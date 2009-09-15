@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="characterID" xmlns:row="characterID">
+  <xs:import schemaLocation="CharacterID.xsd"/>
+  <xs:element name="name">
+    <xs:complexType>
+      <xs:attribute name="characterID" use="required" type="xs:integer"/>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

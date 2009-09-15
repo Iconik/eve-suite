@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="eveapi">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="currentTime"/>
+        <xs:element ref="result"/>
+        <xs:element ref="cachedUntil"/>
+      </xs:sequence>
+      <xs:attribute name="version" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="currentTime" type="xs:string"/>
+  <xs:element name="result">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="corporationID"/>
+        <xs:element ref="corporationName"/>
+        <xs:element ref="ticker"/>
+        <xs:element ref="ceoID"/>
+        <xs:element ref="ceoName"/>
+        <xs:element ref="stationID"/>
+        <xs:element ref="stationName"/>
+        <xs:element ref="description"/>
+        <xs:element ref="url"/>
+        <xs:element ref="allianceID"/>
+        <xs:element ref="allianceName"/>
+        <xs:element ref="taxRate"/>
+        <xs:element ref="memberCount"/>
+        <xs:element ref="memberLimit"/>
+        <xs:element ref="shares"/>
+        <xs:element maxOccurs="unbounded" ref="rowset"/>
+        <xs:element ref="logo"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="corporationID" type="xs:integer"/>
+  <xs:element name="corporationName" type="xs:string"/>
+  <xs:element name="ticker" type="xs:NCName"/>
+  <xs:element name="ceoID" type="xs:integer"/>
+  <xs:element name="ceoName" type="xs:string"/>
+  <xs:element name="stationID" type="xs:integer"/>
+  <xs:element name="stationName" type="xs:string"/>
+  <xs:element name="description" type="xs:string"/>
+  <xs:element name="url" type="xs:string"/>
+  <xs:element name="allianceID" type="xs:integer"/>
+  <xs:element name="allianceName" type="xs:string"/>
+  <xs:element name="taxRate" type="xs:decimal"/>
+  <xs:element name="memberCount" type="xs:integer"/>
+  <xs:element name="memberLimit" type="xs:integer"/>
+  <xs:element name="shares" type="xs:integer"/>
+  <xs:element name="rowset">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="row"/>
+      </xs:sequence>
+      <xs:attribute name="key" use="required" type="xs:NCName"/>
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="row">
+    <xs:complexType>
+      <xs:attribute name="accountKey" use="required" type="xs:integer"/>
+      <xs:attribute name="description" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="logo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="graphicID"/>
+        <xs:element ref="shape1"/>
+        <xs:element ref="shape2"/>
+        <xs:element ref="shape3"/>
+        <xs:element ref="color1"/>
+        <xs:element ref="color2"/>
+        <xs:element ref="color3"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="graphicID" type="xs:integer"/>
+  <xs:element name="shape1" type="xs:integer"/>
+  <xs:element name="shape2" type="xs:integer"/>
+  <xs:element name="shape3" type="xs:integer"/>
+  <xs:element name="color1" type="xs:integer"/>
+  <xs:element name="color2" type="xs:integer"/>
+  <xs:element name="color3" type="xs:integer"/>
+  <xs:element name="cachedUntil" type="xs:string"/>
+</xs:schema>

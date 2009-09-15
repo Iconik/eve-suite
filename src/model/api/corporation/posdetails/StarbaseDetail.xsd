@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="eveapi">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="currentTime"/>
+        <xs:element ref="result"/>
+        <xs:element ref="cachedUntil"/>
+      </xs:sequence>
+      <xs:attribute name="version" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="currentTime" type="xs:string"/>
+  <xs:element name="result">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="state"/>
+        <xs:element ref="stateTimestamp"/>
+        <xs:element ref="onlineTimestamp"/>
+        <xs:element ref="generalSettings"/>
+        <xs:element ref="combatSettings"/>
+        <xs:element ref="rowset"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="state" type="xs:integer"/>
+  <xs:element name="stateTimestamp" type="xs:string"/>
+  <xs:element name="onlineTimestamp" type="xs:string"/>
+  <xs:element name="generalSettings">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="usageFlags"/>
+        <xs:element ref="deployFlags"/>
+        <xs:element ref="allowCorporationMembers"/>
+        <xs:element ref="allowAllianceMembers"/>
+        <xs:element ref="claimSovereignty"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="usageFlags" type="xs:integer"/>
+  <xs:element name="deployFlags" type="xs:integer"/>
+  <xs:element name="allowCorporationMembers" type="xs:integer"/>
+  <xs:element name="allowAllianceMembers" type="xs:integer"/>
+  <xs:element name="claimSovereignty" type="xs:integer"/>
+  <xs:element name="combatSettings">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="onStandingDrop"/>
+        <xs:element ref="onStatusDrop"/>
+        <xs:element ref="onAggression"/>
+        <xs:element ref="onCorporationWar"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="onStandingDrop">
+    <xs:complexType>
+      <xs:attribute name="enabled" use="required" type="xs:integer"/>
+      <xs:attribute name="standing" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="onStatusDrop">
+    <xs:complexType>
+      <xs:attribute name="enabled" use="required" type="xs:integer"/>
+      <xs:attribute name="standing" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="onAggression">
+    <xs:complexType>
+      <xs:attribute name="enabled" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="onCorporationWar">
+    <xs:complexType>
+      <xs:attribute name="enabled" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="rowset">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="row"/>
+      </xs:sequence>
+      <xs:attribute name="columns" use="required"/>
+      <xs:attribute name="key" use="required" type="xs:NCName"/>
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="row">
+    <xs:complexType>
+      <xs:attribute name="quantity" use="required" type="xs:integer"/>
+      <xs:attribute name="typeID" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="cachedUntil" type="xs:string"/>
+</xs:schema>

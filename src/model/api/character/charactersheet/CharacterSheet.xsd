@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="eveapi">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="currentTime"/>
+        <xs:element ref="result"/>
+        <xs:element ref="cachedUntil"/>
+      </xs:sequence>
+      <xs:attribute name="version" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="currentTime" type="xs:string"/>
+  <xs:element name="result">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="characterID"/>
+        <xs:element ref="name"/>
+        <xs:element ref="race"/>
+        <xs:element ref="bloodLine"/>
+        <xs:element ref="gender"/>
+        <xs:element ref="corporationName"/>
+        <xs:element ref="corporationID"/>
+        <xs:element ref="cloneName"/>
+        <xs:element ref="cloneSkillPoints"/>
+        <xs:element ref="balance"/>
+        <xs:element ref="attributeEnhancers"/>
+        <xs:element ref="attributes"/>
+        <xs:element maxOccurs="unbounded" ref="rowset"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="characterID" type="xs:integer"/>
+  <xs:element name="name" type="xs:NCName"/>
+  <xs:element name="race" type="xs:NCName"/>
+  <xs:element name="bloodLine" type="xs:NCName"/>
+  <xs:element name="gender" type="xs:NCName"/>
+  <xs:element name="corporationName" type="xs:string"/>
+  <xs:element name="corporationID" type="xs:integer"/>
+  <xs:element name="cloneName" type="xs:string"/>
+  <xs:element name="cloneSkillPoints" type="xs:integer"/>
+  <xs:element name="balance" type="xs:decimal"/>
+  <xs:element name="attributeEnhancers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="intelligenceBonus"/>
+        <xs:element ref="memoryBonus"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="intelligenceBonus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="augmentatorName"/>
+        <xs:element ref="augmentatorValue"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="memoryBonus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="augmentatorName"/>
+        <xs:element ref="augmentatorValue"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="attributes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="intelligence"/>
+        <xs:element ref="memory"/>
+        <xs:element ref="charisma"/>
+        <xs:element ref="perception"/>
+        <xs:element ref="willpower"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="intelligence" type="xs:integer"/>
+  <xs:element name="memory" type="xs:integer"/>
+  <xs:element name="charisma" type="xs:integer"/>
+  <xs:element name="perception" type="xs:integer"/>
+  <xs:element name="willpower" type="xs:integer"/>
+  <xs:element name="rowset">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="row"/>
+      </xs:sequence>
+      <xs:attribute name="columns"/>
+      <xs:attribute name="key" use="required" type="xs:NCName"/>
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="row">
+    <xs:complexType>
+      <xs:attribute name="certificateID" type="xs:integer"/>
+      <xs:attribute name="level" type="xs:integer"/>
+      <xs:attribute name="roleID" type="xs:integer"/>
+      <xs:attribute name="roleName" type="xs:NCName"/>
+      <xs:attribute name="skillpoints" type="xs:integer"/>
+      <xs:attribute name="titleID" type="xs:integer"/>
+      <xs:attribute name="titleName" type="xs:NCName"/>
+      <xs:attribute name="typeID" type="xs:integer"/>
+      <xs:attribute name="unpublished" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="cachedUntil" type="xs:string"/>
+  <xs:element name="augmentatorName" type="xs:string"/>
+  <xs:element name="augmentatorValue" type="xs:integer"/>
+</xs:schema>

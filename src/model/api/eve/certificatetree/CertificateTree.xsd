@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="eveapi">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="currentTime"/>
+        <xs:element ref="result"/>
+      </xs:sequence>
+      <xs:attribute name="version" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="currentTime" type="xs:string"/>
+  <xs:element name="result">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="rowset"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="rowset">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="cachedUntil"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="row"/>
+      </xs:choice>
+      <xs:attribute name="columns" use="required"/>
+      <xs:attribute name="key" use="required" type="xs:NCName"/>
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="cachedUntil" type="xs:string"/>
+  <xs:element name="row">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="rowset"/>
+      </xs:sequence>
+      <xs:attribute name="categoryID" type="xs:integer"/>
+      <xs:attribute name="categoryName" type="xs:NCName"/>
+      <xs:attribute name="certificateID" type="xs:integer"/>
+      <xs:attribute name="classID" type="xs:integer"/>
+      <xs:attribute name="className"/>
+      <xs:attribute name="corporationID" type="xs:integer"/>
+      <xs:attribute name="description"/>
+      <xs:attribute name="grade" type="xs:integer"/>
+      <xs:attribute name="level" type="xs:integer"/>
+      <xs:attribute name="typeID" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
