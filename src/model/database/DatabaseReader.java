@@ -31,9 +31,9 @@ public class DatabaseReader {
 			Statement stat = connection.createStatement();
 			rs = stat.executeQuery(query);
 			
-			
 			rowSet = new CachedRowSetImpl();
 			rowSet.populate(rs);
+			rowSet.first();
 		}
 		catch(SQLException e) {
 			// If the error message is "out of memory", it probably means no database file is found
@@ -55,9 +55,9 @@ public class DatabaseReader {
 	}
 	
 	public static int resolveTypeID(String typeName) {
-		CachedRowSet crs = reader("SELECT typeID FROM invType WHERE typeName='"+typeName+"';");
+		typeName.replace("'", "\'");
+		CachedRowSet crs = reader("SELECT typeID FROM invTypes WHERE typeName='"+typeName+"';");
 		try {
-			crs.first();
 			return crs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
