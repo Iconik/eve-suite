@@ -83,7 +83,6 @@ public class BlueprintCalc extends ApplicationWindow {
 					ContentProposalAdapter adapter = new ContentProposalAdapter(blueprintCombo.getCombo(), new ComboContentAdapter(), scpp, null, autoActivationCharacters);
 					adapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
 					adapter.addContentProposalListener(new IContentProposalListener() {
-
 						@Override
 						public void proposalAccepted(IContentProposal arg0) {
 							blueprintChanged();
@@ -124,6 +123,8 @@ public class BlueprintCalc extends ApplicationWindow {
 					Spinner spinner = new Spinner(container, SWT.BORDER);
 					RowDataFactory.swtDefaults().hint(50, SWT.DEFAULT).applyTo(spinner);
 					blueprintSettings.add(spinner);
+					spinner.setMinimum(Integer.MIN_VALUE);
+					spinner.setMaximum(Integer.MAX_VALUE);
 				}
 				
 				blueprintSettings.get(0).addModifyListener(new ModifyListener() {
