@@ -21,7 +21,7 @@ class Account(object):
         
         API.fetch("account","Characters",self.userID,self.apiKey)
         
-        tree = ET.parse(API.build_path("account",userID)+"/Characters.xml.aspx")
+        tree = ET.parse("%s/Characters.xml.aspx" % (API.build_path("account",userID)))
         root = tree.getroot()
         rowset = root.find("result").find("rowset")
         
@@ -41,17 +41,15 @@ class Account(object):
             char.fetch_skill_queue()
     
 if __name__ == '__main__':
-    userID=0
-	apiKey=0
+    userID=2698778
+    apiKey="VD6mibIWqvNLZVtfmBgyAJJUASc5ADV0PylBAeIsgJWUTcAYTOgEUPe59482Gq8M"
     account = Account(userID,apiKey)
     account.fetch_skill_queues()
     for character in account.characters:
         print(character.get_name()+":")
         for skill in character.get_skill_queue():
-            str = "\t"+skill.get_name()+" "+skill.get_level()
             if skill.get_startTime():
-                str+="\t"+skill.get_startTime().isoformat(" ")
+                print("\t%s %s\t%s" % (skill.get_name(),skill.get_level(),skill.get_startTime().isoformat(" ")))
             if skill.get_endTime():
-                str+="\t"+skill.get_endTime().isoformat(" ")
-            print(str)
+                print("\t%s %s\t%s" % (skill.get_name(),skill.get_level(),skill.get_endTime().isoformat(" ")))
         print()

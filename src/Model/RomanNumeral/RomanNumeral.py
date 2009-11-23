@@ -14,6 +14,6 @@ def int_to_roman(input):
     result = ""
     for i in range(len(ints)):
         count = int(input / ints[i])
-        result += nums[i] * count
+        result = result.join(nums[i] * count)
         input -= ints[i] * count
     return result

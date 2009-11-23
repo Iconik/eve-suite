@@ -17,7 +17,7 @@ class POSFuel(object):
         '''
         conn = sqlite3.connect('../../../Resources/Database/apo15-sqlite3-v1.db')
         cur = conn.cursor()
-        cur.execute("select * from invControlTowerResources where controlTowerTypeID='"+str(id)+"';")
+        cur.execute("select * from invControlTowerResources where controlTowerTypeID='%s';" % (id))
         
         self.online = list()
         self.power = list()

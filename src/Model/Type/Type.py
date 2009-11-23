@@ -17,7 +17,7 @@ class Type(object):
         self.typeID = id
         conn = sqlite3.connect('../../../Resources/Database/apo15-sqlite3-v1.db')
         cur = conn.cursor()
-        cur.execute("select * from invTypes where typeID='"+str(self.typeID)+"';")
+        cur.execute("select * from invTypes where typeID='%s';" % (self.typeID))
         row = cur.fetchone()
         
         self.groupID = row[1]

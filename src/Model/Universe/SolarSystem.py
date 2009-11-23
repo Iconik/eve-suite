@@ -18,7 +18,7 @@ class SolarSystem(object):
         self.solarSystemID = id
         conn = sqlite3.connect('../../../Resources/Database/apo15-sqlite3-v1.db')
         cur = conn.cursor()
-        cur.execute("select * from mapSolarSystem where solarSystemID='"+str(self.solarSystemID)+"';")
+        cur.execute("select * from mapSolarSystem where solarSystemID='%s';" % (self.solarSystemID))
         row = cur.fetchone()
         
         self.regionID = row[0]

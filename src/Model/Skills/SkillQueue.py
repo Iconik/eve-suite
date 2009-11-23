@@ -18,7 +18,7 @@ class SkillQueue(object):
         '''
         API.fetch("char", "SkillQueue", userID, apiKey, characterID)
         
-        tree = ElementTree.parse(API.build_path("char", userID, characterID)+"/SkillQueue.xml.aspx")
+        tree = ElementTree.parse("%s /SkillQueue.xml.aspx" % API.build_path("char", userID, characterID))
         root = tree.getroot()
         rowset = root.find("result").find("rowset")
         self.skillQueue = list()
