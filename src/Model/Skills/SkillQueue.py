@@ -18,13 +18,11 @@ class SkillQueue(object):
         '''
         API.fetch("char", "SkillQueue", userID, apiKey, characterID)
         
-        tree = ElementTree.parse("%s /SkillQueue.xml.aspx" % API.build_path("char", userID, characterID))
+        tree = ElementTree.parse("%s/SkillQueue.xml.aspx" % API.build_path("char", userID, characterID))
         root = tree.getroot()
         rowset = root.find("result").find("rowset")
         self.skillQueue = list()
         if rowset.getchildren():
-            
-        
             for element in rowset:
                 self.skillQueue.insert(int(element.get("queuePosition")),
                                        SkillQueueItem(int(element.get("typeID")),

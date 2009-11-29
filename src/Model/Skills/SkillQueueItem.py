@@ -3,9 +3,10 @@ Created on Nov 6, 2009
 
 @author: frederikns
 '''
-from Model.RomanNumeral import RomanNumeral
-from Model.Type.Type import Type
+
 from datetime import datetime
+from Model.RomanNumeral.RomanNumeral import int_to_roman
+from Model.Inventory import inventoryDictionaries
 
 class SkillQueueItem(object):
     '''
@@ -16,8 +17,9 @@ class SkillQueueItem(object):
         '''
         Constructor
         '''
-        self.type = Type(typeID)
-        self.level = RomanNumeral.int_to_roman(level)
+        
+        self.type = inventoryDictionaries.get_type(typeID)
+        self.level = int_to_roman(level)
         self.startSP = startSP
         self.endSP = endSP
         if len(startTime)>0:

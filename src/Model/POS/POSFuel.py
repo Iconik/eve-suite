@@ -11,7 +11,7 @@ class POSFuel(object):
     classdocs
     '''
 
-    def __init__(self,id,faction):
+    def __init__(self,id):
         '''
         Constructor
         '''

@@ -4,7 +4,7 @@ Created on Oct 28, 2009
 @author: frederikns
 '''
 
-class MyClass(object):
+class Constellation(object):
     '''
     classdocs
     '''

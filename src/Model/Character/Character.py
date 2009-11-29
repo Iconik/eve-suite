@@ -21,9 +21,6 @@ class Character(object):
         self.characterID = characterID
         self.corporationName = corporationName
         self.corporationID = corporationID
-        
-    def fetch_skill_queue(self):
-        self.skillQueue = SkillQueue(self.account.get_userID(),self.account.get_apiKey(),self.characterID)
     
     def get_account(self):
         return self.account
@@ -41,7 +38,7 @@ class Character(object):
         return self.corporationID
     
     def get_skill_queue(self):
-        if not self.skillQueue:
-            self.fetch_skill_queue()
+        if 'self.skillQueue' not in locals():
+            self.skillQueue = SkillQueue(self.account.get_userID(),self.account.get_apiKey(),self.characterID)
         return self.skillQueue.get_skill_queue()
         

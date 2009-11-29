@@ -3,8 +3,9 @@ Created on Nov 15, 2009
 
 @author: frederikns
 '''
-from Model.Type.Type import Type
-from Model.POS.POSFuel import POSFuel
+
+from Model.Inventory import inventoryDictionaries
+from Model.POS import posDictionaries
 import datetime
 import math
 
@@ -17,11 +18,12 @@ class POS(object):
         '''
         Constructor
         '''
-        self.type = Type(id)
-        self.fuel = POSFuel(id,faction)
+        self.id = id
+        self.type = inventoryDictionaries.get_type(self.id)
         self.power = power
         self.cpu = cpu
         self.faction = faction
+        self.fuel = posDictionaries.get_posFuel(self.id)
         
     def get_type(self):
         return self.type

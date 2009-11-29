@@ -1,0 +1,3 @@
+from Model.Inventory.InventoryDictionaries import InventoryDictionaries
+inventoryDictionaries = InventoryDictionaries()
+global inventoryDictionaries

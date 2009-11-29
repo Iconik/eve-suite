@@ -16,12 +16,12 @@ class Account(object):
         '''
         Constructor
         '''
-        self.userID = userID
-        self.apiKey = apiKey
+        self.userID = int(userID)
+        self.apiKey = apiKey.strip()
         
         API.fetch("account","Characters",self.userID,self.apiKey)
         
-        tree = ET.parse("%s/Characters.xml.aspx" % (API.build_path("account",userID)))
+        tree = ET.parse("%s/Characters.xml.aspx" % (API.build_path("account",self.userID)))
         root = tree.getroot()
         rowset = root.find("result").find("rowset")
         
@@ -36,6 +36,9 @@ class Account(object):
     def get_apiKey(self):
         return self.apiKey
     
+    def get_characters(self):
+        return self.characters
+    
     def fetch_skill_queues(self):
         for char in self.characters:
             char.fetch_skill_queue()
@@ -44,7 +47,7 @@ if __name__ == '__main__':
     userID=2698778
     apiKey="VD6mibIWqvNLZVtfmBgyAJJUASc5ADV0PylBAeIsgJWUTcAYTOgEUPe59482Gq8M"
     account = Account(userID,apiKey)
-    account.fetch_skill_queues()
+    characters = account.characters
     for character in account.characters:
         print(character.get_name()+":")
         for skill in character.get_skill_queue():

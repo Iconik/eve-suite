@@ -39,7 +39,7 @@ def check_cached_until(path):
             return True
     return True
     
-_online_ = False
+_online_ = True
     
 def fetch(folder,file,userID=None,apiKey=None,characterID=None):
     if not _online_:

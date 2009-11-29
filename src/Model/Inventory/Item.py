@@ -5,7 +5,7 @@ Created on Oct 28, 2009
 '''
 from Model.Universe import SolarSystem
 
-from Model.Type.Type import Type
+from Model.Inventory import inventoryDictionaries
 
 class Item(object):
     '''
@@ -17,7 +17,7 @@ class Item(object):
         Constructor
         '''
         self.id = id
-        self.type = Type(id)
+        self.type = inventoryDictionaries.get_type(id)
         if locationID!=None:
             self.location = SolarSystem(id)
         if quantity!=None:
