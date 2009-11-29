@@ -3,6 +3,7 @@ Created on Oct 28, 2009
 
 @author: frederikns
 '''
+from Model.Inventory.Group import Group
 import sqlite3
 
 class Type(object):
@@ -43,6 +44,11 @@ class Type(object):
     
     def get_groupID(self):
         return self.groupID
+    
+    def get_group(self):
+        if self.group is None:
+            self.group = Group(self.groupID)
+        return self.group
     
     def get_typeName(self):
         return self.typeName
