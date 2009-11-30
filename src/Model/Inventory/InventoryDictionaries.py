@@ -19,6 +19,7 @@ class InventoryDictionaries(object):
         '''
         Constructor
         '''
+        
         self.types = WeakValueDictionary()
         self.groups = WeakValueDictionary()
         self.categories = WeakValueDictionary()
