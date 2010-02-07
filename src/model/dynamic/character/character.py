@@ -3,42 +3,33 @@ Created on Nov 6, 2009
 
 @author: frederikns
 '''
+
 from model.dynamic.skills.skill_queue import SkillQueue
 
 
 class Character(object):
-    '''
-    classdocs
-    '''
+    """
+     # PyUML: Do not remove this line! # XMI_ID:_hdmBUhEPEd-LgJ4IxcJkTA
+    """
 
-
-    def __init__(self,account,name,characterID,corporationName,corporationID):
+    def __init__(self, account, name, character_id, #IGNORE:R0913
+                 corporation_name, corporation_id):
         '''
         Constructor
         '''
         self.account = account
         self.name = name
-        self.characterID = characterID
-        self.corporationName = corporationName
-        self.corporationID = corporationID
-    
-    def get_account(self):
-        return self.account
-    
-    def get_name(self):
-        return self.name
-    
-    def get_characterID(self):
-        return self.character    
-    
-    def get_corporationName(self):
-        return self.corporationName
-    
-    def get_corporationID(self):
-        return self.corporationID
+        self.character_id = character_id
+        self.corporation_name = corporation_name
+        self.corporation_id = corporation_id
+        
+        self.skill_queue = None
     
     def get_skill_queue(self):
-        if 'self.skillQueue' not in locals():
-            self.skillQueue = SkillQueue(self.account.get_userID(),self.account.get_apiKey(),self.characterID)
-        return self.skillQueue.get_skill_queue()
+        """Populates and returns the characters skill queue"""
+        if self.skill_queue is None:
+            self.skill_queue = SkillQueue(self.account.get_userID(),
+                                         self.account.get_apiKey(),
+                                         self.character_id)
+        return self.skill_queue.get_skill_queue()
         

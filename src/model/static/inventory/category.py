@@ -5,25 +5,24 @@ Created on Nov 26, 2009
 '''
 from model.static.database import database
 
-import sqlite3
-
 class Category(object):
-    '''
-    classdocs
-    '''
+    """
+     # PyUML: Do not remove this line! # XMI_ID:_EIA8hhEREd-LgJ4IxcJkTA
+    """
 
-    def __init__(self,categoryID):
+    def __init__(self, category_id):
         '''
         Constructor
         '''
-        self.categoryID = categoryID
+        self.category_id = category_id
         
-        cursor = database.get_cursor("select * from invTypes where categoryID=%s;" % (self.categoryID))
+        cursor = database.get_cursor("select * from invTypes where \
+        categoryID=%s;" % (self.category_id))
         row = cursor.fetchone()
         
-        self.categoryName = row["categoryName"]
+        self.category_name = row["categoryName"]
         self.description = row["description"]
-        self.graphicID = row["graphicID"]
+        self.graphic_id = row["graphicID"]
         self.published = row["published"]
         
         cursor.close()

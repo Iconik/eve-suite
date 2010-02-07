@@ -8,37 +8,44 @@ from model.static.inventory import inventory_dictionaries
 
 
 class MarketGroup(object):
-    '''
-    classdocs
-    '''
+    """
+     # PyUML: Do not remove this line! # XMI_ID:_EIDYyBEREd-LgJ4IxcJkTA
+    """
 
-
-    def __init__(self,marketGroupID,parentGroupID=None,marketGroupName=None,description=None,graphicsID=None,hasTypes=None):
+    def __init__(self, market_group_id, parent_group_id=None, #IGNORE:R0913
+                 market_group_name=None, description=None, graphics_id=None,
+                 has_types=None):
         '''
         Constructor
         '''
         
-        self.marketGroupID = marketGroupID
+        self.market_group_id = market_group_id
         
-        if parentGroupID is None and marketGroupName is None and description is None and graphicsID is None and hasTypes is None:
-            cursor = database.get_cursor("select * from invMarketGroups where marketGroupID=%s;" % (self.marketGroupID))
+        if parent_group_id is None and market_group_name is None and \
+        description is None and graphics_id is None and has_types is None:
+            cursor = database.get_cursor("select * from invMarketGroups where \
+            marketGroupID=%s;" % (self.market_group_id))
             row = cursor.fetchone()
         
-            self.parentGroupID = row["parentGroupID"]
-            self.marketGroupName = row["marketGroupName"]
+            self.parent_group_id = row["parentGroupID"]
+            self.market_group_name = row["marketGroupName"]
             self.description = row["description"]
-            self.graphicsID = row["graphicsID"]
-            self.hasTypes = row["hasTypes"]
+            self.graphics_id = row["graphicsID"]
+            self.has_types = row["hasTypes"]
         else:
-            self.parentGroupID = parentGroupID
-            self.marketGroupName = marketGroupName
+            self.parent_group_id = parent_group_id
+            self.market_group_name = market_group_name
             self.description = description
-            self.graphicsID = graphicsID
-            self.hasTypes = hasTypes
+            self.graphics_id = graphics_id
+            self.has_types = has_types
         
         cursor.close()
         
+        self.parent_group = None
+        
     def get_parent_group(self):
-        if 'self.parent_group' not in locals():
-            self.parent_group = inventory_dictionaries.get_group(self.parentGroupID)
+        """Populates and returns the parent group"""
+        if self.parent_group is None:
+            self.parent_group = inventory_dictionaries.\
+            get_group(self.parent_group_id)
         return self.parent_group

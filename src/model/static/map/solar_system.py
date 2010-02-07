@@ -8,25 +8,23 @@ from model.static.inventory import inventory_dictionaries
 from model.static.database import database
 
 class SolarSystem(object):
-    '''
-    classdocs
-    '''
+    """
+     # PyUML: Do not remove this line! # XMI_ID:_EIKGdhEREd-LgJ4IxcJkTA
+    """
 
-    def __init__(self,solar_system_id):
-        '''
-        Constructor
-        '''
+    def __init__(self, solar_system_id):
         self.solar_system_id = solar_system_id
         
-        cursor = database.get_cursor("select * from mapSolarSystem where solarSystemID='%s';" % (self.solar_system_id))
+        cursor = database.get_cursor("select * from mapSolarSystem where \
+        solarSystemID=%s;" % (self.solar_system_id))
         row = cursor.fetchone()
         
         self.region_id = row["regionID"]
         self.constellation_id = row["constellationID"]
         self.solar_system_name = row["solarSystemName"]
-        self.x = row["x"]
-        self.y = row["y"]
-        self.z = row["z"]
+        self.x_pos = row["x"]
+        self.y_pos = row["y"]
+        self.z_pos = row["z"]
         self.x_min = row["xMin"]
         self.x_max = row["xMax"]
         self.y_min = row["yMin"]
@@ -49,17 +47,25 @@ class SolarSystem(object):
         
         cursor.close()
         
+        self.region = None
+        self.constellation = None
+        self.sun_type = None
+        
     def get_region(self):
-        if 'self.region' not in locals():
+        """Populates and returns the region"""
+        if self.region is None:
             self.region = map_dictionaries.get_region(self.region_id)
         return self.region
     
     def get_constellation(self):
-        if 'self.constellation' not in locals():
-            self.constellation = map_dictionaries.get_constellation(self.constellation_id)
+        """Populates and returns the constellation"""
+        if self.constellation is None:
+            self.constellation = map_dictionaries.\
+            get_constellation(self.constellation_id)
         return self.constellation
     
     def get_sun_type(self):
-        if 'self.sun_type' not in locals():
+        """Populates and returns the sun type"""
+        if self.sun_type is None:
             self.sun_type = inventory_dictionaries.get_type(self.sun_type_id)
         return self.sun_type

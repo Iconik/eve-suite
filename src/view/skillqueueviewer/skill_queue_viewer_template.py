@@ -10,6 +10,9 @@
 from PyQt4 import QtCore, QtGui
 
 class Ui_MainWindow(object):
+    """
+     # PyUML: Do not remove this line! # XMI_ID:_EIYv8xEREd-LgJ4IxcJkTA
+    """
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(641, 581)

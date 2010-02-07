@@ -1,3 +1,1 @@
-from model.dynamic.account.account_dictionaries import AccountDictionaries
-
-accountDictionaries = AccountDictionaries()
+# PyUML: Do not remove this line! # XMI_ID:_hdLKkREPEd-LgJ4IxcJkTA

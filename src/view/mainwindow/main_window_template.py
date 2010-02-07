@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main_window_template.ui'
 #
-# Created: Mon Dec 14 15:06:12 2009
+# Created: Sat Jan 02 20:44:25 2010
 #      by: PyQt4 UI code generator 4.6.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -10,9 +10,12 @@
 from PyQt4 import QtCore, QtGui
 
 class Ui_MainWindow(object):
+    """
+     # PyUML: Do not remove this line! # XMI_ID:_EIVFmxEREd-LgJ4IxcJkTA
+    """
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(368, 365)
+        MainWindow.resize(368, 345)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout = QtGui.QHBoxLayout(self.centralwidget)
@@ -121,7 +124,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_8.setObjectName("verticalLayout_8")
         self.ResearchCalculatorButton = QtGui.QPushButton(self.centralwidget)
         icon7 = QtGui.QIcon()
-        icon7.addPixmap(QtGui.QPixmap(":/imgs/icons/icons_items_png/128_128/icon32_02.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon7.addPixmap(QtGui.QPixmap(":/icons/icons/64_64/icon57_09.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.ResearchCalculatorButton.setIcon(icon7)
         self.ResearchCalculatorButton.setIconSize(QtCore.QSize(64, 64))
         self.ResearchCalculatorButton.setObjectName("ResearchCalculatorButton")
@@ -134,7 +137,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_12 = QtGui.QVBoxLayout()
         self.verticalLayout_12.setObjectName("verticalLayout_12")
         self.POSFitterButton = QtGui.QPushButton(self.centralwidget)
-        self.POSFitterButton.setIcon(icon7)
+        icon8 = QtGui.QIcon()
+        icon8.addPixmap(QtGui.QPixmap(":/icons/icons/64_64/icon55_07.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.POSFitterButton.setIcon(icon8)
         self.POSFitterButton.setIconSize(QtCore.QSize(64, 64))
         self.POSFitterButton.setObjectName("POSFitterButton")
         self.verticalLayout_12.addWidget(self.POSFitterButton)
@@ -146,7 +151,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_9 = QtGui.QVBoxLayout()
         self.verticalLayout_9.setObjectName("verticalLayout_9")
         self.SkillBrowserButton = QtGui.QPushButton(self.centralwidget)
-        self.SkillBrowserButton.setIcon(icon7)
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap(":/icons/icons/64_64/icon50_14.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.SkillBrowserButton.setIcon(icon9)
         self.SkillBrowserButton.setIconSize(QtCore.QSize(64, 64))
         self.SkillBrowserButton.setObjectName("SkillBrowserButton")
         self.verticalLayout_9.addWidget(self.SkillBrowserButton)
@@ -158,7 +165,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_10 = QtGui.QVBoxLayout()
         self.verticalLayout_10.setObjectName("verticalLayout_10")
         self.SkillPlannerButton = QtGui.QPushButton(self.centralwidget)
-        self.SkillPlannerButton.setIcon(icon7)
+        icon10 = QtGui.QIcon()
+        icon10.addPixmap(QtGui.QPixmap(":/icons/icons/64_64/icon36_15.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.SkillPlannerButton.setIcon(icon10)
         self.SkillPlannerButton.setIconSize(QtCore.QSize(64, 64))
         self.SkillPlannerButton.setObjectName("SkillPlannerButton")
         self.verticalLayout_10.addWidget(self.SkillPlannerButton)
@@ -170,7 +179,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_11 = QtGui.QVBoxLayout()
         self.verticalLayout_11.setObjectName("verticalLayout_11")
         self.TravelPlannerButton = QtGui.QPushButton(self.centralwidget)
-        self.TravelPlannerButton.setIcon(icon7)
+        icon11 = QtGui.QIcon()
+        icon11.addPixmap(QtGui.QPixmap(":/icons/icons/64_64/icon07_04.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.TravelPlannerButton.setIcon(icon11)
         self.TravelPlannerButton.setIconSize(QtCore.QSize(64, 64))
         self.TravelPlannerButton.setObjectName("TravelPlannerButton")
         self.verticalLayout_11.addWidget(self.TravelPlannerButton)
@@ -184,13 +195,9 @@ class Ui_MainWindow(object):
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 368, 21))
         self.menubar.setObjectName("menubar")
-        self.menuFile = QtGui.QMenu(self.menubar)
-        self.menuFile.setObjectName("menuFile")
         MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtGui.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
-        self.menubar.addAction(self.menuFile.menuAction())
+        self.actionQuit = QtGui.QAction(MainWindow)
+        self.actionQuit.setObjectName("actionQuit")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -222,6 +229,6 @@ class Ui_MainWindow(object):
         self.SkillBrowserLabel.setText(QtGui.QApplication.translate("MainWindow", "Skill Browser", None, QtGui.QApplication.UnicodeUTF8))
         self.SkillPlannerLabel.setText(QtGui.QApplication.translate("MainWindow", "Skill Planner", None, QtGui.QApplication.UnicodeUTF8))
         self.TravelPlannerLabel.setText(QtGui.QApplication.translate("MainWindow", "Travel Planner", None, QtGui.QApplication.UnicodeUTF8))
-        self.menuFile.setTitle(QtGui.QApplication.translate("MainWindow", "File", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionQuit.setText(QtGui.QApplication.translate("MainWindow", "Quit", None, QtGui.QApplication.UnicodeUTF8))
 
 import main_window_rc

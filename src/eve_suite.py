@@ -9,9 +9,9 @@ from view.mainwindow.main_window import MainWindow
 import sys
 
 if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)
+    APP = QtGui.QApplication(sys.argv)
     
-    mainWindow = MainWindow()
-    mainWindow.show()
+    MAIN_WINDOW = MainWindow()
+    MAIN_WINDOW.show()
     
-    sys.exit(app.exec_())
+    sys.exit(APP.exec_())

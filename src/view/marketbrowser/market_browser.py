@@ -1,52 +1,56 @@
-import sqlite3
+'''
+Created on Oct 28, 2009
+
+@author: frederikns
+'''
 from PyQt4 import QtGui
 
-from model.static.database.database import Database
+from model.static.database import database
 
 from view.marketbrowser.market_browser_template import Ui_MainWindow
 
 class MarketBrowser(QtGui.QMainWindow):
-    def __init__(self, parent=None):
-        QtGui.QWidget.__init__(self, parent)
-        self.ui = Ui_MainWindow()
+    """
+     # PyUML: Do not remove this line! # XMI_ID:_EIWTsBEREd-LgJ4IxcJkTA
+    """
+    def __init__(self, parent=None): #IGNORE:W0231
+        QtGui.QWidget.__init__(self, parent) #IGNORE:W0233
+        self.ui = Ui_MainWindow() #IGNORE:C0103
         self.ui.setupUi(self)
         self.buildMarketTree()
         
-    def buildMarketTree(self):
-        '''
-        Constructor
-        '''
-        conn = sqlite3.connect(Database.location)
-        cur = conn.cursor()
-        cur.execute("select marketGroupID, parentGroupID, marketGroupName from invMarketGroups")
+    def build_market_tree(self):
+        """Builds a tree of the market groups"""
+        cur = database.get_cursor("select marketGroupID, parentGroupID, \
+        marketGroupName from invMarketGroups")
         
-        treeItems = dict()
-        treeTypes = dict()
-        itemRelations = dict()
-        typeRelations = dict()
+        tree_items = dict()
+        tree_types = dict()
+        item_relations = dict()
+        type_relations = dict()
         
         for row in cur:
-            a = QtGui.QTreeWidgetItem()
-            a.setText(0, row[2])
-            treeItems[row[0]] = a
-            itemRelations[row[0]] = row[1]
+            item = QtGui.QTreeWidgetItem()
+            item.setText(0, row[2])
+            tree_items[row[0]] = item
+            item_relations[row[0]] = row[1]
             
-        cur.execute("select typeID, typeName, marketGroupID from invTypes where marketGroupID<>'';")
+        cur.execute("select typeID, typeName, marketGroupID from invTypes \
+        where marketGroupID<>'';")
         
         for row in cur:
-            a = QtGui.QTreeWidgetItem()
-            a.setText(0, row[1])
-            treeTypes[row[0]] = a
-            typeRelations[row[0]] = row[2]
+            type = QtGui.QTreeWidgetItem() #IGNORE:W0622
+            type.setText(0, row[1])
+            tree_types[row[0]] = type
+            type_relations[row[0]] = row[2]
         
         cur.close()
-        conn.close()
         
-        for key in treeItems.keys():
-            if itemRelations[key] is not None:
-                treeItems[itemRelations[key]].addChild(treeItems[key])
+        for key in tree_items.keys():
+            if item_relations[key] is not None:
+                tree_items[item_relations[key]].addChild(tree_items[key])
             else:
-                self.ui.treeWidget.addTopLevelItem(treeItems[key])
+                self.ui.treeWidget.addTopLevelItem(tree_items[key])
                 
-        for key in treeTypes.keys():
-            treeItems[typeRelations[key]].addChild(treeTypes[key])
+        for key in tree_types.keys():
+            tree_items[type_relations[key]].addChild(tree_types[key])

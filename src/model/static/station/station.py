@@ -9,18 +9,15 @@ from model.static.map import map_dictionaries
 from model.static.inventory import inventory_dictionaries
 
 class Station(object):
-    '''
-    classdocs
-    '''
+    """
+     # PyUML: Do not remove this line! # XMI_ID:_EIPmCBEREd-LgJ4IxcJkTA
+    """
 
-
-    def __init__(self,id):
-        '''
-        Constructor
-        '''
-        self.station_id = id
+    def __init__(self, station_id):
+        self.station_id = station_id
         
-        cursor = database.get_cursor("select * from mapSolarSystem where solarSystemID='%s';" % (self.solarSystemID))
+        cursor = database.get_cursor("select * from staStations where \
+        stationID='%s';" % (self.station_id))
         row = cursor.fetchone()
         
         self.security = row["security"]
@@ -34,31 +31,43 @@ class Station(object):
         self.constellation_id = row["constellationID"]
         self.region_id = row["regionID"]
         self.station_name = row["stationName"]
-        self.x = row["x"]
-        self.y = row["y"]
-        self.z = row["z"]
+        self.x_pos = row["x"]
+        self.y_pos = row["y"]
+        self.z_pos = row["z"]
         self.reprocessing_efficiency = row["reprocessingEfficiency"]
         self.reprocessing_stations_take = row["reprocessingStationsTake"]
         self.reprocessing_hangar_flag = row["reprocessingHangarFlag"]
         
         cursor.close()
         
+        self.solar_system = None
+        self.region = None
+        self.constellation = None
+        self.station_type = None
+        
     def get_solar_system(self):
-        if 'self.solar_system' not in locals():
-            self.solar_system = map_dictionaries.get_solar_system(self.solar_system_id)
+        """Populations and returns the solar system"""
+        if self.solar_system is None:
+            self.solar_system = map_dictionaries.\
+            get_solar_system(self.solar_system_id)
         return self.solar_system
         
     def get_region(self):
-        if 'self.region' not in locals():
+        """Populations and returns the region"""
+        if self.region is None:
             self.region = map_dictionaries.get_region(self.region_id)
         return self.region
     
     def get_constellation(self):
-        if 'self.constellation' not in locals():
-            self.constellation = map_dictionaries.get_constellation(self.constellation_id)
+        """Populations and returns the constellation"""
+        if self.constellation is None:
+            self.constellation = map_dictionaries.\
+            get_constellation(self.constellation_id)
         return self.constellation
     
-    def get_sun_type(self):
-        if 'self.station_type' not in locals():
-            self.station_type = inventory_dictionaries.get_type(self.station_type_id)
+    def get_stations_type(self):
+        """Populations and returns the station type"""
+        if self.station_type is None:
+            self.station_type = inventory_dictionaries.\
+            get_type(self.station_type_id)
         return self.station_type

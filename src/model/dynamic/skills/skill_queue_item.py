@@ -5,49 +5,38 @@ Created on Nov 6, 2009
 '''
 
 from datetime import datetime
-from model.generated.romannumeral.roman_numeral import int_to_roman
 from model.static.inventory import inventory_dictionaries
+from model.generated.roman.roman import to_roman
 
 class SkillQueueItem(object):
-    '''
-    classdocs
-    '''
+    """
+     # PyUML: Do not remove this line! # XMI_ID:_hdpruREPEd-LgJ4IxcJkTA
+    """
 
-    def __init__(self,typeID,level,startSP,endSP,startTime,endTime):
+    def __init__(self, type_id, level, start_sp, end_sp, #IGNORE:R0913
+                 start_time, end_time):
         '''
         Constructor
         '''
         
-        self.type = inventory_dictionaries.get_type(typeID)
-        self.level = int_to_roman(level)
-        self.startSP = startSP
-        self.endSP = endSP
-        if len(startTime)>0:
-            self.startTime = datetime.strptime(startTime,"%Y-%m-%d %H:%M:%S")
+        self.type_id = type_id
+        self.level = to_roman(level)
+        self.start_sp = start_sp
+        self.end_sp = end_sp
+        if len(start_time)>0:
+            self.start_time = datetime.strptime(start_time,
+                                                "%Y-%m-%d %H:%M:%S")
         else:
-            self.startTime = None
-        if len(endTime)>0:
-            self.endTime = datetime.strptime(endTime,"%Y-%m-%d %H:%M:%S")
+            self.start_time = None
+        if len(end_time)>0:
+            self.end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
         else:
-            self.endTime = None
+            self.end_time = None
         
+        self.type = None
+            
     def get_type(self):
+        """Populates and returns the type"""
+        if self.type is None:
+            self.type = inventory_dictionaries.get_type(self.type_id)
         return self.type
-    
-    def get_name(self):
-        return self.type.get_typeName()
-    
-    def get_level(self):
-        return self.level
-    
-    def get_startSP(self):
-        return self.startSP
-    
-    def get_endSP(self):
-        return self.endSP
-    
-    def get_startTime(self):
-        return self.startTime
-    
-    def get_endTime(self):
-        return self.endTime

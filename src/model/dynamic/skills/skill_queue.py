@@ -8,29 +8,28 @@ from model.dynamic.api import api
 from model.dynamic.skills.skill_queue_item import SkillQueueItem
 
 class SkillQueue(object):
-    '''
-    classdocs
-    '''
+    """
+     # PyUML: Do not remove this line! # XMI_ID:_hdpEphEPEd-LgJ4IxcJkTA
+    """
 
-    def __init__(self,userID,apiKey,characterID):
+    def __init__(self, user_id, api_key, character_id):
         '''
         Constructor
         '''
-        api.fetch("char", "SkillQueue", userID, apiKey, characterID)
+        api.fetch("char", "SkillQueue", user_id, api_key, character_id)
         
-        tree = ElementTree.parse("%s/SkillQueue.xml.aspx" % api.build_path("char", userID, characterID))
+        tree = ElementTree.parse("%s/SkillQueue.xml.aspx" % \
+                                 api.build_path("char", user_id, character_id))
         root = tree.getroot()
         rowset = root.find("result").find("rowset")
-        self.skillQueue = list()
+        self.skill_queue = list()
         if rowset.getchildren():
             for element in rowset:
-                self.skillQueue.insert(int(element.get("queuePosition")),
-                                       SkillQueueItem(int(element.get("typeID")),
-                                                      int(element.get("level")),
-                                                      int(element.get("startSP")),
-                                                      int(element.get("endSP")),
-                                                      element.get("startTime"),
-                                                      element.get("endTime")))
-        
-    def get_skill_queue(self):
-        return self.skillQueue
+                self.skill_queue.insert\
+                (int(element.get("queuePosition")),
+                 SkillQueueItem(int(element.get("typeID")),
+                                int(element.get("level")),
+                                int(element.get("startSP")),
+                                int(element.get("endSP")),
+                                element.get("startTime"),
+                                element.get("endTime")))

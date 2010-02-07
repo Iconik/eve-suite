@@ -5,14 +5,12 @@ Created on 23 Dec 2009
 '''
 from weakref import WeakValueDictionary
 
-npc_corporations = WeakValueDictionary()
-
-def get_corporation(corporation_id):
-    return get_npc_corporation(corporation_id)
+NPC_CORPORATIONS = WeakValueDictionary()
     
 def get_npc_corporation(corporation_id):
+    """Retrieves or populates the requested NPC Corporation"""
     from model.static.corporation.npc_corporation import NPCCorporation
-    if corporation_id not in npc_corporations:
+    if corporation_id not in NPC_CORPORATIONS:
         npc_corporation = NPCCorporation(corporation_id)
-        npc_corporations[corporation_id] = npc_corporation
-    return npc_corporations[corporation_id]
+        NPC_CORPORATIONS[corporation_id] = npc_corporation
+    return NPC_CORPORATIONS[corporation_id]

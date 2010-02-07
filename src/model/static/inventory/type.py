@@ -5,24 +5,27 @@ Created on Oct 28, 2009
 '''
 from model.static.inventory import inventory_dictionaries
 from model.static.database import database
+from model.static.dgm.type_attributes import TypeAttributes
 
 class Type(object):
-    '''
-    classdocs
-    '''
+    """
+     # PyUML: Do not remove this line! # XMI_ID:_EIEm5REREd-LgJ4IxcJkTA
+    """
 
-    def __init__(self,type_id=None,type_name=None):
+    def __init__(self, type_id=None, type_name=None):
         '''
         Constructor
         '''
         if type_id is not None:
             self.type_id = type_id
-            cursor = database.get_cursor("select * from invTypes where typeID=%s;" % (self.type_id))
+            cursor = database.get_cursor("select * from invTypes where \
+            typeID=%s;" % (self.type_id))
             row = cursor.fetchone()
             self.type_name = row["typeName"]
         elif type_name is not None:
             self.type_name = type_name
-            cursor = database.get_cursor("select * from invTypes where typeName='%s';" % (self.type_name))
+            cursor = database.get_cursor('select * from invTypes where \
+            typeName="%s";' % (self.type_name))
             row = cursor.fetchone()
             self.type_id = row["typeID"]
         
@@ -42,12 +45,25 @@ class Type(object):
         
         cursor.close()
         
+        self.group = None
+        self.market_group = None
+        self.attributes = None
+        
     def get_group(self):
-        if 'self.group' not in locals():
+        """Populates and returns the group"""
+        if self.group is None:
             self.group = inventory_dictionaries.get_group(self.group_id)
         return self.group
     
     def get_market_group(self):
-        if 'self.market_group' not in locals():
-            self.market_group = inventory_dictionaries.get_market_group(self.market_group_id)
+        """Populates and returns the market group"""
+        if self.market_group is None:
+            self.market_group = inventory_dictionaries.\
+            get_market_group(self.market_group_id)
         return self.market_group
+    
+    def get_attributes(self):
+        """Populates and returns the attributes"""
+        if self.attributes is None:
+            self.attributes = TypeAttributes(self.type_id)
+        return self.attributes

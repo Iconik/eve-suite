@@ -5,13 +5,10 @@ Created on Oct 28, 2009
 '''
 
 class Region(object):
-    '''
-    classdocs
-    '''
+    """
+     # PyUML: Do not remove this line! # XMI_ID:_EIKGcBEREd-LgJ4IxcJkTA
+    """
 
 
-    def __init__(self,id):
-        '''
-        Constructor
-        '''
-        
+    def __init__(self, region_id):
+        pass
