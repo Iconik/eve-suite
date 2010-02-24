@@ -4,7 +4,7 @@ Created on Oct 28, 2009
 @author: frederikns
 '''
 from model.static.map import map_dictionaries
-from model.static.inventory import inventory_dictionaries
+from model.static.inv import inventory_dictionaries
 from model.static.database import database
 
 class SolarSystem(object):

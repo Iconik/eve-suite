@@ -36,7 +36,7 @@ def get_solar_system(solar_system_id):
     
 def get_station(station_id):
     """Retrieves or populates the requested station"""
-    from model.static.station.station import Station
+    from model.static.sta.station import Station
     if station_id not in STATIONS:
         station = Station(station_id)
         STATIONS[station_id] = station

@@ -5,7 +5,7 @@ Created on Nov 6, 2009
 '''
 
 from datetime import datetime
-from model.static.inventory import inventory_dictionaries
+from model.static.inv import inventory_dictionaries
 from model.generated.roman.roman import to_roman
 
 class SkillQueueItem(object):

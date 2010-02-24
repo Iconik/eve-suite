@@ -5,6 +5,7 @@ Created on Nov 30, 2009
 '''
 from PyQt4 import QtGui
 from view.mainwindow.main_window import MainWindow
+from model.static.inv import inventory_dictionaries
 
 import sys
 

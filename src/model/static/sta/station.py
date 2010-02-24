@@ -6,7 +6,7 @@ Created on Oct 28, 2009
 
 from model.static.database import database
 from model.static.map import map_dictionaries
-from model.static.inventory import inventory_dictionaries
+from model.static.inv import inventory_dictionaries
 
 class Station(object):
     """

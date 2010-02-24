@@ -3,9 +3,9 @@ Created on Nov 15, 2009
 
 @author: frederikns
 '''
-from model.static.inventory import inventory_dictionaries
+from model.static.inv import inventory_dictionaries
 from model.static.pos import pos_dictionaries
-from model.static.character import character_dictionaries
+from model.static.chr import character_dictionaries
 
 import datetime
 import math
@@ -26,7 +26,7 @@ class POS(object):
         
         self.type = None
         self.fuel = None
-        self.faction = faction
+        self.faction = None
         
     def get_type(self):
         """Populates and returns the type"""
@@ -52,40 +52,44 @@ class POS(object):
         power_volume = 0.0
         cpu_volume = 0.0
         
-        for online in self.fuel.get_online():
-            if online[2] == self.faction or online[2] == None:
+        for online in self.get_fuel().online:
+            if online[2] == self.faction or online[2] is None:
                 online_volume += online[0].get_volume()
         
-        for power in self.fuel.get_power():
+        for power in self.fuel.power:
             power_volume += power[0].get_volume()
-        power_volume *= self.power
+        power_volume = power_volume * self.power
         
-        for cpu in self.fuel.get_cpu():
+        for cpu in self.fuel.cpu:
             cpu_volume += cpu[0].get_volume()
-        cpu_volume *= self.cpu
+        cpu_volume = cpu_volume * self.cpu
         
         total_volume = online_volume + power_volume + cpu_volume
         
-        fuel_multiplier = self.type.get_capacity() / total_volume
+        fuel_multiplier = math.trunc(self.get_type().capacity / total_volume)
         
-        print("Tower: ", self.type.get_typeName())
+        print "Tower: ", self.get_type().type_name
         
-        for online in self.fuel.get_online():
+        print "Online:"
+        for online in self.get_fuel().online:
             if online[2] == self.faction or online[2] == None:
-                print(math.trunc(online[0].get_quantity() * fuel_multiplier),
-                      "\t", online[0].get_type().get_typeName())
-        for power in self.fuel.get_power():
-            print(math.trunc(power[0].get_quantity() * fuel_multiplier), "\t",
-                  online[0].get_type().get_typeName())
-        for cpu in self.fuel.get_cpu():
-            print(math.trunc(cpu[0].get_quantity() * fuel_multiplier), "\t",
-                  cpu[0].get_type().get_typeName())
-        print("Volume per hour: ", total_volume, " m^3")
-        print("Volume total: ", total_volume * math.trunc(fuel_multiplier),
-              " m^3")
-        print("Hours of operation: ", math.trunc(fuel_multiplier))
-        time = datetime.timedelta(hours=math.trunc(fuel_multiplier))
-        print("Operating time: ", str(time))
+                print online[0].quantity * fuel_multiplier,\
+                      "\t", online[0].get_type().type_name
+        print "Power:"
+        for power in self.get_fuel().power:
+            print math.trunc(math.ceil(power[0].quantity * self.power)) * fuel_multiplier, "\t",\
+                  power[0].get_type().type_name
+        print "CPU:"
+        for cpu in self.get_fuel().cpu:
+            print math.trunc(math.ceil(cpu[0].quantity * self.cpu)) * fuel_multiplier, "\t",\
+                  cpu[0].get_type().type_name
+                  
+        print "Volume per hour: ", total_volume, " m^3"
+        print "Volume total: ", total_volume * fuel_multiplier,\
+              " m^3"
+        print "Hours of operation: ", fuel_multiplier
+        time = datetime.timedelta(hours=fuel_multiplier)
+        print "Operating time: ", str(time)
         
     def max_stront(self):
         """Calculates and prints the optimal strontium amount for the pos"""
@@ -95,5 +99,5 @@ class POS(object):
         print reinforce_volume
         
 if __name__ == '__main__':
-    TEST = POS(27597, 1, 1, 500001)
+    TEST = POS(27597, 840000.0/1275000.0, 3500.0/3750.0, 500001)
     TEST.max_fuel()

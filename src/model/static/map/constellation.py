@@ -5,7 +5,7 @@ Created on Oct 28, 2009
 '''
 from model.static.database import database
 from model.static.map import map_dictionaries
-from model.static.character import character_dictionaries
+from model.static.chr import character_dictionaries
 
 class Constellation(object):
     """

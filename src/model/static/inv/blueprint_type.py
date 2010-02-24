@@ -3,10 +3,12 @@ Created on Dec 1, 2009
 
 @author: frederikns
 '''
-from model.static.inventory import inventory_dictionaries
+from model.static.inv import inventory_dictionaries
 from model.static.database import database
-from model.static.inventory.type_materials import TypeMaterials
-from model.static.inventory.type import Type
+from model.static.inv.type_materials import TypeMaterials
+from model.static.inv.type import Type
+from model.static.ram.type_requirements import TypeRequirements
+from model.static.ram import ram_dictionaries
 
 class BlueprintType(object):
     """
@@ -63,50 +65,55 @@ class BlueprintType(object):
             self.waste_factor = row["wasteFactor"]
             self.max_production_limit = row["maxProductionLimit"]
         
-        if 'cursor' not in locals():
+        if 'cursor' in locals():
             cursor.close()
             
         self.blueprint = None
         self.parent_blueprint = None
         self.product_type = None
-        self.build_materials = None
+        self.materials = None
+        self.requirements = None
         
     def get_blueprint_type(self):
         """Populates and returns the blueprint type"""
         if self.blueprint is None:
-            self.blueprint_type = Type(self.blueprint_type_id)
+            self.blueprint_type = inventory_dictionaries.get_type(
+                self.blueprint_type_id)
         return self.blueprint_type
         
     def get_parent_blueprint_type(self):
         """Populates and returns the parent blueprint type"""
         if self.parent_blueprint is None:
             self.parent_blueprint = inventory_dictionaries.get_blueprint(
-                                                self.parent_blueprint_type_id)
+                self.parent_blueprint_type_id)
         return self.parent_blueprint
         
     def get_product_type(self):
         """Populates and returns the product type"""
         if self.product_type is None:
             self.product_type = inventory_dictionaries.get_type(
-                                                        self.product_type_id)
+                self.product_type_id)
         return self.product_type
     
-    def get_build_materials(self):
-        """Populates and returns the materials"""
-        if self.build_materials is None:
-            self.build_materials = TypeMaterials(self.product_type_id,
-                                                 self.waste_factor)
-        return self.build_materials
+    def get_materials(self):
+        """Populates and returns the type materials"""
+        if self.materials is None:
+            self.materials = inventory_dictionaries.get_type_materials(
+                self.product_type_id, self.blueprint_type_id)
+        return self.materials
     
-    def get_bp_calc_materials(self, material_efficiency, runs, pe_skill):
-        """
-        Populates the materials for the blueprint calculator and returns them
-        """
-        if self.build_materials is None:
-            self.build_materials = TypeMaterials(self.product_type_id)
-        return self.build_materials.get_material_calc(material_efficiency,
-                                                      runs, pe_skill,
-                                                      self.waste_factor)
+    def get_requirements(self):
+        """Populates and returns the type requirements"""
+        if self.requirements is None:
+            self.requirements = ram_dictionaries.get_type_requirements(
+                self.blueprint_type_id)
+        return self.requirements
+    
+    def get_combined(self, material_efficiency, production_efficiency_skill):
+        return self.get_materials().get_combined_material_data(
+            material_efficiency,
+            production_efficiency_skill,
+            self.waste_factor)
 
 if __name__ == '__main__':
     def tree_print(group_names, group_relations, type_names, #IGNORE:R0913

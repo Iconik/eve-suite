@@ -4,7 +4,7 @@ Created on Nov 26, 2009
 @author: frederikns
 '''
 from model.static.database import database
-from model.static.inventory import inventory_dictionaries
+from model.static.inv import inventory_dictionaries
 
 
 class MarketGroup(object):

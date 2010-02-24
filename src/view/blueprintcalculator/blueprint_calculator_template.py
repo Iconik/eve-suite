@@ -2,17 +2,14 @@
 
 # Form implementation generated from reading ui file 'blueprint_calculator_template.ui'
 #
-# Created: Sun Jan 03 00:58:40 2010
-#      by: PyQt4 UI code generator 4.6.2
+# Created: Mon Feb  8 01:34:02 2010
+#      by: PyQt4 UI code generator 4.7-snapshot-20091207
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
 
 class Ui_MainWindow(object):
-    """
-     # PyUML: Do not remove this line! # XMI_ID:_EIT3dxEREd-LgJ4IxcJkTA
-    """
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 393)
@@ -75,11 +72,12 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.groupBox_2)
         self.verticalLayout_2.addLayout(self.horizontalLayout)
         self.material_table = QtGui.QTreeWidget(self.centralwidget)
+        self.material_table.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.material_table.setObjectName("material_table")
         self.verticalLayout_2.addWidget(self.material_table)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
 
