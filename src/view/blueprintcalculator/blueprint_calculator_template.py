@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'blueprint_calculator_template.ui'
 #
-# Created: Mon Feb  8 01:34:02 2010
-#      by: PyQt4 UI code generator 4.7-snapshot-20091207
+# Created: Wed Feb 24 23:40:48 2010
+#      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -96,6 +96,6 @@ class Ui_MainWindow(object):
         self.material_table.headerItem().setText(3, QtGui.QApplication.translate("MainWindow", "Total Amount", None, QtGui.QApplication.UnicodeUTF8))
         self.material_table.headerItem().setText(4, QtGui.QApplication.translate("MainWindow", "Unit Price", None, QtGui.QApplication.UnicodeUTF8))
         self.material_table.headerItem().setText(5, QtGui.QApplication.translate("MainWindow", "Total Price", None, QtGui.QApplication.UnicodeUTF8))
-        self.material_table.headerItem().setText(6, QtGui.QApplication.translate("MainWindow", "Perfect ME", None, QtGui.QApplication.UnicodeUTF8))
-        self.material_table.headerItem().setText(7, QtGui.QApplication.translate("MainWindow", "Improve At Level", None, QtGui.QApplication.UnicodeUTF8))
+        self.material_table.headerItem().setText(6, QtGui.QApplication.translate("MainWindow", "Improve At Level", None, QtGui.QApplication.UnicodeUTF8))
+        self.material_table.headerItem().setText(7, QtGui.QApplication.translate("MainWindow", "Perfect ME", None, QtGui.QApplication.UnicodeUTF8))
 

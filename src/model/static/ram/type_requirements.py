@@ -11,7 +11,7 @@ class TypeRequirements(object):
     classdocs
     '''
 
-    def __init__(self,type_id):
+    def __init__(self, type_id):
         '''
         Constructor
         '''
@@ -26,5 +26,8 @@ class TypeRequirements(object):
         for row in cursor:
             if row["activityID"] not in self.requirements:
                 self.requirements[row["activityID"]] = list()
-            self.requirements[row["activityID"]].append((Item(row["requiredTypeID"], quantity=row["quantity"]), row["damagePerJob"], row["recycle"]))
+            self.requirements[row["activityID"]].append((
+                Item(row["requiredTypeID"], quantity=row["quantity"]),
+                row["damagePerJob"],
+                row["recycle"]))
 

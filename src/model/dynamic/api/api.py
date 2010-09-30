@@ -54,7 +54,7 @@ def check_cached_until(path):
             return True
     return True
     
-ONLINE = False
+ONLINE = True
     
 def fetch(folder, file_name, user_id=None, api_key=None, character_id=None):
     """

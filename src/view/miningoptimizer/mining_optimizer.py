@@ -16,5 +16,9 @@ class MiningOptimizer(QtGui.QMainWindow):
         QtGui.QWidget.__init__(self, parent) #IGNORE:W0233
         self.ui = Ui_mining_optimizer_window() #IGNORE:C0103
         self.ui.setupUi(self)
-        
+        for col in range(0, self.ui.mineral_tree.columnCount()):
+            self.ui.mineral_tree.resizeColumnToContents(col)
+        for col in range(0, self.ui.mine_tree.columnCount()):
+            self.ui.mine_tree.resizeColumnToContents(col)
+            
     

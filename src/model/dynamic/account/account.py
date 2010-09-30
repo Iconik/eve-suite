@@ -46,8 +46,3 @@ class Account(object):
     def get_characters(self):
         """Returns the list of characters the account contains"""
         return self.characters
-    
-    def fetch_skill_queues(self):
-        """Fetches all the characters on the account's skill queues"""
-        for char in self.characters:
-            char.fetch_skill_queue()

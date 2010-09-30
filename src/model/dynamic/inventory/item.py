@@ -16,7 +16,7 @@ class Item(object):
     def __init__(self, type_id=None, location_id=None, quantity=None,
                  flags=None, singleton=None):
         
-        self.type_id = type_id    
+        self.type_id = type_id
         self.location_id = location_id
         self.quantity = quantity
         self.flags = flags
@@ -67,6 +67,17 @@ class Item(object):
         return item
     
     def __div__(self, other):
+        """Divides an item amount by another item amount"""
         item = copy(self)
         item.quantity /= other
         return item
+    
+def get_volume(items):
+    """Takes a list of items or an item and returns the total volume"""
+    if isinstance(items, Item):
+        return items.get_volume()
+    if isinstance(items, list()):
+        total_vol = 0 
+        for x in items:
+            total_vol += x.volume()
+        return total_vol

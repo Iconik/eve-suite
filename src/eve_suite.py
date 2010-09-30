@@ -3,16 +3,25 @@ Created on Nov 30, 2009
 
 @author: frederikns
 '''
-from PyQt4 import QtGui
+import wx
 from view.mainwindow.main_window import MainWindow
-from model.static.inv import inventory_dictionaries
 
-import sys
+
+class EVESuite(wx.App): #IGNORE:R0904
+    """The main class for the eve suite"""
+    
+    def __init__(self):
+        wx.App.__init__(self)
+        self.mainframe = None
+        
+    def OnInit(self): #IGNORE:C0103
+        """Function needed for wx, to initialize the program"""
+        self.SetAppName('EVE Suite')
+        self.mainframe = MainWindow()
+        self.SetTopWindow(self.mainframe.frame)
+        return True
 
 if __name__ == '__main__':
-    APP = QtGui.QApplication(sys.argv)
-    
-    MAIN_WINDOW = MainWindow()
-    MAIN_WINDOW.show()
-    
-    sys.exit(APP.exec_())
+
+    APP = EVESuite()
+    APP.MainLoop()

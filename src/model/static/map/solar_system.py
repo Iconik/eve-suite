@@ -15,7 +15,7 @@ class SolarSystem(object):
     def __init__(self, solar_system_id):
         self.solar_system_id = solar_system_id
         
-        cursor = database.get_cursor("select * from mapSolarSystem where \
+        cursor = database.get_cursor("select * from mapSolarSystems where \
         solarSystemID=%s;" % (self.solar_system_id))
         row = cursor.fetchone()
         
@@ -69,3 +69,6 @@ class SolarSystem(object):
         if self.sun_type is None:
             self.sun_type = inventory_dictionaries.get_type(self.sun_type_id)
         return self.sun_type
+    
+    def __str__(self):
+        return self.solar_system_name

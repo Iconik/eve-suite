@@ -9,7 +9,7 @@ from setuptools import setup
 
 APP = ['src/eve_suite.py']
 DATA_FILES = []
-OPTIONS = {'argv_emulation': True, 'includes':['zlib']}
+OPTIONS = {'argv_emulation': True, 'includes':['sip']}
 
 setup(
     app=APP,

@@ -18,12 +18,15 @@ class Character(object):
         Constructor
         '''
         self.account = account
+        
         self.name = name
         self.character_id = character_id
         self.corporation_name = corporation_name
         self.corporation_id = corporation_id
         
         self.skill_queue = None
+        self.character_sheet = None
+        
     
     def get_skill_queue(self):
         """Populates and returns the characters skill queue"""
@@ -32,4 +35,6 @@ class Character(object):
                                          self.account.get_apiKey(),
                                          self.character_id)
         return self.skill_queue.get_skill_queue()
+        
+    def get_character_sheet(self):
         

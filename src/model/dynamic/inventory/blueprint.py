@@ -10,8 +10,6 @@ class Blueprint(object):
     '''
     classdocs
     '''
-
-
     def __init__(self, blueprint_type_id, runs=None, material_efficiency=None,
                  production_efficiency=None):
         '''
