@@ -52,10 +52,10 @@ def get_market_group(market_group_id):
         MARKET_GROUPS[market_group_id] = market_group
     return MARKET_GROUPS[market_group_id]
 
-def get_type_materials(type_id, blueprint_type_id=None):
+def get_type_materials(type_id):
     """Retrieves or populates the requested market group"""
     from model.static.inv.type_materials import TypeMaterials
     if type_id not in TYPE_MATERIALS:
-        type_materials = TypeMaterials(type_id, blueprint_type_id)
+        type_materials = TypeMaterials(type_id)
         TYPE_MATERIALS[type_id] = type_materials
     return TYPE_MATERIALS[type_id]

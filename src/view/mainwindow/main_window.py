@@ -18,4 +18,4 @@ class MainWindow: #IGNORE:R0904
         self.frame.Show()
         
     def blueprint_calc(self, event):
-        bpc = BlueprintCalculatorView()
+        bpc = BlueprintCalculatorView(self)

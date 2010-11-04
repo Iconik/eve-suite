@@ -1,94 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resource>
   <object class="wxFrame" name="blueprint_calc_frame">
-    <title>Blueprint Calculator</title>
     <object class="wxBoxSizer">
       <orient>wxVERTICAL</orient>
       <object class="sizeritem">
         <object class="wxBoxSizer">
+          <orient>wxHORIZONTAL</orient>
           <object class="sizeritem">
-            <object class="wxBoxSizer">
-              <orient>wxVERTICAL</orient>
+            <object class="wxStaticBoxSizer">
+              <label>Base Blueprint</label>
+              <orient>wxHORIZONTAL</orient>
               <object class="sizeritem">
-                <object class="wxBoxSizer">
-                  <orient>wxHORIZONTAL</orient>
-                  <object class="sizeritem">
-                    <object class="wxStaticText">
-                      <label>Blueprint:</label>
-                    </object>
-                    <flag>wxALIGN_CENTRE_VERTICAL</flag>
-                  </object>
-                  <object class="sizeritem">
-                    <object class="unknown" name="blueprint_combo"/>
-                  </object>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <object class="wxBoxSizer">
-                  <orient>wxHORIZONTAL</orient>
-                  <object class="sizeritem">
-                    <object class="wxStaticText">
-                      <label>ME:</label>
-                    </object>
-                    <flag>wxALIGN_CENTRE_VERTICAL</flag>
-                  </object>
-                  <object class="sizeritem">
-                    <object class="wxSpinCtrl" name="me_spinner">
-                      <value>0</value>
-                    </object>
-                  </object>
-                  <object class="sizeritem">
-                    <object class="wxStaticText">
-                      <label>PE:</label>
-                    </object>
-                    <flag>wxALIGN_CENTRE_VERTICAL</flag>
-                  </object>
-                  <object class="sizeritem">
-                    <object class="wxSpinCtrl" name="pe_spin">
-                      <value>0</value>
-                    </object>
-                  </object>
-                  <object class="sizeritem">
-                    <object class="wxStaticText">
-                      <label>Runs:</label>
-                    </object>
-                    <flag>wxALIGN_CENTRE_VERTICAL</flag>
-                  </object>
-                  <object class="sizeritem">
-                    <object class="wxSpinCtrl" name="runs_spin">
-                      <value>1</value>
-                      <min>1</min>
-                    </object>
-                  </object>
-                </object>
+                <object class="unknown" name="blueprint_combo"/>
               </object>
             </object>
           </object>
-          <orient>wxHORIZONTAL</orient>
           <object class="sizeritem">
-            <object class="wxBoxSizer">
+            <object class="wxStaticLine">
+              <style>wxLI_VERTICAL</style>
+            </object>
+          </object>
+          <object class="sizeritem">
+            <object class="wxStaticBoxSizer">
+              <label>Character</label>
               <orient>wxHORIZONTAL</orient>
               <object class="sizeritem">
-                <object class="wxStaticText" name="">
-                  <label>Character:</label>
+                <object class="wxChoice" name="character_combo">
+                  <content/>
                 </object>
-                <flag>wxALIGN_CENTRE_VERTICAL</flag>
-              </object>
-              <object class="sizeritem">
-                <object class="wxChoice" name="character_select">
-                  <content>
-                    <item></item>
-                  </content>
-                </object>
-                <flag>wxALIGN_CENTRE_VERTICAL</flag>
               </object>
             </object>
           </object>
         </object>
       </object>
       <object class="sizeritem">
-        <object class="unknown" name="material_tree"/>
+        <object class="wxBoxSizer">
+          <object class="sizeritem">
+            <object class="wxStaticBoxSizer">
+              <label>Production Materials</label>
+              <orient>wxVERTICAL</orient>
+              <object class="sizeritem">
+                <object class="unknown" name="material_tree"/>
+              </object>
+            </object>
+          </object>
+          <orient>wxHORIZONTAL</orient>
+          <object class="sizeritem">
+            <object class="wxStaticBoxSizer">
+              <label>Production Blueprints</label>
+              <orient>wxVERTICAL</orient>
+              <object class="sizeritem">
+                <object class="unknown" name="blueprint_tree"/>
+              </object>
+            </object>
+          </object>
+        </object>
       </object>
     </object>
+    <title>Blueprint Calculator</title>
+    <centered>1</centered>
+    <focused>1</focused>
   </object>
 </resource>

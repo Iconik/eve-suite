@@ -18,25 +18,45 @@ class Blueprint(object):
         self.blueprint_type_id = blueprint_type_id
         self.runs = runs
         self.material_efficiency = material_efficiency
-        self.production_efficiency = production_efficiency
+        self.production_efficiency_skill = production_efficiency
         
         self.blueprint = None
         
     def get_blueprint(self):
+        """Populates and returns the blueprint object"""
         if self.blueprint is None:
             self.blueprint = inventory_dictionaries.get_blueprint(
                 self.blueprint_type_id)
         return self.blueprint
         
-    def get_requirements(self):
-        return self.get_blueprint().get_requirements()
-    
     def get_materials(self):
+        """Returns the materials object"""
         return self.get_blueprint().get_materials()
     
-    def get_combined(self, production_efficiency_skill):
-        return self.get_blueprint().get_combined(self.material_efficiency,
-                                          production_efficiency_skill)
-        
-    def get_production_times(self):
-        pass
+    def get_requirements(self):
+        """Returns the requirements object"""
+        return self.get_blueprint().get_requirements()
+    
+    def get_base_amounts(self):
+        """Returns the base amounts for manufacturing"""
+        return self.get_blueprint().get_base_amounts()
+    
+    def get_waste(self, material_multiplier=1.0):
+        """Returns the waste amounts for manufacturing"""
+        return self.get_blueprint().get_waste(self.material_efficiency,
+            self.production_efficiency_skill, material_multiplier)
+    
+    def get_totals(self, material_multiplier=1.0):
+        """Returns the total amounts for manufacturing"""
+        return self.get_blueprint().get_totals(self.material_efficiency,
+            self.production_efficiency_skill, material_multiplier)
+    
+    def get_eliminate_waste(self):
+        """Returns the eliminate waste levels for manufacturing"""
+        return self.get_blueprint().get_eliminate_waste()
+    
+    def get_next_improvement(self, material_multiplier=1.0):
+        """Returns the next improving level for me research"""
+        return self.get_blueprint().get_next_improvement(
+            self.material_efficiency, self.production_efficiency_skill,
+            material_multiplier)

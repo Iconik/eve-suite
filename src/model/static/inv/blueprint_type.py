@@ -5,9 +5,9 @@ Created on Dec 1, 2009
 '''
 import weakref
 
-from model.static.inv import inventory_dictionaries
 from model.static.database import database
-from model.static.ram import ram_dictionaries
+from model.static.inv import inventory_dictionaries
+from model.dynamic.inventory.material_requirements import MaterialRequirements
 
 
 class BlueprintType(object): #IGNORE:R0902
@@ -41,8 +41,7 @@ class BlueprintType(object): #IGNORE:R0902
         self.blueprint = None
         self.parent_blueprint = None
         self.product_type = None
-        self.materials = None
-        self.requirements = None
+        self.material_requirements = None
 
     def get_parent_blueprint_type(self):
         """Populates and returns the parent blueprint type"""
@@ -58,22 +57,43 @@ class BlueprintType(object): #IGNORE:R0902
             self.product_type = weakref.ref(inventory_dictionaries.get_type(
                 self.product_type_id))
         return self.product_type
+    
+    def get_material_requirements(self):
+        if self.material_requirements is None:
+            self.material_requirements = MaterialRequirements(
+                self.blueprint_type_id, self.product_type_id)
+        return self.material_requirements
 
-    def get_materials(self):
-        """Populates and returns the type materials"""
-        if self.materials is None:
-            self.materials = inventory_dictionaries.get_type_materials(
-                self.product_type_id, self.blueprint_type_id)
-        return self.materials
+    def get_base_amounts(self):
+        """Returns the base amounts for manufacturing"""
+        return self.get_material_requirements().get_material_base()
+    
+    def get_waste(self, material_efficiency, production_efficiency_skill=5.0,
+        material_multiplier=1.0):
+        """Returns the waste amounts for manufacturing"""
+        return self.get_material_requirements().get_material_waste(
+            material_efficiency, production_efficiency_skill, self.waste_factor,
+            material_multiplier)
+    
+    def get_totals(self, material_efficiency, production_efficiency_skill=5.0,
+        material_multiplier=1.0):
+        """Returns the total amounts for manufacturing"""
+        return self.get_material_requirements().get_material_totals(
+            material_efficiency, production_efficiency_skill, self.waste_factor,
+            material_multiplier)
+        
+    def get_eliminate_waste(self):
+        """Returns the eliminate waste levels for manufacturing"""
+        return self.get_material_requirements().get_material_eliminate_waste(
+            self.waste_factor)
+    
+    def get_next_improvement(self, material_efficiency,
+        production_efficiency_skill=5.0, material_multiplier=1.0):
+        """Returns the next improving level for me research"""
+        return self.get_material_requirements().get_material_next_improvements(
+            material_efficiency, production_efficiency_skill, self.waste_factor,
+            material_multiplier)
 
-    def get_requirements(self):
-        """Populates and returns the type requirements"""
-        if self.requirements is None:
-            self.requirements = ram_dictionaries.get_type_requirements(
-                self.blueprint_type_id)
-        return self.requirements
-
-    def get_manufacture(self, material_efficiency, production_efficiency_skill):
-        """Gets all the materials and requirements for the blueprint"""
-        self.get_materials()
-        self.get_requirements()
+    def get_component_blueprints(self):
+        """Gets a list of blueprints required for the components"""
+        pass

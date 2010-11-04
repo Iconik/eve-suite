@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resource>
   <object class="wxFrame" name="main_frame">
-    <title></title>
     <object class="wxGridSizer">
       <cols>2</cols>
       <rows>2</rows>
@@ -22,5 +21,7 @@
         </object>
       </object>
     </object>
+    <centered>1</centered>
+    <focused>1</focused>
   </object>
 </resource>

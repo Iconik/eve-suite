@@ -11,14 +11,14 @@ class BlueprintCalculator(object):
     def __init__(self):
         self.blueprint_map = dict()
         self.blueprint_list = list()
-        self.blueprint_list_init()
+        self._blueprint_list_init()
         self.selected_blueprint = None
         self.materials = dict()
 
-    def blueprint_list_init(self):
+    def _blueprint_list_init(self):
         cursor = database.get_cursor("SELECT typeID, typeName FROM \
-        invBlueprintTypes LEFT JOIN invTypes ON blueprintTypeID=typeID WHERE \
-        published=1 ORDER BY typeName")
+            invBlueprintTypes LEFT JOIN invTypes ON blueprintTypeID=typeID WHERE \
+            published=1 ORDER BY typeName")
         for row in cursor:
             self.blueprint_map[row["typeName"]] = row["typeID"]
             self.blueprint_list.append(row["typeName"])

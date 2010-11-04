@@ -6,7 +6,7 @@ Created on 9 Feb 2010
 from model.static.database import database
 from model.dynamic.inventory.item import Item
 
-class TypeRequirements(object):
+class TypeRequirements(object): #IGNORE:R0903
     '''
     classdocs
     '''
@@ -30,4 +30,6 @@ class TypeRequirements(object):
                 Item(row["requiredTypeID"], quantity=row["quantity"]),
                 row["damagePerJob"],
                 row["recycle"]))
-
+            
+    def __getitem__(self, k):
+        return self.requirements[k]

@@ -22,6 +22,5 @@ class EVESuite(wx.App): #IGNORE:R0904
         return True
 
 if __name__ == '__main__':
-
     APP = EVESuite()
     APP.MainLoop()
