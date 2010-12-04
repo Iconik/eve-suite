@@ -28,9 +28,7 @@ class BlueprintCalculatorView():
         self.blueprint_calculator = BlueprintCalculator()
         self.last_run = 0
         
-        self.active_blueprints = list(self.blueprint_calculator.blueprint_list)
-        self.inactive_blueprints = list()
-        self.blueprint_combo.SetItems(self.active_blueprints)
+        self.blueprints = self.blueprint_calculator.blueprint_list
         
     def init_frame(self):
         """initializes the frame"""
@@ -57,32 +55,14 @@ class BlueprintCalculatorView():
         """This function runs each time the blueprint selection combo is
         modified, updating the list of blueprints to only show the ones which
         match the entered substring"""
-        if len(self.blueprint_combo.Value) == 0:
-            self.active_blueprints.extend(self.inactive_blueprints)
-            self.inactive_blueprints = list()
-        elif len(self.blueprint_combo.Value) > self.last_run:
-            removals = list()
-            for index in xrange(0,len(self.active_blueprints)):
-                if self.blueprint_combo.Value not in self.active_blueprints[index]:
-                    removals.append(index)
-            if len(removals)>0:
-                for index in reversed(removals):
-                    self.inactive_blueprints.append(self.active_blueprints[index])
-                    del self.active_blueprints[index]
-        else:
-            additions = list()
-            for index in xrange(0,len(self.inactive_blueprints)):
-                if self.blueprint_combo.Value in self.inactive_blueprints[index]:
-                    additions.append(index)
-            if len(additions)>0:
-                for index in reversed(additions):
-                    self.active_blueprints.append(self.inactive_blueprints[index])
-                    del self.inactive_blueprints[index]
-        self.last_run = len(self.blueprint_combo.Value)
-        self.active_blueprints.sort()
-        self.blueprint_combo.SetItems(self.active_blueprints)
+        
+        self.blueprint_combo.SetItems([blueprint for blueprint in 
+            self.blueprints if self.blueprint_combo.Value in blueprint])
         
     def update_production(self, event):
         """This function runs when a blueprint has been selected, displaying
         the resources required for production""" 
-        pass
+        
+        if(self.blueprint_combo.Value in self.blueprints or 
+            self.blueprint_combo.Value+" Blueprint" in self.blueprints):
+            pass
