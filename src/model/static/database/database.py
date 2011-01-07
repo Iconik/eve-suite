@@ -5,7 +5,7 @@ Created on Dec 7, 2009
 '''
 import sqlite3
 
-LOCATION = '../Resources/Database/tyr101-sqlite3-v1.db'
+LOCATION = '../Resources/Database/inc101-sqlite3-v1.db'
 
 CONNECTION = sqlite3.connect(LOCATION)
 CONNECTION.row_factory = sqlite3.Row

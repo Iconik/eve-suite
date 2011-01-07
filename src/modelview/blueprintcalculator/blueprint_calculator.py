@@ -4,7 +4,6 @@ Created on May 31, 2010
 @author: frederikns
 '''
 from model.static.database import database
-from model.static.inv.type_materials import TypeMaterials
 from model.dynamic.inventory.blueprint import Blueprint
 
 class BlueprintCalculator(object):
@@ -26,7 +25,21 @@ class BlueprintCalculator(object):
             
     def blueprint_change(self,blueprint_id):
         self.selected_blueprint = Blueprint(blueprint_id)
-        self.materials = self.selected_blueprint.get_combined(production_efficiency_skill)
+        self.materials = self.selected_blueprint.get_base_amounts()
+        
+        ids = list()
+        for items in self.materials:
+            ids.append(items.type_id)
+        query = "SELECT blueprintTypeID, productTypeID FROM invBlueprintTypes WHERE pruductTypeID==%s " % (ids[0])
+        
+        for id in ids:
+            if id[0] == ids[0][0] and id[1] == ids[0][1]:
+                continue
+            query += "AND productTypeID==%s " % (id)
+        
+        query += ";"
+        
+            
     
     def material_change(self):
         pass

@@ -92,7 +92,7 @@ class Type(object): #IGNORE:R0902
         """populates the blueprint reference, if the type can be manufactured"""
         if self.is_manufacturable():
             if self.blueprint is None:
-                self.blueprint = inventory_dictionaries.get_blueprint(
+                self.blueprint = inventory_dictionaries.get_blueprint_type(
                     self.blueprint_type_id)
         return self.blueprint
         

@@ -11,7 +11,7 @@
               <label>Base Blueprint</label>
               <orient>wxHORIZONTAL</orient>
               <object class="sizeritem">
-                <object class="unknown" name="blueprint_combo"/>
+                <object class="wxComboBox" name="blueprint_combo"/>
               </object>
             </object>
           </object>
@@ -25,9 +25,7 @@
               <label>Character</label>
               <orient>wxHORIZONTAL</orient>
               <object class="sizeritem">
-                <object class="wxChoice" name="character_combo">
-                  <content/>
-                </object>
+                <object class="wxChoice" name="character_choice"/>
               </object>
             </object>
           </object>

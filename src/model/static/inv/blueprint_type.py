@@ -33,7 +33,7 @@ class BlueprintType(object): #IGNORE:R0902
         self.research_tech_time = row["researchTechTime"]
         self.productivity_modifier = row["productivityModifier"]
         self.material_modifier = row["materialModifier"]
-        self.waste_factor = row["wasteFactor"]
+        self.waste_factor = float(row["wasteFactor"])
         self.max_production_limit = row["maxProductionLimit"]
 
         cursor.close()
@@ -47,7 +47,7 @@ class BlueprintType(object): #IGNORE:R0902
         """Populates and returns the parent blueprint type"""
         if self.parent_blueprint is None:
             self.parent_blueprint = weakref.ref(
-                inventory_dictionaries.get_blueprint(
+                inventory_dictionaries.get_blueprint_type(
                     self.parent_blueprint_type_id))
         return self.parent_blueprint
 

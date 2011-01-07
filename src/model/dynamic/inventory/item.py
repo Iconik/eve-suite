@@ -41,6 +41,9 @@ class Item(object):
         """Returns the volume of the item"""
         return self.quantity*self.get_type().volume
     
+    def copy(self):
+        return copy(self)
+    
     def __add__(self, other):
         item = copy(self)
         if isinstance(other, Item):
@@ -79,5 +82,5 @@ def get_volume(items):
     if isinstance(items, list()):
         total_vol = 0 
         for x in items:
-            total_vol += x.volume()
+            total_vol += x.get_volume()
         return total_vol

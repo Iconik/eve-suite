@@ -32,7 +32,9 @@ class TypeMaterials(object): #IGNORE:R0903
         return self.materials.values()
         
     def __getitem__(self, k):
+        """Allows TypeMaterials[k]"""
         return self.materials[k]
     
     def __contains__(self, item):
+        """Allows 'if item in TypeMaterials'"""
         return item in self.materials

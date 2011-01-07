@@ -12,7 +12,7 @@ CATEGORIES = WeakValueDictionary()
 MARKET_GROUPS = WeakValueDictionary()
 TYPE_MATERIALS = WeakValueDictionary()
 
-def get_blueprint(blueprint_type_id):
+def get_blueprint_type(blueprint_type_id):
     """Retrieves or populates the requested blueprint"""
     from model.static.inv.blueprint_type import BlueprintType
     if blueprint_type_id not in BLUEPRINTS:
