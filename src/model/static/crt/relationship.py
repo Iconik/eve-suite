@@ -3,10 +3,8 @@ Created on Feb 7, 2010
 
 @author: frederikns
 '''
-from model.static.database import database
-from model.static.crt.certificate import Certificate
-from model.static.inv.type import Type
 from model.flyweight import Flyweight
+from model.static.database import database
 
 class Relationship(Flyweight):
     def __init__(self, relationship_id):
@@ -33,15 +31,18 @@ class Relationship(Flyweight):
         
     def get_parent(self):
         if self.parent is None:
+            from model.static.crt.certificate import Certificate
             self.parent = Certificate(self.parent_id)
         return self.parent
     
     def get_parent_type(self):
         if self.parent_type is None:
+            from model.static.inv.type import Type
             self.parent_type = Type(self.parent_type_id)
         return self.parent_type
     
     def get_child(self):
         if self.child is None:
+            from model.static.crt.certificate import Certificate
             self.child = Certificate(self.child_id)
         return self.child

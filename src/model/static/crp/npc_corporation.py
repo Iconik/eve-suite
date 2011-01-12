@@ -3,9 +3,8 @@ Created on 23 Dec 2009
 
 @author: FrederikNS
 '''
-from model.static.database import database
 from model.flyweight import Flyweight
-from model.static.map.solar_system import SolarSystem
+from model.static.database import database
 
 class NPCCorporation(Flyweight):
     def __init__(self, corporation_id):
@@ -54,8 +53,8 @@ class NPCCorporation(Flyweight):
     def get_solar_system(self):
         """Populates and returns the solar system"""
         if self.solar_system is None:
-            self.solar_system = SolarSystem \
-            (self.solar_system_id)
+            from model.static.map.solar_system import SolarSystem
+            self.solar_system = SolarSystem(self.solar_system_id)
         return self.solar_system
     
     def get_investor(self, investor_index):

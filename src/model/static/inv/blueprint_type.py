@@ -5,10 +5,8 @@ Created on Dec 1, 2009
 '''
 import weakref
 
-from model.static.database import database
-from model.dynamic.inventory.material_requirements import MaterialRequirements
 from model.flyweight import Flyweight
-from model.static.inv.type import Type
+from model.static.database import database
 
 class BlueprintType(Flyweight): #IGNORE:R0902
     
@@ -55,17 +53,20 @@ class BlueprintType(Flyweight): #IGNORE:R0902
     
     def get_type(self):
         if self.type is None:
+            from model.static.inv.type import Type
             self.type = Type(self.blueprint_type_id)
         return self.type
 
     def get_product_type(self):
         """Populates and returns the product type"""
         if self.product_type is None:
+            from model.static.inv.type import Type
             self.product_type = weakref.ref(Type(self.product_type_id))
         return self.product_type
     
     def get_material_requirements(self):
         if self.material_requirements is None:
+            from model.dynamic.inventory.material_requirements import MaterialRequirements
             self.material_requirements = MaterialRequirements(
                 self.blueprint_type_id, self.product_type_id)
         return self.material_requirements

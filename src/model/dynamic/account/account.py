@@ -3,10 +3,10 @@ Created on Nov 6, 2009
 
 @author: frederikns
 '''
+from model.flyweight import Flyweight
 from model.dynamic.api import api
 from model.dynamic.character.character import Character
 import xml.etree.ElementTree as ET
-from model.flyweight import Flyweight
 
 class Account(Flyweight):
     def __init__(self, user_id, api_key):

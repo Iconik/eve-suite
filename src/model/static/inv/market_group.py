@@ -5,7 +5,7 @@ Created on Nov 26, 2009
 '''
 from model.static.database import database
 from model.flyweight import Flyweight
-from model.static.inv.group import Group
+
 
 class MarketGroup(Flyweight):
     def __init__(self, market_group_id, parent_group_id=None, #IGNORE:R0913
@@ -44,5 +44,6 @@ class MarketGroup(Flyweight):
     def get_parent_group(self):
         """Populates and returns the parent group"""
         if self.parent_group is None:
+            from model.static.inv.group import Group
             self.parent_group = Group(self.parent_group_id)
         return self.parent_group

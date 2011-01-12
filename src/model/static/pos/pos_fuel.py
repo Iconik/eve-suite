@@ -3,9 +3,9 @@ Created on Nov 15, 2009
 
 @author: frederikns
 '''
-from model.dynamic.inventory.item import Item
-from model.static.database import database
 from model.flyweight import Flyweight
+from model.static.database import database
+from model.dynamic.inventory.item import Item
 
 class POSFuel(Flyweight):
     def __init__(self, pos_type_id):

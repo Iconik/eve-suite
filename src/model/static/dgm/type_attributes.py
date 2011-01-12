@@ -3,10 +3,9 @@ Created on 30 Jan 2010
 
 @author: FrederikNS
 '''
-
+from model.flyweight import Flyweight
 from model.static.database import database
 from model.static.dgm.attribute import Attribute
-from model.flyweight import Flyweight
 
 class TypeAttributes(Flyweight):
     def __init__(self, type_id):

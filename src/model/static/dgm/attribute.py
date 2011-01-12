@@ -3,9 +3,8 @@ Created on 30 Jan 2010
 
 @author: FrederikNS
 '''
-from model.static.database import database
-from model.static.inv.category import Category
 from model.flyweight import Flyweight
+from model.static.database import database
 
 class Attribute(Flyweight):
     def __init__(self, attribute_id):
@@ -37,5 +36,6 @@ class Attribute(Flyweight):
     def get_category(self):
         """Populates and returns the category"""
         if self.category is None:
+            from model.static.inv.category import Category
             self.category = Category(self.category_id)
         return self.category

@@ -7,7 +7,6 @@ from weakref import WeakValueDictionary
 
 class Flyweight(object):
     def __new__(cls, id, *args, **kwargs):
-        print "new"
         if not '_instances' in cls.__dict__:
             cls._instances = WeakValueDictionary()
         if id not in cls._instances:

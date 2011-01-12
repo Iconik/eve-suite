@@ -5,7 +5,6 @@ Created on Nov 26, 2009
 '''
 from model.static.database import database
 from model.flyweight import Flyweight
-from model.static.inv.category import Category
 
 class Group(Flyweight):
     def __init__(self, group_id):
@@ -40,5 +39,6 @@ class Group(Flyweight):
     def get_category(self):
         """Populates and returns the category"""
         if self.category is None:
+            from model.static.inv.category import Category
             self.category = Category(self.category_id)
         return self.category

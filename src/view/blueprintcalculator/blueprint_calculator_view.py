@@ -70,7 +70,7 @@ class BlueprintCalculatorView():
         self.frame.Bind(wx.EVT_TEXT_ENTER, self.update_blueprint,
             self.blueprint_combo)
         
-        self.blueprint_combo.SetItems(self.blueprint_calculator.blueprint_list)
+        self.blueprint_combo.SetItems(BlueprintCalculator._blueprint_list)
         
         self.frame.Fit()
         self.frame.Show()
@@ -81,7 +81,7 @@ class BlueprintCalculatorView():
         match the entered substring"""
         
         self.blueprint_combo.SetItems([blueprint for blueprint in 
-            self.blueprint_calculator.blueprint_list
+            BlueprintCalculator._blueprint_list
             if self.blueprint_combo.Value in blueprint])
         
     def update_blueprint(self, event):
@@ -89,13 +89,13 @@ class BlueprintCalculatorView():
         the resources required for production""" 
         
         if(self.blueprint_combo.Value in
-            self.blueprint_calculator.blueprint_list or 
+            BlueprintCalculator._blueprint_list or 
             self.blueprint_combo.Value+" Blueprint" in
-            self.blueprint_calculator.blueprint_list):
+            BlueprintCalculator._blueprint_list):
             
             self.blueprint_calculator.blueprint_change(
-                self.blueprint_calculator.blueprint_map[
+                BlueprintCalculator._blueprint_map[
                     self.blueprint_combo.Value])
             
             self.blueprint_tree.AddRoot(Type(
-                self.blueprint_calculator.selected_blueprint.blueprint_type_id))
+                self.blueprint_calculator.selected_blueprint.blueprint_type_id).type_name)

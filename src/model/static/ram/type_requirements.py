@@ -5,9 +5,9 @@ Created on 9 Feb 2010
 '''
 from collections import namedtuple
 
+from model.flyweight import Flyweight
 from model.static.database import database
 from model.dynamic.inventory.item import Item
-from model.flyweight import Flyweight
 
 class TypeRequirements(Flyweight): #IGNORE:R0903
     def __init__(self, type_id):

@@ -3,10 +3,8 @@ Created on Nov 6, 2009
 
 @author: frederikns
 '''
-
 from datetime import datetime
 from model.generated.roman.roman import to_roman
-from model.static.inv.type import Type
 
 class SkillQueueItem(object):
     def __init__(self, type_id, level, start_sp, end_sp, #IGNORE:R0913
@@ -30,5 +28,6 @@ class SkillQueueItem(object):
     def get_type(self):
         """Populates and returns the type"""
         if self.type is None:
+            from model.static.inv.type import Type
             self.type = Type(self.type_id)
         return self.type

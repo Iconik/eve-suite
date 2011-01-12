@@ -3,8 +3,8 @@ Created on 23 Dec 2009
 
 @author: FrederikNS
 '''
-from model.static.database import database
 from model.flyweight import Flyweight
+from model.static.database import database
 
 class Race(Flyweight):
     def __init__(self, race_id):

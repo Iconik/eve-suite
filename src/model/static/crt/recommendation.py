@@ -3,10 +3,8 @@ Created on Feb 7, 2010
 
 @author: frederikns
 '''
-from model.static.database import database
-from model.static.inv.type import Type
-from model.static.crt.certificate import Certificate
 from model.flyweight import Flyweight
+from model.static.database import database
 
 class Recommendation(Flyweight):
     def __init__(self,recommendation_id):
@@ -31,10 +29,12 @@ class Recommendation(Flyweight):
         
     def get_ship_type(self):
         if self.ship_type is None:
+            from model.static.inv.type import Type
             self.ship_type = Type(self.ship_type_id)
         return self.ship_type
     
     def get_certificate(self):
         if self.certificate is None:
+            from model.static.crt.certificate import Certificate
             self.certificate = Certificate(self.certificate_id)
         return self.certificate

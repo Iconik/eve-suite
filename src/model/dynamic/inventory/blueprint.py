@@ -3,7 +3,6 @@ Created on 9 Feb 2010
 
 @author: FrederikNS
 '''
-from model.static.inv.blueprint_type import BlueprintType
 
 class Blueprint(object):
     '''
@@ -24,6 +23,7 @@ class Blueprint(object):
     def get_blueprint_type(self):
         """Populates and returns the blueprint object"""
         if self.blueprint is None:
+            from model.static.inv.blueprint_type import BlueprintType
             self.blueprint = BlueprintType(self.blueprint_type_id)
         return self.blueprint
         

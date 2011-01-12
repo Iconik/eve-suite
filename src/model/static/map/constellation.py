@@ -3,10 +3,8 @@ Created on Oct 28, 2009
 
 @author: frederikns
 '''
-from model.static.database import database
 from model.flyweight import Flyweight
-from model.static.map.region import Region
-from model.static.chr.faction import Faction
+from model.static.database import database
 
 class Constellation(Flyweight):
     def __init__(self, constellation_id):
@@ -42,11 +40,13 @@ class Constellation(Flyweight):
     def get_region(self):
         """Populates and returns the region"""
         if self.region is None:
+            from model.static.map.region import Region
             self.region = Region(self.region_id)
         return self.region
     
     def get_faction(self):
         """Populates and returns the faction"""
         if self.faction is None:
+            from model.static.chr.faction import Faction
             self.faction = Faction(self.faction_id)
         return self.faction

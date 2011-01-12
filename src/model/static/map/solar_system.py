@@ -3,11 +3,8 @@ Created on Oct 28, 2009
 
 @author: frederikns
 '''
-from model.static.database import database
 from model.flyweight import Flyweight
-from model.static.map.region import Region
-from model.static.map.constellation import Constellation
-from model.static.inv.type import Type
+from model.static.database import database
 
 class SolarSystem(Flyweight):
     def __init__(self, solar_system_id):
@@ -58,18 +55,21 @@ class SolarSystem(Flyweight):
     def get_region(self):
         """Populates and returns the region"""
         if self.region is None:
+            from model.static.map.region import Region
             self.region = Region(self.region_id)
         return self.region
     
     def get_constellation(self):
         """Populates and returns the constellation"""
         if self.constellation is None:
+            from model.static.map.constellation import Constellation
             self.constellation = Constellation(self.constellation_id)
         return self.constellation
     
     def get_sun_type(self):
         """Populates and returns the sun type"""
         if self.sun_type is None:
+            from model.static.inv.type import Type
             self.sun_type = Type(self.sun_type_id)
         return self.sun_type
     

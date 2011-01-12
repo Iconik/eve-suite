@@ -3,13 +3,8 @@ Created on Oct 28, 2009
 
 @author: frederikns
 '''
-from model.static.database import database
-from model.static.dgm.type_attributes import TypeAttributes
 from model.flyweight import Flyweight
-from model.static.inv.group import Group
-from model.static.inv.market_group import MarketGroup
-from model.static.inv.type_materials import TypeMaterials
-from model.static.inv.blueprint_type import BlueprintType
+from model.static.database import database
 
 class Type(Flyweight):
     def __init__(self, type_id):
@@ -53,23 +48,27 @@ class Type(Flyweight):
     def get_group(self):
         """Populates and returns the group"""
         if self.group is None:
+            from model.static.inv.group import Group
             self.group = Group(self.group_id)
         return self.group
     
     def get_market_group(self):
         """Populates and returns the market group"""
         if self.market_group is None:
+            from model.static.inv.market_group import MarketGroup
             self.market_group = MarketGroup(self.market_group_id)
         return self.market_group
     
     def get_attributes(self):
         """Populates and returns the attributes"""
         if self.attributes is None:
+            from model.static.dgm.type_attributes import TypeAttributes
             self.attributes = TypeAttributes(self.type_id)
         return self.attributes
 
     def get_materials(self):
         """Populates and returns the materials"""
+        from model.static.inv.type_materials import TypeMaterials
         if self.materials is None:
             self.materials = TypeMaterials(self.type_id)
         return self.materials
@@ -91,8 +90,8 @@ class Type(Flyweight):
         
     def get_blueprint_type(self):
         """populates the blueprint reference, if the type can be manufactured"""
+        from model.static.inv.blueprint_type import BlueprintType
         if self.is_manufacturable():
             if self.blueprint is None:
                 self.blueprint = BlueprintType(self.blueprint_type_id)
         return self.blueprint
-        

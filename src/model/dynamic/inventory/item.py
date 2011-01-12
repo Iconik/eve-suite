@@ -4,8 +4,6 @@ Created on Oct 28, 2009
 @author: frederikns
 '''
 from copy import copy
-from model.static.inv.type import Type
-from model.static.map.solar_system import SolarSystem
 
 class Item(object):
     def __init__(self, type_id=None, location_id=None, quantity=None,
@@ -22,12 +20,14 @@ class Item(object):
     def get_type(self):
         """Populates the type and returns it"""
         if self.type is None:
+            from model.static.inv.type import Type
             self.type = Type(self.type_id)
         return self.type
     
     def get_location(self):
         """Populates the location and returns it"""
         if self.location is None:
+            from model.static.map.solar_system import SolarSystem
             self.location = SolarSystem(self.location_id)
         return self.location
     

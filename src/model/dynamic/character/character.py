@@ -3,7 +3,7 @@ Created on Nov 6, 2009
 
 @author: frederikns
 '''
-from model.dynamic.skills.skill_queue import SkillQueue
+
 
 class Character(object):
     def __init__(self, account, name, character_id, #IGNORE:R0913
@@ -22,6 +22,7 @@ class Character(object):
     def get_skill_queue(self):
         """Populates and returns the characters skill queue"""
         if self.skill_queue is None:
+            from model.dynamic.skills.skill_queue import SkillQueue
             self.skill_queue = SkillQueue(self.account.get_userID(),
                                          self.account.get_apiKey(),
                                          self.character_id)

@@ -4,7 +4,6 @@ Created on May 31, 2010
 @author: frederikns
 '''
 from model.static.database import database
-from model.dynamic.inventory.blueprint import Blueprint
 
 class BlueprintCalculator(object):
     _blueprint_map = dict()
@@ -22,11 +21,12 @@ class BlueprintCalculator(object):
                 invBlueprintTypes LEFT JOIN invTypes ON blueprintTypeID=typeID WHERE \
                 published=1 ORDER BY typeName")
             for row in cursor:
-                self.blueprint_map[row["typeName"]] = row["typeID"]
-                self.blueprint_list.append(row["typeName"])
+                BlueprintCalculator._blueprint_map[row["typeName"]] = row["typeID"]
+                BlueprintCalculator._blueprint_list.append(row["typeName"])
             cursor.close()
             
     def blueprint_change(self,blueprint_id):
+        from model.dynamic.inventory.blueprint import Blueprint
         self.selected_blueprint = Blueprint(blueprint_id)
         self.materials = self.selected_blueprint.get_material_base()
         self.component_blueprints = list()
