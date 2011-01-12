@@ -10,7 +10,7 @@ from wx import combo
 from modelview.blueprintcalculator.blueprint_calculator import \
 BlueprintCalculator
 from modelview.blueprintcalculator import blueprint_calculator
-from model.static.inv import inventory_dictionaries
+from model.static.inv.type import Type
 
 
 class BlueprintCalculatorView():
@@ -97,4 +97,5 @@ class BlueprintCalculatorView():
                 self.blueprint_calculator.blueprint_map[
                     self.blueprint_combo.Value])
             
-            self.blueprint_tree.AddRoot(inventory_dictionaries.get_type(self.blueprint_calculator.selected_blueprint.blueprint_type_id))
+            self.blueprint_tree.AddRoot(Type(
+                self.blueprint_calculator.selected_blueprint.blueprint_type_id))

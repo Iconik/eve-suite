@@ -8,14 +8,7 @@ from model.dynamic.api import api
 from model.dynamic.skills.skill_queue_item import SkillQueueItem
 
 class SkillQueue(object):
-    """
-     # PyUML: Do not remove this line! # XMI_ID:_hdpEphEPEd-LgJ4IxcJkTA
-    """
-
     def __init__(self, user_id, api_key, character_id):
-        '''
-        Constructor
-        '''
         api.fetch("char", "SkillQueue", user_id, api_key, character_id)
         
         tree = ElementTree.parse("%s/SkillQueue.xml.aspx" % \

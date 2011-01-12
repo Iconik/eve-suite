@@ -3,9 +3,9 @@ Created on Oct 13, 2010
 
 @author: frederikns
 '''
-from model.static.inv import inventory_dictionaries
-from model.static.ram import ram_dictionaries
 import math
+from model.static.inv.type_materials import TypeMaterials
+from model.static.ram.type_requirements import TypeRequirements
 
 class MaterialRequirements(object): #IGNORE:R0902
     '''
@@ -14,10 +14,8 @@ class MaterialRequirements(object): #IGNORE:R0902
     def __init__(self, blueprint_type_id=None, product_type_id=None):
         self.blueprint_type_id = blueprint_type_id
         self.product_type_id = product_type_id
-        self.type_materials = inventory_dictionaries.get_type_materials(
-            self.product_type_id)
-        self.type_requirements = ram_dictionaries.get_type_requirements(
-            self.blueprint_type_id)
+        self.type_materials = TypeMaterials(self.product_type_id)
+        self.type_requirements = TypeRequirements(self.blueprint_type_id)
         
         """The blueprints base materials, list, ("""
         self.base_materials = None
@@ -40,8 +38,7 @@ class MaterialRequirements(object): #IGNORE:R0902
             recycled_mats = dict()
             for item in self.type_requirements[1]:
                 if item.recycle == True: #Check if requirement is recycled
-                    component_mats = inventory_dictionaries.get_type_materials(
-                        item.item.type_id)
+                    component_mats = TypeMaterials(item.item.type_id)
                     
                     for mat in component_mats.values():
                         if mat.type_id not in recycled_mats:

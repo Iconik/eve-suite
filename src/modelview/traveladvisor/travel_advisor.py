@@ -7,10 +7,8 @@ from model.static.database import database
 from collections import deque
 
 class TravelAdvisor(object):
-    
     def __init__(self):
         cursor = database.get_cursor("select * from mapSolarSystemJumps;")
-        
         self.connections = dict()
         
         for row in cursor:

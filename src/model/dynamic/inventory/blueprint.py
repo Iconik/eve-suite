@@ -3,8 +3,7 @@ Created on 9 Feb 2010
 
 @author: FrederikNS
 '''
-
-from model.static.inv import inventory_dictionaries
+from model.static.inv.blueprint_type import BlueprintType
 
 class Blueprint(object):
     '''
@@ -25,8 +24,7 @@ class Blueprint(object):
     def get_blueprint_type(self):
         """Populates and returns the blueprint object"""
         if self.blueprint is None:
-            self.blueprint = inventory_dictionaries.get_blueprint_type(
-                self.blueprint_type_id)
+            self.blueprint = BlueprintType(self.blueprint_type_id)
         return self.blueprint
         
     def get_material_requirements(self):
@@ -41,12 +39,14 @@ class Blueprint(object):
         """Returns the base amounts for manufacturing"""
         return self.get_blueprint_type().get_base_amounts()
     
-    def get_material_waste(self, production_efficiency_skill, material_multiplier=1.0):
+    def get_material_waste(self, production_efficiency_skill,
+        material_multiplier=1.0):
         """Returns the waste amounts for manufacturing"""
         return self.get_blueprint_type().get_waste(self.material_efficiency,
             production_efficiency_skill, material_multiplier)
     
-    def get_material_totals(self, production_efficiency_skill, material_multiplier=1.0):
+    def get_material_totals(self, production_efficiency_skill,
+        material_multiplier=1.0):
         """Returns the total amounts for manufacturing"""
         return self.get_blueprint_type().get_totals(self.material_efficiency,
             production_efficiency_skill, material_multiplier)
@@ -55,7 +55,8 @@ class Blueprint(object):
         """Returns the eliminate waste levels for manufacturing"""
         return self.get_blueprint_type().get_eliminate_waste()
     
-    def get_next_improvement(self, production_efficiency_skill, material_multiplier):
+    def get_next_improvement(self, production_efficiency_skill,
+        material_multiplier):
         """Returns the next improving level for me research"""
         return self.get_blueprint_type().get_next_improvement(
             self.material_efficiency, production_efficiency_skill,

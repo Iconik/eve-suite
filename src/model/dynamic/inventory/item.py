@@ -3,19 +3,13 @@ Created on Oct 28, 2009
 
 @author: frederikns
 '''
-
-from model.static.inv import inventory_dictionaries
-from model.static.map import map_dictionaries
 from copy import copy
+from model.static.inv.type import Type
+from model.static.map.solar_system import SolarSystem
 
 class Item(object):
-    """
-     # PyUML: Do not remove this line! # XMI_ID:_hdn2ghEPEd-LgJ4IxcJkTA
-    """
-
     def __init__(self, type_id=None, location_id=None, quantity=None,
-                 flags=None, singleton=None):
-        
+        flags=None, singleton=None):
         self.type_id = type_id
         self.location_id = location_id
         self.quantity = quantity
@@ -28,13 +22,13 @@ class Item(object):
     def get_type(self):
         """Populates the type and returns it"""
         if self.type is None:
-            self.type = inventory_dictionaries.get_type(self.type_id)
+            self.type = Type(self.type_id)
         return self.type
     
     def get_location(self):
         """Populates the location and returns it"""
         if self.location is None:
-            self.location = map_dictionaries.get_solar_system(self.location_id)
+            self.location = SolarSystem(self.location_id)
         return self.location
     
     def get_volume(self):
