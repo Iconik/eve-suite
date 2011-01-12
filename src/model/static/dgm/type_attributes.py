@@ -10,9 +10,9 @@ from model.static.dgm.attribute import Attribute
 class TypeAttributes(Flyweight):
     def __init__(self, type_id):
         #prevents reinitializing
-        if "inited" in self.__dict__:
+        if "_inited" in self.__dict__:
             return
-        self.inited = None
+        self._inited = None
         #prevents reinitializing
         
         self.type_id = type_id

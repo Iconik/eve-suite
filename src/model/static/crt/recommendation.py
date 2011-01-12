@@ -9,9 +9,9 @@ from model.static.database import database
 class Recommendation(Flyweight):
     def __init__(self,recommendation_id):
         #prevents reinitializing
-        if "inited" in self.__dict__:
+        if "_inited" in self.__dict__:
             return
-        self.inited = None
+        self._inited = None
         #prevents reinitializing
 
         self.recommendation_id = recommendation_id
@@ -24,17 +24,17 @@ class Recommendation(Flyweight):
         self.certificate_id = row["certificateID"]
         self.recommendation_level = row["recommendationLevel"]
         
-        self.ship_type = None
-        self.certificate = None
+        self._ship_type = None
+        self._certificate = None
         
     def get_ship_type(self):
-        if self.ship_type is None:
+        if self._ship_type is None:
             from model.static.inv.type import Type
-            self.ship_type = Type(self.ship_type_id)
-        return self.ship_type
+            self._ship_type = Type(self.ship_type_id)
+        return self._ship_type
     
     def get_certificate(self):
-        if self.certificate is None:
+        if self._certificate is None:
             from model.static.crt.certificate import Certificate
-            self.certificate = Certificate(self.certificate_id)
-        return self.certificate
+            self._certificate = Certificate(self.certificate_id)
+        return self._certificate

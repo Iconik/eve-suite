@@ -8,7 +8,7 @@ from model.flyweight import Flyweight
 class Region(Flyweight):
     def __init__(self, region_id):
         #prevents reinitializing
-        if "inited" in self.__dict__:
+        if "_inited" in self.__dict__:
             return
-        self.inited = None
+        self._inited = None
         #prevents reinitializing

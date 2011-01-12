@@ -9,9 +9,9 @@ from model.static.database import database
 class Certificate(Flyweight):
     def __init__(self, certificate_id):
         #prevents reinitializing
-        if "inited" in self.__dict__:
+        if "_inited" in self.__dict__:
             return
-        self.inited = None
+        self._inited = None
         #prevents reinitializing
         
         self.certificate_id = certificate_id
@@ -27,24 +27,24 @@ class Certificate(Flyweight):
         self.icon_id = row["iconID"]
         self.description = row["description"]
         
-        self.category = None
-        self.certificate_class = None
-        self.corporation = None
+        self._category = None
+        self._certificate_class = None
+        self._corporation = None
         
     def get_category(self):
-        if self.category is None:
+        if self._category is None:
             from model.static.crt.certificate_category import CertificateCategory
-            self.category = CertificateCategory(self.certificate_id)
-        return self.category
+            self._category = CertificateCategory(self.certificate_id)
+        return self._category
     
     def get_certificate_class(self):
-        if self.certificate_class is None:
+        if self._certificate_class is None:
             from model.static.crt.certificate_class import CertificateClass
-            self.certificate_class = CertificateClass(self.certificate_class_id)
-        return self.certificate_class
+            self._certificate_class = CertificateClass(self.certificate_class_id)
+        return self._certificate_class
     
     def get_corporation(self):
-        if self.corporation is None:
+        if self._corporation is None:
             from model.static.crp.npc_corporation import NPCCorporation
-            self.corporation = NPCCorporation(self.corporation_id)
-        return self.corporation
+            self._corporation = NPCCorporation(self.corporation_id)
+        return self._corporation

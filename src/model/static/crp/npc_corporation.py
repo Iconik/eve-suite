@@ -5,13 +5,14 @@ Created on 23 Dec 2009
 '''
 from model.flyweight import Flyweight
 from model.static.database import database
+import weakref
 
 class NPCCorporation(Flyweight):
     def __init__(self, corporation_id):
         #prevents reinitializing
-        if "inited" in self.__dict__:
+        if "_inited" in self.__dict__:
             return
-        self.inited = None
+        self._inited = None
         #prevents reinitializing
         
         self.corporation_id = corporation_id
@@ -45,34 +46,36 @@ class NPCCorporation(Flyweight):
         
         cursor.close()
         
-        self.solar_system = None
-        self.investors = None
-        self.friend = None
-        self.enemy = None
+        self._solar_system = None
+        self._investors = None
+        self._friend = None
+        self._enemy = None
         
     def get_solar_system(self):
         """Populates and returns the solar system"""
-        if self.solar_system is None:
+        if self._solar_system is None:
             from model.static.map.solar_system import SolarSystem
-            self.solar_system = SolarSystem(self.solar_system_id)
-        return self.solar_system
+            self._solar_system = SolarSystem(self.solar_system_id)
+        return self._solar_system
     
     def get_investor(self, investor_index):
         """Populates and returns the requested investor"""
-        if self.investors is None:
-            self.investors = list()
-        if self.investors[investor_index] is None:
-            self.investors[investor_index] = NPCCorporation(self.investor_ids[investor_index])
-        return self.investors[investor_index]
+        if self._investors is None:
+            self._investors = weakref.WeakValueDictionary()
+        if investor_index not in self._investors:
+            investor = self._investors[investor_index] = NPCCorporation(
+                self.investor_ids[investor_index])
+            return investor
+        return self._investors[investor_index]
     
     def get_friend(self):
-        """Populates and returns the friend"""
-        if self.friend is None:
-            self.friend = NPCCorporation(self.friend_id)
-        return self.friend
+        """Populates and returns the _friend"""
+        if self._friend is None:
+            self._friend = weakref.ref(NPCCorporation(self.friend_id))
+        return self._friend
     
     def get_enemy(self):
-        """Populates and returns the enemy"""
-        if self.enemy is None:
-            self.enemy = NPCCorporation(self.enemy_id)
-        return self.enemy
+        """Populates and returns the _enemy"""
+        if self._enemy is None:
+            self._enemy = NPCCorporation(self.enemy_id)
+        return self._enemy

@@ -10,9 +10,9 @@ from model.dynamic.inventory.item import Item
 class POSFuel(Flyweight):
     def __init__(self, pos_type_id):
         #prevents reinitializing
-        if "inited" in self.__dict__:
+        if "_inited" in self.__dict__:
             return
-        self.inited = None
+        self._inited = None
         #prevents reinitializing
         
         cursor = database.get_cursor("select * from invControlTowerResources \

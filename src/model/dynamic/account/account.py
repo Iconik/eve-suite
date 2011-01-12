@@ -11,9 +11,9 @@ import xml.etree.ElementTree as ET
 class Account(Flyweight):
     def __init__(self, user_id, api_key):
         #prevents reinitializing
-        if "inited" in self.__dict__:
+        if "_inited" in self.__dict__:
             return
-        self.inited = None
+        self._inited = None
         #prevents reinitializing
         
         self.user_id = int(user_id)

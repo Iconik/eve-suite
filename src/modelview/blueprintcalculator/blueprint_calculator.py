@@ -13,7 +13,7 @@ class BlueprintCalculator(object):
         self._blueprint_list_init()
         self.selected_blueprint = None
         self.component_blueprints = None
-        self.materials = None
+        self._materials = None
 
     def _blueprint_list_init(self):
         if len(BlueprintCalculator._blueprint_list) == 0:
@@ -28,11 +28,11 @@ class BlueprintCalculator(object):
     def blueprint_change(self,blueprint_id):
         from model.dynamic.inventory.blueprint import Blueprint
         self.selected_blueprint = Blueprint(blueprint_id)
-        self.materials = self.selected_blueprint.get_material_base()
+        self._materials = self.selected_blueprint.get_material_base()
         self.component_blueprints = list()
         
         ids = list()
-        for items in self.materials:
+        for items in self._materials:
             ids.append(items.type_id)
         query = "SELECT blueprintTypeID, productTypeID FROM invBlueprintTypes WHERE productTypeID==%s " % (ids[0])
         

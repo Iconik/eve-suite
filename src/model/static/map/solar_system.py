@@ -9,9 +9,9 @@ from model.static.database import database
 class SolarSystem(Flyweight):
     def __init__(self, solar_system_id):
         #prevents reinitializing
-        if "inited" in self.__dict__:
+        if "_inited" in self.__dict__:
             return
-        self.inited = None
+        self._inited = None
         #prevents reinitializing
         
         self.solar_system_id = solar_system_id
@@ -39,7 +39,7 @@ class SolarSystem(Flyweight):
         self.hub = row["hub"]
         self.international = row["international"]
         self.regional = row["regional"]
-        self.constellation = row["constellation"]
+        self._constellation = row["_constellation"]
         self.security = row["security"]
         self.faction_id = row["factionID"]
         self.radius = row["radius"]
@@ -48,30 +48,30 @@ class SolarSystem(Flyweight):
         
         cursor.close()
         
-        self.region = None
-        self.constellation = None
-        self.sun_type = None
+        self._region = None
+        self._constellation = None
+        self._sun_type = None
         
     def get_region(self):
-        """Populates and returns the region"""
-        if self.region is None:
+        """Populates and returns the _region"""
+        if self._region is None:
             from model.static.map.region import Region
-            self.region = Region(self.region_id)
-        return self.region
+            self._region = Region(self.region_id)
+        return self._region
     
     def get_constellation(self):
-        """Populates and returns the constellation"""
-        if self.constellation is None:
+        """Populates and returns the _constellation"""
+        if self._constellation is None:
             from model.static.map.constellation import Constellation
-            self.constellation = Constellation(self.constellation_id)
-        return self.constellation
+            self._constellation = Constellation(self.constellation_id)
+        return self._constellation
     
     def get_sun_type(self):
         """Populates and returns the sun type"""
-        if self.sun_type is None:
+        if self._sun_type is None:
             from model.static.inv.type import Type
-            self.sun_type = Type(self.sun_type_id)
-        return self.sun_type
+            self._sun_type = Type(self.sun_type_id)
+        return self._sun_type
     
     def __str__(self):
         return self.solar_system_name

@@ -23,11 +23,11 @@ class SkillQueueItem(object):
         else:
             self.end_time = None
         
-        self.type = None
+        self._type = None
             
     def get_type(self):
-        """Populates and returns the type"""
-        if self.type is None:
+        """Populates and returns the _type"""
+        if self._type is None:
             from model.static.inv.type import Type
-            self.type = Type(self.type_id)
-        return self.type
+            self._type = Type(self.type_id)
+        return self._type

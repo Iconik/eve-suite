@@ -14,22 +14,22 @@ class Item(object):
         self.flags = flags
         self.singleton = singleton
         
-        self.type = None    
-        self.location = None
+        self._type = None    
+        self._location = None
     
     def get_type(self):
-        """Populates the type and returns it"""
-        if self.type is None:
+        """Populates the _type and returns it"""
+        if self._type is None:
             from model.static.inv.type import Type
-            self.type = Type(self.type_id)
-        return self.type
+            self._type = Type(self.type_id)
+        return self._type
     
     def get_location(self):
-        """Populates the location and returns it"""
-        if self.location is None:
+        """Populates the _location and returns it"""
+        if self._location is None:
             from model.static.map.solar_system import SolarSystem
-            self.location = SolarSystem(self.location_id)
-        return self.location
+            self._location = SolarSystem(self.location_id)
+        return self._location
     
     def get_volume(self):
         """Returns the volume of the item"""

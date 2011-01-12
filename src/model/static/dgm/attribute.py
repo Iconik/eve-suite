@@ -9,9 +9,9 @@ from model.static.database import database
 class Attribute(Flyweight):
     def __init__(self, attribute_id):
         #prevents reinitializing
-        if "inited" in self.__dict__:
+        if "_inited" in self.__dict__:
             return
-        self.inited = None
+        self._inited = None
         #prevents reinitializing
 
         self.attribute_id = attribute_id
@@ -31,11 +31,11 @@ class Attribute(Flyweight):
         self.high_is_good = row["highIsGood"]
         self.category_id = row["categoryID"]
         
-        self.category = None
+        self._category = None
 
     def get_category(self):
-        """Populates and returns the category"""
-        if self.category is None:
+        """Populates and returns the _category"""
+        if self._category is None:
             from model.static.inv.category import Category
-            self.category = Category(self.category_id)
-        return self.category
+            self._category = Category(self.category_id)
+        return self._category

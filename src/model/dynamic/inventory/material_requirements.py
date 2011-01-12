@@ -12,19 +12,18 @@ class MaterialRequirements(object): #IGNORE:R0902
     classdocs
     '''
     def __init__(self, blueprint_type_id=None, product_type_id=None):
-        self.blueprint_type_id = blueprint_type_id
+        self._blueprint_type_id = blueprint_type_id
         self.product_type_id = product_type_id
         self.type_materials = TypeMaterials(self.product_type_id)
-        self.type_requirements = TypeRequirements(self.blueprint_type_id)
+        self.type_requirements = TypeRequirements(self._blueprint_type_id)
         
         """The blueprints base materials, list, ("""
-        self.base_materials = None
-        
-        self.material_efficiency = None
-        self.production_efficiency_skill = None
-        self.waste_factor = None
-        self.wastes = None
-        self.eliminate_levels = None
+        self._base_materials = None
+        self._material_efficiency = None
+        self._production_efficiency_skill = None
+        self._waste_factor = None
+        self._wastes = None
+        self._eliminate_levels = None
         
     def get_reprocessing_materials(self):
         """Gets and returns the reprocessing materials for the type"""
@@ -32,8 +31,8 @@ class MaterialRequirements(object): #IGNORE:R0902
     
     def get_material_base(self):
         """Returns the base materials, excluding recycled materials"""
-        if self.base_materials is None:
-            self.base_materials = list()
+        if self._base_materials is None:
+            self._base_materials = list()
             
             recycled_mats = dict()
             for item in self.type_requirements[1]:
@@ -49,25 +48,28 @@ class MaterialRequirements(object): #IGNORE:R0902
             for mat in self.type_materials.values():
                 if mat.type_id in recycled_mats:
                     if mat.quantity > recycled_mats[mat.type_id].quantity:
-                        self.base_materials.append(mat-recycled_mats[mat.type_id])            
+                        self._base_materials.append(mat-recycled_mats[mat.type_id])            
                 else:
-                    self.base_materials.append(mat.copy())
+                    self._base_materials.append(mat.copy())
                 
-        return self.base_materials
+        return self._base_materials
         
     def get_material_waste(self, material_efficiency=0,
         production_efficiency_skill=5, waste_factor=10.0,
         material_multiplier=1.0):
         """Returns a dictionary of the waste amounts for the materials"""
-        if(self.material_efficiency != material_efficiency or
-            self.production_efficiency_skill != production_efficiency_skill or
-            self.waste_factor != waste_factor):
-            self.wastes = dict()
+        if(self._material_efficiency != material_efficiency or
+            self._production_efficiency_skill != production_efficiency_skill or
+            self._waste_factor != waste_factor):
+            self._wastes = dict()
+            self._material_efficiency = material_efficiency
+            self._production_efficiency_skill = production_efficiency_skill
+            self._waste_factor = waste_factor
             for item in self.get_material_base():
-                self.wastes[item.type_id] = waste(item.quantity, material_efficiency,
+                self._wastes[item.type_id] = waste(item.quantity, material_efficiency,
                     production_efficiency_skill, waste_factor,
                     material_multiplier)
-        return self.wastes
+        return self._wastes
     
     def get_material_totals(self, material_efficiency=0,
         production_efficiency_skill=5, waste_factor=10.0,
@@ -83,27 +85,27 @@ class MaterialRequirements(object): #IGNORE:R0902
     def get_material_eliminate_waste(self, waste_factor=10.0):
         """Returns the levels where no waste will be present for the materials
         """
-        if self.eliminate_levels is None:
-            self.eliminate_levels = dict()
+        if self._eliminate_levels is None:
+            self._eliminate_levels = dict()
             for item in self.get_material_base():
-                self.eliminate_levels[item.type_id] = eliminate_waste(item.quantity,
+                self._eliminate_levels[item.type_id] = eliminate_waste(item.quantity,
                     waste_factor)
-        return self.eliminate_levels
+        return self._eliminate_levels
     
     def get_material_next_improvements(self, material_efficiency=0,
         production_efficiency_skill=5, waste_factor=10.0,
         material_multiplier=1.0):
         """Returns the next level the material would have less waste"""
-        if(self.material_efficiency != material_efficiency or
-            self.production_efficiency_skill != production_efficiency_skill or
-            self.waste_factor != waste_factor):
-            self.eliminate_levels = dict()
+        if(self._material_efficiency != material_efficiency or
+            self._production_efficiency_skill != production_efficiency_skill or
+            self._waste_factor != waste_factor):
+            self._eliminate_levels = dict()
             for item in self.get_material_base():
-                self.eliminate_levels[item.type_id] = (next_improvement(
+                self._eliminate_levels[item.type_id] = (next_improvement(
                     item.quantity, material_efficiency,
                     production_efficiency_skill, waste_factor,
                     material_multiplier))
-        return self.eliminate_levels
+        return self._eliminate_levels
 
 def waste(quantity, material_efficiency, production_efficiency_skill=5,
           waste_factor=10.0, material_multiplier=1.0):

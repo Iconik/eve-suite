@@ -9,9 +9,9 @@ from model.static.database import database
 class Type(Flyweight):
     def __init__(self, type_id):
         #prevents reinitializing
-        if "inited" in self.__dict__:
+        if "_inited" in self.__dict__:
             return
-        self.inited = None
+        self._inited = None
         #prevents reinitializing
             
         self.type_id = type_id
@@ -19,8 +19,8 @@ class Type(Flyweight):
         cursor = database.get_cursor(
             "select * from invTypes where typeID=%s;" % self.type_id)
         row = cursor.fetchone()
+        
         self.type_name = row["typeName"]
-   
         self.group_id = row["groupID"]
         self.description = row["description"]
         self.graphic_id = row["graphicID"]
@@ -37,61 +37,61 @@ class Type(Flyweight):
         
         cursor.close()
     
-        self.group = None
-        self.market_group = None
-        self.attributes = None
-        self.materials = None
-        self.manufacturable = None
-        self.blueprint = None
-        self.blueprint_type_id = None
+        self._group = None
+        self._market_group = None
+        self._attributes = None
+        self._materials = None
+        self._manufacturable = None
+        self._blueprint = None
+        self._blueprint_type_id = None
         
     def get_group(self):
-        """Populates and returns the group"""
-        if self.group is None:
+        """Populates and returns the _group"""
+        if self._group is None:
             from model.static.inv.group import Group
-            self.group = Group(self.group_id)
-        return self.group
+            self._group = Group(self.group_id)
+        return self._group
     
     def get_market_group(self):
-        """Populates and returns the market group"""
-        if self.market_group is None:
+        """Populates and returns the market _group"""
+        if self._market_group is None:
             from model.static.inv.market_group import MarketGroup
-            self.market_group = MarketGroup(self.market_group_id)
-        return self.market_group
+            self._market_group = MarketGroup(self.market_group_id)
+        return self._market_group
     
     def get_attributes(self):
-        """Populates and returns the attributes"""
-        if self.attributes is None:
+        """Populates and returns the _attributes"""
+        if self._attributes is None:
             from model.static.dgm.type_attributes import TypeAttributes
-            self.attributes = TypeAttributes(self.type_id)
-        return self.attributes
+            self._attributes = TypeAttributes(self.type_id)
+        return self._attributes
 
     def get_materials(self):
-        """Populates and returns the materials"""
+        """Populates and returns the _materials"""
         from model.static.inv.type_materials import TypeMaterials
-        if self.materials is None:
-            self.materials = TypeMaterials(self.type_id)
-        return self.materials
+        if self._materials is None:
+            self._materials = TypeMaterials(self.type_id)
+        return self._materials
     
     def is_manufacturable(self):
         """Returns true if the type can be manufactured, false if not, and also
         populates the blueprint_id"""
            
-        if self.manufacturable is None:
+        if self._manufacturable is None:
             cursor = database.get_cursor(
                 "select * from invBlueprintTypes where productTypeID=%s;" %
                 self.type_id)
             if len(cursor) > 0:
-                self.blueprint_type_id = cursor.fetchone()["blueprintTypeID"]
-                self.manufacturable = True
+                self._blueprint_type_id = cursor.fetchone()["blueprintTypeID"]
+                self._manufacturable = True
             else:
-                self.manufacturable = False
-        return self.manufacturable
+                self._manufacturable = False
+        return self._manufacturable
         
     def get_blueprint_type(self):
-        """populates the blueprint reference, if the type can be manufactured"""
+        """populates the _blueprint reference, if the type can be manufactured"""
         from model.static.inv.blueprint_type import BlueprintType
         if self.is_manufacturable():
-            if self.blueprint is None:
-                self.blueprint = BlueprintType(self.blueprint_type_id)
-        return self.blueprint
+            if self._blueprint is None:
+                self._blueprint = BlueprintType(self._blueprint_type_id)
+        return self._blueprint

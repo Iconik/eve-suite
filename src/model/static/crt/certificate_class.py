@@ -9,9 +9,9 @@ from model.flyweight import Flyweight
 class CertificateClass(Flyweight):
     def __init__(self, class_id):
         #prevents reinitializing
-        if "inited" in self.__dict__:
+        if "_inited" in self.__dict__:
             return
-        self.inited = None
+        self._inited = None
         #prevents reinitializing
         
         self.class_id = class_id

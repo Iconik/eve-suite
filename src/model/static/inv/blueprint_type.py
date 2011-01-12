@@ -12,15 +12,15 @@ class BlueprintType(Flyweight): #IGNORE:R0902
     
     def __init__(self, blueprint_type_id):
         #prevents reinitializing
-        if "inited" in self.__dict__:
+        if "_inited" in self.__dict__:
             return
-        self.inited = None
+        self._inited = None
         #prevents reinitializing
                
-        self.blueprint_type_id = blueprint_type_id
+        self._blueprint_type_id = blueprint_type_id
 
         cursor = database.get_cursor("select * from invBlueprintTypes \
-        where blueprintTypeID=%s;" % (self.blueprint_type_id))
+        where blueprintTypeID=%s;" % (self._blueprint_type_id))
 
         row = cursor.fetchone()
 
@@ -39,37 +39,37 @@ class BlueprintType(Flyweight): #IGNORE:R0902
 
         cursor.close()
 
-        self.type = None
-        self.parent_blueprint = None
-        self.product_type = None
-        self.material_requirements = None
+        self._type = None
+        self._parent_blueprint = None
+        self._product_type = None
+        self._material_requirements = None
         
     def get_parent_blueprint_type(self):
-        """Populates and returns the parent blueprint type"""
-        if self.parent_blueprint is None:
-            self.parent_blueprint = weakref.ref(BlueprintType(
+        """Populates and returns the parent blueprint _type"""
+        if self._parent_blueprint is None:
+            self._parent_blueprint = weakref.ref(BlueprintType(
                     self.parent_blueprint_type_id))
-        return self.parent_blueprint
+        return self._parent_blueprint
     
     def get_type(self):
-        if self.type is None:
+        if self._type is None:
             from model.static.inv.type import Type
-            self.type = Type(self.blueprint_type_id)
-        return self.type
+            self._type = Type(self._blueprint_type_id)
+        return self._type
 
     def get_product_type(self):
-        """Populates and returns the product type"""
-        if self.product_type is None:
+        """Populates and returns the product _type"""
+        if self._product_type is None:
             from model.static.inv.type import Type
-            self.product_type = weakref.ref(Type(self.product_type_id))
-        return self.product_type
+            self._product_type = weakref.ref(Type(self.product_type_id))
+        return self._product_type
     
     def get_material_requirements(self):
-        if self.material_requirements is None:
+        if self._material_requirements is None:
             from model.dynamic.inventory.material_requirements import MaterialRequirements
-            self.material_requirements = MaterialRequirements(
-                self.blueprint_type_id, self.product_type_id)
-        return self.material_requirements
+            self._material_requirements = MaterialRequirements(
+                self._blueprint_type_id, self.product_type_id)
+        return self._material_requirements
 
     def get_base_amounts(self):
         """Returns the base amounts for manufacturing"""

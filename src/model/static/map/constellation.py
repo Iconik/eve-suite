@@ -9,9 +9,9 @@ from model.static.database import database
 class Constellation(Flyweight):
     def __init__(self, constellation_id):
         #prevents reinitializing
-        if "inited" in self.__dict__:
+        if "_inited" in self.__dict__:
             return
-        self.inited = None
+        self._inited = None
         #prevents reinitializing
         
         self.constellation_id = constellation_id
@@ -34,19 +34,19 @@ class Constellation(Flyweight):
         self.faction_id = row["factionID"]
         self.radius = row["radius"]
         
-        self.region = None
-        self.faction = None
+        self._region = None
+        self._faction = None
         
     def get_region(self):
-        """Populates and returns the region"""
-        if self.region is None:
+        """Populates and returns the _region"""
+        if self._region is None:
             from model.static.map.region import Region
-            self.region = Region(self.region_id)
-        return self.region
+            self._region = Region(self.region_id)
+        return self._region
     
     def get_faction(self):
-        """Populates and returns the faction"""
-        if self.faction is None:
+        """Populates and returns the _faction"""
+        if self._faction is None:
             from model.static.chr.faction import Faction
-            self.faction = Faction(self.faction_id)
-        return self.faction
+            self._faction = Faction(self.faction_id)
+        return self._faction

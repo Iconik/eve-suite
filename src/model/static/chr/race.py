@@ -9,9 +9,9 @@ from model.static.database import database
 class Race(Flyweight):
     def __init__(self, race_id):
         #prevents reinitializing
-        if "inited" in self.__dict__:
+        if "_inited" in self.__dict__:
             return
-        self.inited = None
+        self._inited = None
         #prevents reinitializing
         
         self.race_id = race_id

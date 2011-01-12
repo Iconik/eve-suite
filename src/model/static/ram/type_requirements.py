@@ -12,9 +12,9 @@ from model.dynamic.inventory.item import Item
 class TypeRequirements(Flyweight): #IGNORE:R0903
     def __init__(self, type_id):
         #prevents reinitializing
-        if "inited" in self.__dict__:
+        if "_inited" in self.__dict__:
             return
-        self.inited = None
+        self._inited = None
         #prevents reinitializing
 
         self.type_id = type_id
@@ -29,7 +29,7 @@ class TypeRequirements(Flyweight): #IGNORE:R0903
         6 = Duplicating
         7 = Reverse Engineering
         8 = Invention"""
-        self.requirements = dict()
+        self._requirements = dict()
         
         cursor = database.get_cursor("select * \
         from ramTypeRequirements where typeID=%s;" % (self.type_id))
@@ -37,13 +37,13 @@ class TypeRequirements(Flyweight): #IGNORE:R0903
         requirement = namedtuple("requirement", "item, damage, recycle")
         
         for row in cursor:
-            if row["activityID"] not in self.requirements:
-                self.requirements[row["activityID"]] = list()
-            self.requirements[row["activityID"]].append(requirement(
+            if row["activityID"] not in self._requirements:
+                self._requirements[row["activityID"]] = list()
+            self._requirements[row["activityID"]].append(requirement(
                 item=Item(row["requiredTypeID"], quantity=row["quantity"]),
                 damage=row["damagePerJob"],
                 recycle=True if row["recycle"] == 1 else False))
             
     def __getitem__(self, k):
         """Allows TypeRequirements[k]"""
-        return self.requirements[k]
+        return self._requirements[k]

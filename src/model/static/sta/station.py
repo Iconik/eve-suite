@@ -10,9 +10,9 @@ from model.flyweight import Flyweight
 class Station(Flyweight):
     def __init__(self, station_id):
         #prevents reinitializing
-        if "inited" in self.__dict__:
+        if "_inited" in self.__dict__:
             return
-        self.inited = None
+        self._inited = None
         #prevents reinitializing
         
         self.station_id = station_id
@@ -41,35 +41,35 @@ class Station(Flyweight):
         
         cursor.close()
         
-        self.solar_system = None
-        self.region = None
-        self.constellation = None
-        self.station_type = None
+        self._solar_system = None
+        self._region = None
+        self._constellation = None
+        self._station_type = None
         
     def get_solar_system(self):
         """Populations and returns the solar system"""
-        if self.solar_system is None:
+        if self._solar_system is None:
             from model.static.map.solar_system import SolarSystem
-            self.solar_system = SolarSystem(self.solar_system_id)
-        return self.solar_system
+            self._solar_system = SolarSystem(self.solar_system_id)
+        return self._solar_system
         
     def get_region(self):
-        """Populations and returns the region"""
-        if self.region is None:
+        """Populations and returns the _region"""
+        if self._region is None:
             from model.static.map.region import Region
-            self.region = Region(self.region_id)
-        return self.region
+            self._region = Region(self.region_id)
+        return self._region
     
     def get_constellation(self):
-        """Populations and returns the constellation"""
-        if self.constellation is None:
+        """Populations and returns the _constellation"""
+        if self._constellation is None:
             from model.static.map.constellation import Constellation
-            self.constellation = Constellation(self.constellation_id)
-        return self.constellation
+            self._constellation = Constellation(self.constellation_id)
+        return self._constellation
     
     def get_stations_type(self):
         """Populations and returns the station type"""
-        if self.station_type is None:
+        if self._station_type is None:
             from model.static.inv.type import Type
-            self.station_type = Type(self.station_type_id)
-        return self.station_type
+            self._station_type = Type(self.station_type_id)
+        return self._station_type

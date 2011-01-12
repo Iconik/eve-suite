@@ -5,13 +5,9 @@ Created on Oct 28, 2009
 '''
 import wx
 from wx import xrc, gizmos
-from wx import combo
 
 from modelview.blueprintcalculator.blueprint_calculator import \
 BlueprintCalculator
-from modelview.blueprintcalculator import blueprint_calculator
-from model.static.inv.type import Type
-
 
 class BlueprintCalculatorView():
     """Control class for the Blueprint Calculator View"""
@@ -97,5 +93,4 @@ class BlueprintCalculatorView():
                 BlueprintCalculator._blueprint_map[
                     self.blueprint_combo.Value])
             
-            self.blueprint_tree.AddRoot(Type(
-                self.blueprint_calculator.selected_blueprint.blueprint_type_id).type_name)
+            #self.blueprint_tree.AddRoot()
