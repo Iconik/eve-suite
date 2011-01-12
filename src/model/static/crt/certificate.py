@@ -4,18 +4,19 @@ Created on Feb 7, 2010
 @author: frederikns
 '''
 from model.static.database import database
-from model.static.crt import certificate_dictionaries
-from model.static.crp import corporation_dictionaries
+from model.flyweight import Flyweight
+from model.static.crt.certificate_category import CertificateCategory
+from model.static.crt.certificate_class import CertificateClass
+from model.static.crp.npc_corporation import NPCCorporation
 
-class Certificate(object):
-    '''
-    classdocs
-    '''
-
+class Certificate(Flyweight):
     def __init__(self, certificate_id):
-        '''
-        Constructor
-        '''
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing
+        
         self.certificate_id = certificate_id
         
         cursor = database.get_cursor("select * from crtCertificates where \
@@ -35,18 +36,15 @@ class Certificate(object):
         
     def get_category(self):
         if self.category is None:
-            self.category = \
-            certificate_dictionaries.get_category(self.certificate_id)
+            self.category = CertificateCategory(self.certificate_id)
         return self.category
     
     def get_certificate_class(self):
         if self.certificate_class is None:
-            self.certificate_class = \
-            certificate_dictionaries.get_certificate_class(self.certificate_class_id)
+            self.certificate_class = CertificateClass(self.certificate_class_id)
         return self.certificate_class
     
     def get_corporation(self):
         if self.corporation is None:
-            self.corporation = \
-            corporation_dictionaries.get_npc_corporation(self.corporation_id)
+            self.corporation = NPCCorporation(self.corporation_id)
         return self.corporation

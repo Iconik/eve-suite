@@ -4,15 +4,17 @@ Created on 23 Dec 2009
 @author: FrederikNS
 '''
 from model.static.database import database
-from model.static.map import map_dictionaries
-from model.static.corporation import corporation_dictionaries
+from model.flyweight import Flyweight
+from model.static.map.solar_system import SolarSystem
 
-class NPCCorporation(object):
-    """
-     # PyUML: Do not remove this line! # XMI_ID:_EH5nxxEREd-LgJ4IxcJkTA
-    """
-
+class NPCCorporation(Flyweight):
     def __init__(self, corporation_id):
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing
+        
         self.corporation_id = corporation_id
         
         cursor = database.get_cursor("select * from crpNPCCorporations where \
@@ -52,7 +54,7 @@ class NPCCorporation(object):
     def get_solar_system(self):
         """Populates and returns the solar system"""
         if self.solar_system is None:
-            self.solar_system = map_dictionaries.get_solar_system \
+            self.solar_system = SolarSystem \
             (self.solar_system_id)
         return self.solar_system
     
@@ -61,20 +63,17 @@ class NPCCorporation(object):
         if self.investors is None:
             self.investors = list()
         if self.investors[investor_index] is None:
-            self.investors[investor_index] = corporation_dictionaries.\
-            get_npc_corporation(self.investor_ids[investor_index])
+            self.investors[investor_index] = NPCCorporation(self.investor_ids[investor_index])
         return self.investors[investor_index]
     
     def get_friend(self):
         """Populates and returns the friend"""
         if self.friend is None:
-            self.friend = corporation_dictionaries.\
-            get_npc_corporation(self.friend_id)
+            self.friend = NPCCorporation(self.friend_id)
         return self.friend
     
     def get_enemy(self):
         """Populates and returns the enemy"""
         if self.enemy is None:
-            self.enemy = corporation_dictionaries.\
-            get_npc_corporation(self.enemy_id)
+            self.enemy = NPCCorporation(self.enemy_id)
         return self.enemy

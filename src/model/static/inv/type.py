@@ -3,26 +3,29 @@ Created on Oct 28, 2009
 
 @author: frederikns
 '''
-from model.static.inv import inventory_dictionaries
 from model.static.database import database
 from model.static.dgm.type_attributes import TypeAttributes
+from model.flyweight import Flyweight
+from model.static.inv.group import Group
+from model.static.inv.market_group import MarketGroup
+from model.static.inv.type_materials import TypeMaterials
+from model.static.inv.blueprint_type import BlueprintType
 
-class Type(object): #IGNORE:R0902
-    """
-     # PyUML: Do not remove this line! # XMI_ID:_EIEm5REREd-LgJ4IxcJkTA
-    """
-
+class Type(Flyweight):
     def __init__(self, type_id):
-        '''
-        Constructor
-        '''
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing
+            
         self.type_id = type_id
-        
+    
         cursor = database.get_cursor(
             "select * from invTypes where typeID=%s;" % self.type_id)
         row = cursor.fetchone()
         self.type_name = row["typeName"]
-       
+   
         self.group_id = row["groupID"]
         self.description = row["description"]
         self.graphic_id = row["graphicID"]
@@ -36,9 +39,9 @@ class Type(object): #IGNORE:R0902
         self.published = row["published"]
         self.market_group_id = row["marketGroupID"]
         self.chance_of_duplicating = row["chanceOfDuplicating"]
-            
-        cursor.close()
         
+        cursor.close()
+    
         self.group = None
         self.market_group = None
         self.attributes = None
@@ -50,14 +53,13 @@ class Type(object): #IGNORE:R0902
     def get_group(self):
         """Populates and returns the group"""
         if self.group is None:
-            self.group = inventory_dictionaries.get_group(self.group_id)
+            self.group = Group(self.group_id)
         return self.group
     
     def get_market_group(self):
         """Populates and returns the market group"""
         if self.market_group is None:
-            self.market_group = inventory_dictionaries.get_market_group(
-                self.market_group_id)
+            self.market_group = MarketGroup(self.market_group_id)
         return self.market_group
     
     def get_attributes(self):
@@ -69,12 +71,11 @@ class Type(object): #IGNORE:R0902
     def get_materials(self):
         """Populates and returns the materials"""
         if self.materials is None:
-            self.materials = inventory_dictionaries.get_type_materials(
-                self.type_id)
+            self.materials = TypeMaterials(self.type_id)
         return self.materials
     
     def is_manufacturable(self):
-        """Returns true if the type can be manufactures, false if not, and also
+        """Returns true if the type can be manufactured, false if not, and also
         populates the blueprint_id"""
            
         if self.manufacturable is None:
@@ -92,7 +93,6 @@ class Type(object): #IGNORE:R0902
         """populates the blueprint reference, if the type can be manufactured"""
         if self.is_manufacturable():
             if self.blueprint is None:
-                self.blueprint = inventory_dictionaries.get_blueprint_type(
-                    self.blueprint_type_id)
+                self.blueprint = BlueprintType(self.blueprint_type_id)
         return self.blueprint
         

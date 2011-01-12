@@ -5,16 +5,16 @@ Created on Nov 15, 2009
 '''
 from model.dynamic.inventory.item import Item
 from model.static.database import database
+from model.flyweight import Flyweight
 
-class POSFuel(object):
-    """
-     # PyUML: Do not remove this line! # XMI_ID:_EIPmABEREd-LgJ4IxcJkTA
-    """
-
+class POSFuel(Flyweight):
     def __init__(self, pos_type_id):
-        '''
-        Constructor
-        '''
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing
+        
         cursor = database.get_cursor("select * from invControlTowerResources \
         where controlTowerTypeID='%s';" % (pos_type_id))
         

@@ -4,18 +4,18 @@ Created on Oct 28, 2009
 @author: frederikns
 '''
 from model.static.database import database
-from model.static.map import map_dictionaries
-from model.static.chr import character_dictionaries
+from model.flyweight import Flyweight
+from model.static.map.region import Region
+from model.static.chr.faction import Faction
 
-class Constellation(object):
-    """
-     # PyUML: Do not remove this line! # XMI_ID:_EIHqOBEREd-LgJ4IxcJkTA
-    """
-
+class Constellation(Flyweight):
     def __init__(self, constellation_id):
-        '''
-        Constructor
-        '''
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing
+        
         self.constellation_id = constellation_id
         
         cursor = database.get_cursor("select * from mapConstellations where \
@@ -42,11 +42,11 @@ class Constellation(object):
     def get_region(self):
         """Populates and returns the region"""
         if self.region is None:
-            self.region = map_dictionaries.get_region(self.region_id)
+            self.region = Region(self.region_id)
         return self.region
     
     def get_faction(self):
         """Populates and returns the faction"""
         if self.faction is None:
-            self.faction = character_dictionaries.get_faction(self.faction_id)
+            self.faction = Faction(self.faction_id)
         return self.faction

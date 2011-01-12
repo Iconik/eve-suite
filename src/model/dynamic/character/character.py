@@ -3,9 +3,7 @@ Created on Nov 6, 2009
 
 @author: frederikns
 '''
-
 from model.dynamic.skills.skill_queue import SkillQueue
-
 
 class Character(object):
     """
@@ -37,4 +35,4 @@ class Character(object):
         return self.skill_queue.get_skill_queue()
         
     def get_character_sheet(self):
-        
+        pass

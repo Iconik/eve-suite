@@ -4,16 +4,15 @@ Created on Feb 7, 2010
 @author: frederikns
 '''
 from model.static.database import database
+from model.flyweight import Flyweight
 
-class CertificateClass(object):
-    '''
-    classdocs
-    '''
-
+class CertificateClass(Flyweight):
     def __init__(self, class_id):
-        '''
-        Constructor
-        '''
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing
         
         self.class_id = class_id
         

@@ -5,54 +5,65 @@
       <orient>wxVERTICAL</orient>
       <object class="sizeritem">
         <object class="wxBoxSizer">
-          <orient>wxHORIZONTAL</orient>
           <object class="sizeritem">
             <object class="wxStaticBoxSizer">
-              <label>Base Blueprint</label>
-              <orient>wxHORIZONTAL</orient>
               <object class="sizeritem">
                 <object class="wxComboBox" name="blueprint_combo"/>
+                <option>1</option>
+                <flag>wxEXPAND</flag>
               </object>
+              <label>Base Blueprint</label>
+              <orient>wxHORIZONTAL</orient>
             </object>
-          </object>
-          <object class="sizeritem">
-            <object class="wxStaticLine">
-              <style>wxLI_VERTICAL</style>
-            </object>
+            <option>1</option>
+            <flag>wxEXPAND</flag>
           </object>
           <object class="sizeritem">
             <object class="wxStaticBoxSizer">
-              <label>Character</label>
-              <orient>wxHORIZONTAL</orient>
               <object class="sizeritem">
                 <object class="wxChoice" name="character_choice"/>
               </object>
+              <label>Character</label>
+              <orient>wxHORIZONTAL</orient>
             </object>
           </object>
+          <orient>wxHORIZONTAL</orient>
         </object>
+        <option>0</option>
+        <flag>wxEXPAND</flag>
       </object>
       <object class="sizeritem">
         <object class="wxBoxSizer">
           <object class="sizeritem">
             <object class="wxStaticBoxSizer">
-              <label>Production Materials</label>
-              <orient>wxVERTICAL</orient>
               <object class="sizeritem">
                 <object class="unknown" name="material_tree"/>
+                <option>1</option>
+                <flag>wxEXPAND</flag>
               </object>
+              <label>Production Materials</label>
+              <orient>wxVERTICAL</orient>
             </object>
+            <option>2</option>
+            <flag>wxEXPAND</flag>
           </object>
-          <orient>wxHORIZONTAL</orient>
           <object class="sizeritem">
             <object class="wxStaticBoxSizer">
-              <label>Production Blueprints</label>
-              <orient>wxVERTICAL</orient>
               <object class="sizeritem">
                 <object class="unknown" name="blueprint_tree"/>
+                <option>1</option>
+                <flag>wxEXPAND</flag>
               </object>
+              <label>Production Blueprints</label>
+              <orient>wxVERTICAL</orient>
             </object>
+            <option>1</option>
+            <flag>wxEXPAND</flag>
           </object>
+          <orient>wxHORIZONTAL</orient>
         </object>
+        <option>1</option>
+        <flag>wxEXPAND</flag>
       </object>
     </object>
     <title>Blueprint Calculator</title>

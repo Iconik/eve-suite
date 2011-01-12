@@ -4,16 +4,16 @@ Created on 23 Dec 2009
 @author: FrederikNS
 '''
 from model.static.database import database
+from model.flyweight import Flyweight
 
-class Race(object):
-    """
-     # PyUML: Do not remove this line! # XMI_ID:_EH5AsBEREd-LgJ4IxcJkTA
-    """
-
+class Race(Flyweight):
     def __init__(self, race_id):
-        '''
-        Constructor
-        '''
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing
+        
         self.race_id = race_id
         
         cursor = database.get_cursor("select * from chrRaces where \

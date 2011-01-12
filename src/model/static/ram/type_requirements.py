@@ -7,16 +7,16 @@ from collections import namedtuple
 
 from model.static.database import database
 from model.dynamic.inventory.item import Item
+from model.flyweight import Flyweight
 
-class TypeRequirements(object): #IGNORE:R0903
-    '''
-    classdocs
-    '''
-
+class TypeRequirements(Flyweight): #IGNORE:R0903
     def __init__(self, type_id):
-        """
-        Constructor
-        """
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing
+
         self.type_id = type_id
         
         """Remember: the key is the activity type

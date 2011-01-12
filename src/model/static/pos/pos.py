@@ -3,18 +3,15 @@ Created on Nov 15, 2009
 
 @author: frederikns
 '''
-from model.static.inv import inventory_dictionaries
-from model.static.pos import pos_dictionaries
-from model.static.chr import character_dictionaries
 
 import datetime
 import math
+from model.static.inv.type import Type
+from model.static.pos.pos_fuel import POSFuel
+from model.static.chr.faction import Faction
 
 class POS(object):
-    """
-     # PyUML: Do not remove this line! # XMI_ID:_EINw0xEREd-LgJ4IxcJkTA
-    """
-
+    """FIXME: NON-STATIC CONTENT SHOULD BE MOVED"""
     def __init__(self, type_id, power, cpu, faction_id):
         '''
         Constructor
@@ -31,19 +28,19 @@ class POS(object):
     def get_type(self):
         """Populates and returns the type"""
         if self.type is None:
-            self.type = inventory_dictionaries.get_type(self.type_id)
+            self.type = Type(self.type_id)
         return self.type
     
     def get_fuel(self):
         """Populates and returns the fuels"""
         if self.fuel is None:
-            self.fuel = pos_dictionaries.get_pos_fuel(self.type_id)
+            self.fuel = POSFuel(self.type_id)
         return self.fuel
     
     def get_faction(self):
         """Populates and returns the faction"""
         if self.faction is None:
-            self.faction = character_dictionaries.get_faction(self.faction_id)
+            self.faction = Faction(self.faction_id)
         return self.faction
     
     def max_fuel(self):

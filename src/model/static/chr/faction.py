@@ -4,19 +4,19 @@ Created on 23 Dec 2009
 @author: FrederikNS
 '''
 from model.static.database import database
-from model.static.map import map_dictionaries
-from model.static.character import character_dictionaries
-from model.static.corporation import corporation_dictionaries
+from model.flyweight import Flyweight
+from model.static.chr.race import Race
+from model.static.map.solar_system import SolarSystem
+from model.static.crp.npc_corporation import NPCCorporation
 
-class Faction(object):
-    """
-     # PyUML: Do not remove this line! # XMI_ID:_EH2kdREREd-LgJ4IxcJkTA
-    """
-
+class Faction(Flyweight):
     def __init__(self, faction_id):
-        '''
-        Constructor
-        '''
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing
+
         self.faction_id = faction_id
         
         cursor = database.get_cursor("select * from chrFactions where \
@@ -41,30 +41,27 @@ class Faction(object):
     def get_race(self):
         """Populates and returns the race"""
         if self.race is None:
-            self.race = character_dictionaries.get_race(self.race_ids)
+            self.race = Race(self.race_ids)
         return self.race
     
     
     def get_solar_system(self):
         """Populates and returns the solar system"""
         if self.solar_system is None:
-            self.solar_system = \
-            map_dictionaries.get_solar_system(self.solar_system_id)
+            self.solar_system = SolarSystem(self.solar_system_id)
         return self.solar_system
     
     def get_corporation(self):
         """Populates and returns the corporation"""
         if self.corporation is None:
-            self.corporation = \
-            corporation_dictionaries.get_npc_corporation(self.corporation_id)
+            self.corporation = NPCCorporation(self.corporation_id)
         return self.corporation
     
     
     def get_militia_corporation(self):
         """Populates and returns the militia corporation"""
         if self.militia_corporation is None:
-            self.militia_corporation = \
-            corporation_dictionaries.get_npc_corporation \
-            (self.militia_corporation_id)
+            self.militia_corporation = NPCCorporation(
+                self.militia_corporation_id)
         return self.militia_corporation
     

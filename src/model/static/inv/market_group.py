@@ -4,20 +4,18 @@ Created on Nov 26, 2009
 @author: frederikns
 '''
 from model.static.database import database
-from model.static.inv import inventory_dictionaries
+from model.flyweight import Flyweight
+from model.static.inv.group import Group
 
-
-class MarketGroup(object):
-    """
-     # PyUML: Do not remove this line! # XMI_ID:_EIDYyBEREd-LgJ4IxcJkTA
-    """
-
+class MarketGroup(Flyweight):
     def __init__(self, market_group_id, parent_group_id=None, #IGNORE:R0913
                  market_group_name=None, description=None, graphics_id=None,
                  has_types=None):
-        '''
-        Constructor
-        '''
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing
         
         self.market_group_id = market_group_id
         
@@ -46,6 +44,5 @@ class MarketGroup(object):
     def get_parent_group(self):
         """Populates and returns the parent group"""
         if self.parent_group is None:
-            self.parent_group = inventory_dictionaries.\
-            get_group(self.parent_group_id)
+            self.parent_group = Group(self.parent_group_id)
         return self.parent_group

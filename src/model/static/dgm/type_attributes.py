@@ -5,17 +5,17 @@ Created on 30 Jan 2010
 '''
 
 from model.static.database import database
-from model.static.dgm import dgm_dictionaries
+from model.static.dgm.attribute import Attribute
+from model.flyweight import Flyweight
 
-class TypeAttributes(object):
-    """
-     # PyUML: Do not remove this line! # XMI_ID:_EH-gRREREd-LgJ4IxcJkTA
-    """
-
+class TypeAttributes(Flyweight):
     def __init__(self, type_id):
-        '''
-        Constructor
-        '''
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing
+        
         self.type_id = type_id
         
         cursor = database.get_cursor("select * from dgmTypeAttributes where \
@@ -25,12 +25,10 @@ class TypeAttributes(object):
         
         for row in cursor:
             if row["valueInt"] is not None:
-                self.attributes.append((dgm_dictionaries.\
-                                     get_attribute(row["attributeID"]),
+                self.attributes.append((Attribute(row["attributeID"]),
                                      row["valueInt"]))
             elif row["valueFloat"] is not None:
-                self.attributes.append((dgm_dictionaries.\
-                                     get_attribute(row["attributeID"]),
+                self.attributes.append((Attribute(row["attributeID"]),
                                      row["valueFloat"]))
         
         cursor.close()

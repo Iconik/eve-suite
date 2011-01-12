@@ -3,12 +3,12 @@ Created on Oct 28, 2009
 
 @author: frederikns
 '''
+from model.flyweight import Flyweight
 
-class Region(object):
-    """
-     # PyUML: Do not remove this line! # XMI_ID:_EIKGcBEREd-LgJ4IxcJkTA
-    """
-
-
+class Region(Flyweight):
     def __init__(self, region_id):
-        pass
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing

@@ -6,16 +6,19 @@ Created on Dec 1, 2009
 import weakref
 
 from model.static.database import database
-from model.static.inv import inventory_dictionaries
 from model.dynamic.inventory.material_requirements import MaterialRequirements
+from model.flyweight import Flyweight
+from model.static.inv.type import Type
 
-
-class BlueprintType(object): #IGNORE:R0902
-    """
-     # PyUML: Do not remove this line! # XMI_ID:_EH_HVBEREd-LgJ4IxcJkTA
-    """
-
+class BlueprintType(Flyweight): #IGNORE:R0902
+    
     def __init__(self, blueprint_type_id):
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing
+               
         self.blueprint_type_id = blueprint_type_id
 
         cursor = database.get_cursor("select * from invBlueprintTypes \
@@ -38,24 +41,27 @@ class BlueprintType(object): #IGNORE:R0902
 
         cursor.close()
 
-        self.blueprint = None
+        self.type = None
         self.parent_blueprint = None
         self.product_type = None
         self.material_requirements = None
-
+        
     def get_parent_blueprint_type(self):
         """Populates and returns the parent blueprint type"""
         if self.parent_blueprint is None:
-            self.parent_blueprint = weakref.ref(
-                inventory_dictionaries.get_blueprint_type(
+            self.parent_blueprint = weakref.ref(BlueprintType(
                     self.parent_blueprint_type_id))
         return self.parent_blueprint
+    
+    def get_type(self):
+        if self.type is None:
+            self.type = Type(self.blueprint_type_id)
+        return self.type
 
     def get_product_type(self):
         """Populates and returns the product type"""
         if self.product_type is None:
-            self.product_type = weakref.ref(inventory_dictionaries.get_type(
-                self.product_type_id))
+            self.product_type = weakref.ref(Type(self.product_type_id))
         return self.product_type
     
     def get_material_requirements(self):

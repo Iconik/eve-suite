@@ -3,16 +3,20 @@ Created on Oct 28, 2009
 
 @author: frederikns
 '''
-from model.static.map import map_dictionaries
-from model.static.inv import inventory_dictionaries
 from model.static.database import database
+from model.flyweight import Flyweight
+from model.static.map.region import Region
+from model.static.map.constellation import Constellation
+from model.static.inv.type import Type
 
-class SolarSystem(object):
-    """
-     # PyUML: Do not remove this line! # XMI_ID:_EIKGdhEREd-LgJ4IxcJkTA
-    """
-
+class SolarSystem(Flyweight):
     def __init__(self, solar_system_id):
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing
+        
         self.solar_system_id = solar_system_id
         
         cursor = database.get_cursor("select * from mapSolarSystems where \
@@ -54,20 +58,19 @@ class SolarSystem(object):
     def get_region(self):
         """Populates and returns the region"""
         if self.region is None:
-            self.region = map_dictionaries.get_region(self.region_id)
+            self.region = Region(self.region_id)
         return self.region
     
     def get_constellation(self):
         """Populates and returns the constellation"""
         if self.constellation is None:
-            self.constellation = map_dictionaries.\
-            get_constellation(self.constellation_id)
+            self.constellation = Constellation(self.constellation_id)
         return self.constellation
     
     def get_sun_type(self):
         """Populates and returns the sun type"""
         if self.sun_type is None:
-            self.sun_type = inventory_dictionaries.get_type(self.sun_type_id)
+            self.sun_type = Type(self.sun_type_id)
         return self.sun_type
     
     def __str__(self):

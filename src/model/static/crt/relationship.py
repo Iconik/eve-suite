@@ -4,19 +4,18 @@ Created on Feb 7, 2010
 @author: frederikns
 '''
 from model.static.database import database
-from model.static.crt import certificate_dictionaries
-from model.static.inv import inventory_dictionaries
+from model.static.crt.certificate import Certificate
+from model.static.inv.type import Type
+from model.flyweight import Flyweight
 
-class Relationship(object):
-    '''
-    classdocs
-    '''
-
-
+class Relationship(Flyweight):
     def __init__(self, relationship_id):
-        '''
-        Constructor
-        '''
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing
+
         self.relationship_id = relationship_id
         
         cursor = database.get_cursor("select * from crtRelationships where \
@@ -34,18 +33,15 @@ class Relationship(object):
         
     def get_parent(self):
         if self.parent is None:
-            self.parent = \
-            certificate_dictionaries.get_certificate(self.parent_id)
+            self.parent = Certificate(self.parent_id)
         return self.parent
     
     def get_parent_type(self):
         if self.parent_type is None:
-            self.parent_type = \
-            inventory_dictionaries.get_type(self.parent_type_id)
+            self.parent_type = Type(self.parent_type_id)
         return self.parent_type
     
     def get_child(self):
         if self.child is None:
-            self.child = \
-            certificate_dictionaries.get_certificate(self.child_id)
+            self.child = Certificate(self.child_id)
         return self.child

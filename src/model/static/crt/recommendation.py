@@ -4,19 +4,18 @@ Created on Feb 7, 2010
 @author: frederikns
 '''
 from model.static.database import database
-from model.static.inv import inventory_dictionaries
-from model.static.crt import certificate_dictionaries
+from model.static.inv.type import Type
+from model.static.crt.certificate import Certificate
+from model.flyweight import Flyweight
 
-class Recommendation(object):
-    '''
-    classdocs
-    '''
-
-
+class Recommendation(Flyweight):
     def __init__(self,recommendation_id):
-        '''
-        Constructor
-        '''
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing
+
         self.recommendation_id = recommendation_id
         
         cursor = database.get_cursor("select * from crtRecommendations where \
@@ -32,11 +31,10 @@ class Recommendation(object):
         
     def get_ship_type(self):
         if self.ship_type is None:
-            self.ship_type = inventory_dictionaries.get_type(self.ship_type_id)
+            self.ship_type = Type(self.ship_type_id)
         return self.ship_type
     
     def get_certificate(self):
         if self.certificate is None:
-            self.certificate = \
-            certificate_dictionaries.get_certificate(self.certificate_id)
+            self.certificate = Certificate(self.certificate_id)
         return self.certificate

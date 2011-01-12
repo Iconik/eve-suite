@@ -4,18 +4,17 @@ Created on 30 Jan 2010
 @author: FrederikNS
 '''
 from model.static.database import database
-from model.static.inventory import inventory_dictionaries
+from model.static.inv.category import Category
+from model.flyweight import Flyweight
 
-class Attribute(object):
-    """
-     # PyUML: Do not remove this line! # XMI_ID:_EH9SIREREd-LgJ4IxcJkTA
-    """
-
-
+class Attribute(Flyweight):
     def __init__(self, attribute_id):
-        '''
-        Constructor
-        '''
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing
+
         self.attribute_id = attribute_id
         
         cursor = database.get_cursor("select * from dgmAttributeTypes where \
@@ -38,6 +37,5 @@ class Attribute(object):
     def get_category(self):
         """Populates and returns the category"""
         if self.category is None:
-            self.category = inventory_dictionaries.\
-            get_category(self.category_id)
+            self.category = Category(self.category_id)
         return self.category

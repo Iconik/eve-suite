@@ -4,17 +4,17 @@ Created on Nov 26, 2009
 @author: frederikns
 '''
 from model.static.database import database
-from model.static.inv import inventory_dictionaries
+from model.flyweight import Flyweight
+from model.static.inv.category import Category
 
-class Group(object):
-    """
-     # PyUML: Do not remove this line! # XMI_ID:_EIBjmhEREd-LgJ4IxcJkTA
-    """
-
+class Group(Flyweight):
     def __init__(self, group_id):
-        '''
-        Constructor
-        '''
+        #prevents reinitializing
+        if "inited" in self.__dict__:
+            return
+        self.inited = None
+        #prevents reinitializing
+
         self.group_id = group_id
         
         cursor = database.get_cursor("select * from invGroups where \
@@ -40,6 +40,5 @@ class Group(object):
     def get_category(self):
         """Populates and returns the category"""
         if self.category is None:
-            self.category = inventory_dictionaries.get_category(
-            self.category_id)
+            self.category = Category(self.category_id)
         return self.category
