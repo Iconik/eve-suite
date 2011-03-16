@@ -5,3 +5,4 @@ syntax: regexp
 \.DS_Store
 .*\.pyo
 EVE Suite.mchg
+\.settings/
