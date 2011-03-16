@@ -1,96 +1,86 @@
 '''
-Created on Oct 28, 2009
+Created on Mar 2, 2011
 
 @author: frederikns
 '''
-import wx
-from wx import xrc, gizmos
-
-from modelview.blueprintcalculator.blueprint_calculator import \
+from PySide import QtGui, QtCore
+from view.blueprintcalculator.ui_blueprint_calculator import \
+Ui_BlueprintCalculator
+from viewmodel.blueprintcalculator.blueprint_calculator import \
 BlueprintCalculator
 
-class BlueprintCalculatorView():
-    """Control class for the Blueprint Calculator View"""
-    
-    def __init__(self, parent):
-        self.frame = None
-        self.blueprint_combo = None
-        self.character_combo = None
-        self.material_tree = None
-        self.blueprint_tree = None
-        
-        self.blueprint_calculator = BlueprintCalculator()
-        self.last_run = 0
-        
-        self.res = xrc.XmlResource(
-            "view/blueprintcalculator/blueprint_calculator.xrc")
-        self.init_frame()
-        
-    def init_frame(self):
-        """initializes the frame"""
-        
-        self.frame = self.res.LoadFrame(None, "blueprint_calc_frame")
-        self.blueprint_combo = xrc.XRCCTRL(self.frame, "blueprint_combo")
-        self.character_combo = xrc.XRCCTRL(self.frame, "character_choice")
-        #self.material_tree_ref = xrc.XRCCTRL(self.frame, "material_tree")
-        #self.blueprint_tree = xrc.XRCCTRL(self.frame, "blueprint_tree")
-        
-        self.material_tree = gizmos.TreeListCtrl(self.frame, style=wx.TR_DEFAULT_STYLE)
-        self.blueprint_tree = gizmos.TreeListCtrl(self.frame, style=wx.TR_DEFAULT_STYLE)
-        
-        self.res.AttachUnknownControl("material_tree", self.material_tree, self.frame)
-        self.res.AttachUnknownControl("blueprint_tree", self.blueprint_tree, self.frame)
-        
-        self.material_tree.AddColumn("Material")
-        self.material_tree.AddColumn("Base Amount")
-        self.material_tree.AddColumn("Waste")
-        self.material_tree.AddColumn("Total")
-        self.material_tree.AddColumn("Unit Price")
-        self.material_tree.AddColumn("Total Price")
-        self.material_tree.AddColumn("Perfect ME")
-        self.material_tree.AddColumn("Next ME Improvements")
-        for column in range(0,self.material_tree.GetColumnCount()):
-            self.material_tree.SetColumnWidth(column, wx.LIST_AUTOSIZE_USEHEADER)
-        
-        self.blueprint_tree.AddColumn("Blueprint Name")
-        self.blueprint_tree.AddColumn("Manufacture")
-        self.blueprint_tree.AddColumn("ME")
-        self.blueprint_tree.AddColumn("PE")
-        for column in range(0,self.blueprint_tree.GetColumnCount()):
-            self.blueprint_tree.SetColumnWidth(column, wx.LIST_AUTOSIZE_USEHEADER)
-        
-        self.frame.Bind(wx.EVT_TEXT, self.update_blueprint_list,
-            self.blueprint_combo)
-        self.frame.Bind(wx.EVT_COMBOBOX, self.update_blueprint,
-            self.blueprint_combo)
-        self.frame.Bind(wx.EVT_TEXT_ENTER, self.update_blueprint,
-            self.blueprint_combo)
-        
-        self.blueprint_combo.SetItems(BlueprintCalculator._blueprint_list)
-        
-        self.frame.Fit()
-        self.frame.Show()
-        
-    def update_blueprint_list(self, event):
-        """This function runs each time the blueprint selection combo is
-        modified, updating the list of blueprints to only show the ones which
-        match the entered substring"""
-        
-        self.blueprint_combo.SetItems([blueprint for blueprint in 
-            BlueprintCalculator._blueprint_list
-            if self.blueprint_combo.Value in blueprint])
-        
-    def update_blueprint(self, event):
-        """This function runs when a blueprint has been selected, displaying
-        the resources required for production""" 
-        
-        if(self.blueprint_combo.Value in
-            BlueprintCalculator._blueprint_list or 
-            self.blueprint_combo.Value+" Blueprint" in
-            BlueprintCalculator._blueprint_list):
+class BlueprintDelegate(QtGui.QStyledItemDelegate):
+    def createEditor(self, parent, option, index):
+        if index.column() == 1 or index.column() == 2:
+            editor = QtGui.QSpinBox(parent)
+            editor.setRange(-2147483648,2147483647)
+            #editor.editingFinished.connect(self.emitCommitData)
+            return editor
+
+    def setEditorData(self, editor, index):
+        if index.column() == 1 or index.column() == 2:
+            value = index.model().data(index, QtCore.Qt.SizeHintRole)
+            if value is not None:
+                editor.setValue(int(value))
+
+    def setModelData(self, spinBox, model, index):
+        if index.column() == 1 or index.column() == 2:
+            spinBox.interpretText()
+            value = spinBox.value()
+            model.setData(index, value, QtCore.Qt.SizeHintRole)
             
-            self.blueprint_calculator.blueprint_change(
-                BlueprintCalculator._blueprint_map[
-                    self.blueprint_combo.Value])
-            
-            #self.blueprint_tree.AddRoot()
+
+    #def updateEditorGeometry(self, editor, option, index):
+        #editor.setGeometry(option.rect)
+        
+    #def emitCommitData(self):
+        #self.commitData.emit(self.sender())
+
+class BlueprintCalculatorView(QtGui.QMainWindow):
+    def __init__(self, parent=None):
+        #Initialization
+        QtGui.QMainWindow.__init__(self, parent)
+        self.ui = Ui_BlueprintCalculator()
+        self.ui.setupUi(self)
+        
+        #Reference to the viewmodel
+        self.bpc = BlueprintCalculator()
+        
+        #Setting up the combobox for selecting active blueprints, along with
+        #suggestions
+        self.ui.blueprint_combo.addItems(BlueprintCalculator.blueprint_list)
+        self.ui.blueprint_combo.clearEditText()
+        bpcompleter = QtGui.QCompleter(BlueprintCalculator.blueprint_list,
+            self.ui.blueprint_combo)
+        bpcompleter.setCaseSensitivity(QtCore.Qt.CaseInsensitive)
+        self.ui.blueprint_combo.setCompleter(bpcompleter)
+        
+        #Setting up material_tree
+        self.ui.manufacturing_tree.setModel(self.bpc.material_model)
+        self.ui.manufacturing_tree.setUniformRowHeights(True)
+        for x in range(self.bpc.material_model.columnCount()):
+            self.ui.manufacturing_tree.resizeColumnToContents(x)
+        
+        #Setting up blueprint_tree
+        self.ui.blueprint_tree.setModel(self.bpc.blueprint_model)
+        self.ui.blueprint_tree.setSelectionMode(QtGui.QAbstractItemView.NoSelection)
+        self.ui.blueprint_tree.setItemDelegate(BlueprintDelegate(self))
+        self.ui.blueprint_tree.setColumnWidth(1, 67)
+        self.ui.blueprint_tree.setColumnWidth(2, 67)
+        self.ui.blueprint_tree.setUniformRowHeights(True)
+        self.ui.blueprint_tree.header()
+        
+        #Setting up actions
+        self.ui.blueprint_combo.currentIndexChanged.connect(
+            self.update_blueprints)
+        
+    def update_blueprints(self):
+        self.bpc.blueprint_change(BlueprintCalculator.blueprint_dict[
+            self.ui.blueprint_combo.itemText(
+                self.ui.blueprint_combo.currentIndex())])
+        for item in self.bpc.me_items:
+            self.ui.blueprint_tree.openPersistentEditor(item.index())
+        for item in self.bpc.pe_items:
+            self.ui.blueprint_tree.openPersistentEditor(item.index())
+        self.ui.blueprint_tree.expandAll()
+        self.ui.blueprint_tree.resizeColumnToContents(0)

@@ -5,6 +5,7 @@ Created on Oct 28, 2009
 '''
 from model.flyweight import Flyweight
 from model.static.database import database
+import weakref
 
 class Type(Flyweight):
     def __init__(self, type_id):
@@ -93,5 +94,5 @@ class Type(Flyweight):
         from model.static.inv.blueprint_type import BlueprintType
         if self.is_manufacturable():
             if self._blueprint is None:
-                self._blueprint = BlueprintType(self._blueprint_type_id)
+                self._blueprint = weakref(BlueprintType(self._blueprint_type_id))
         return self._blueprint

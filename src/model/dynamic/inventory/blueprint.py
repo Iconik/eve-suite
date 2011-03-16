@@ -18,7 +18,7 @@ class Blueprint(object):
         self.material_efficiency = material_efficiency
         self.production_efficiency = production_efficiency
         
-        self._blueprint = None
+        self._blueprint = None #Should only be referenced directly by get_blueprint_type()
         
     def get_blueprint_type(self):
         """Populates and returns the _blueprint object"""
@@ -26,6 +26,15 @@ class Blueprint(object):
             from model.static.inv.blueprint_type import BlueprintType
             self._blueprint = BlueprintType(self.blueprint_type_id)
         return self._blueprint
+    
+    def get_parent_blueprint_type(self):
+        return self.get_blueprint_type().get_parent_blueprint_type()
+    
+    def get_type(self):
+        return self.get_blueprint_type().get_type()
+    
+    def get_product_type(self):
+        return self.get_blueprint_type().get_product_type()
         
     def get_material_requirements(self):
         """Returns the materials object"""

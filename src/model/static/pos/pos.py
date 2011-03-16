@@ -26,7 +26,7 @@ class POS(object):
         self._faction = None
         
     def get_type(self):
-        """Populates and returns the _type"""
+        """Populates and returns the type"""
         if self._type is None:
             self._type = Type(self.type_id)
         return self._type
@@ -38,13 +38,13 @@ class POS(object):
         return self._fuel
     
     def get_faction(self):
-        """Populates and returns the _faction"""
+        """Populates and returns the faction"""
         if self._faction is None:
             self._faction = Faction(self.faction_id)
         return self._faction
     
     def max_fuel(self):
-        """Calculates and prints the optimal _fuel composition for the pos"""
+        """Calculates and prints the optimal fuel composition for the pos"""
         online_volume = 0.0
         power_volume = 0.0
         cpu_volume = 0.0

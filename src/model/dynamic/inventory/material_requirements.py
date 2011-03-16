@@ -36,7 +36,7 @@ class MaterialRequirements(object): #IGNORE:R0902
             
             recycled_mats = dict()
             for item in self.type_requirements[1]:
-                if item.recycle == True: #Check if requirement is recycled
+                if item.recycle == True:
                     component_mats = TypeMaterials(item.item.type_id)
                     
                     for mat in component_mats.values():

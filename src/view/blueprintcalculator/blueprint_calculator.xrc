@@ -47,20 +47,45 @@
             <option>2</option>
             <flag>wxEXPAND</flag>
           </object>
+          
+          <orient>wxHORIZONTAL</orient>
           <object class="sizeritem">
             <object class="wxStaticBoxSizer">
-              <object class="sizeritem">
-                <object class="unknown" name="blueprint_tree"/>
-                <option>1</option>
-                <flag>wxEXPAND</flag>
-              </object>
-              <label>Production Blueprints</label>
+              <label>Blueprints</label>
               <orient>wxVERTICAL</orient>
+              <object class="sizeritem">
+                <object class="wxPanel" name="blueprint_panel">
+                  <object class="wxGridSizer">
+                    <cols>4</cols>
+                    <rows>2</rows>
+                    <XRCED>
+                      <assign_var>1</assign_var>
+                    </XRCED>
+                    <object class="sizeritem">
+                      <object class="wxStaticText" name="blueprint_label">
+                        <label>Blueprint</label>
+                      </object>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxStaticText">
+                        <label>Manufacture</label>
+                      </object>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxStaticText">
+                        <label>ME</label>
+                      </object>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxStaticText">
+                        <label>PE</label>
+                      </object>
+                    </object>
+                  </object>
+                </object>
+              </object>
             </object>
-            <option>1</option>
-            <flag>wxEXPAND</flag>
           </object>
-          <orient>wxHORIZONTAL</orient>
         </object>
         <option>1</option>
         <flag>wxEXPAND</flag>
