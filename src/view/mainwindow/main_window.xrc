@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource>
+  <object class="wxFrame" name="main_frame">
+    <object class="wxGridSizer">
+      <cols>2</cols>
+      <rows>2</rows>
+      <object class="sizeritem">
+        <object class="wxBoxSizer">
+          <orient>wxVERTICAL</orient>
+          <object class="sizeritem">
+            <object class="wxButton" name="blueprint_calculator_button">
+              <label>BP</label>
+            </object>
+            <minsize>50,50</minsize>
+          </object>
+          <object class="sizeritem">
+            <object class="wxStaticText">
+              <label>Blueprint Calculator</label>
+            </object>
+          </object>
+        </object>
+      </object>
+    </object>
+    <centered>1</centered>
+    <focused>1</focused>
+  </object>
+</resource>
