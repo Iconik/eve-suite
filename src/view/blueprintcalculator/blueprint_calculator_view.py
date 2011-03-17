@@ -29,7 +29,6 @@ class BlueprintDelegate(QtGui.QStyledItemDelegate):
             value = spinBox.value()
             model.setData(index, value, QtCore.Qt.SizeHintRole)
             
-
     #def updateEditorGeometry(self, editor, option, index):
         #editor.setGeometry(option.rect)
         

@@ -24,6 +24,7 @@ class MaterialRequirements(object): #IGNORE:R0902
         self._waste_factor = None
         self._wastes = None
         self._eliminate_levels = None
+        self._component_blueprints = None
         
     def get_reprocessing_materials(self):
         """Gets and returns the reprocessing materials for the type"""
@@ -106,6 +107,14 @@ class MaterialRequirements(object): #IGNORE:R0902
                     production_efficiency_skill, waste_factor,
                     material_multiplier))
         return self._eliminate_levels
+    
+    def get_component_blueprints(self):
+        if self._component_blueprints is None:
+            for material in self.type_materials.values():
+                self._component_blueprints.append(material.get_blueprint_type())
+            for requirements in self.type_requirements[1]:
+                self._component_blueprints.append(requirements.item.get_blueprint_type())
+        return self._component_blueprints
 
 def waste(quantity, material_efficiency, production_efficiency_skill=5,
           waste_factor=10.0, material_multiplier=1.0):

@@ -92,7 +92,7 @@ class Type(Flyweight):
     def get_blueprint_type(self):
         """populates the _blueprint reference, if the type can be manufactured"""
         from model.static.inv.blueprint_type import BlueprintType
-        if self.is_manufacturable():
-            if self._blueprint is None:
+        if self._blueprint is None:
+            if self.is_manufacturable():
                 self._blueprint = weakref(BlueprintType(self._blueprint_type_id))
         return self._blueprint

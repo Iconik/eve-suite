@@ -55,6 +55,8 @@ class BlueprintCalculator(object):
             query += "OR productTypeID==%s " % (id)
         query += ";"
         
+        #self.selected_blueprint.get_component_blueprints()
+        
         cursor = database.get_cursor(query)
         #self.blueprint_model.clear()
         item = QtGui.QStandardItem(

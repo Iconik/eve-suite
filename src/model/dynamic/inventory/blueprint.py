@@ -70,3 +70,6 @@ class Blueprint(object):
         return self.get_blueprint_type().get_next_improvement(
             self.material_efficiency, production_efficiency_skill,
             material_multiplier)
+        
+    def get_component_blueprints(self):
+        return self.get_blueprint_type().get_component_blueprints()

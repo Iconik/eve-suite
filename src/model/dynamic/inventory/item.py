@@ -24,6 +24,9 @@ class Item(object):
             self._type = Type(self.type_id)
         return self._type
     
+    def get_blueprint_type(self):
+        return self.get_type().get_blueprint_type()
+    
     def get_location(self):
         """Populates the _location and returns it"""
         if self._location is None:

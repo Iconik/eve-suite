@@ -38,7 +38,6 @@ class BlueprintType(Flyweight): #IGNORE:R0902
         self.max_production_limit = row["maxProductionLimit"]
 
         cursor.close()
-
         self._type = None
         self._parent_blueprint = None
         self._product_type = None
@@ -48,21 +47,24 @@ class BlueprintType(Flyweight): #IGNORE:R0902
     def get_parent_blueprint_type(self):
         """Populates and returns the parent blueprint type"""
         if self._parent_blueprint is None:
-            self._parent_blueprint = weakref.ref(BlueprintType(
-                    self.parent_blueprint_type_id))
+            self._parent_blueprint = BlueprintType(
+                    self.parent_blueprint_type_id)
         return self._parent_blueprint
+    
     def get_type(self):
         """Populates and returns the bluprint's type"""
         if self._type is None:
             from model.static.inv.type import Type
             self._type = Type(self._blueprint_type_id)
         return self._type
+    
     def get_product_type(self):
         """Populates and returns the blueprint's product type"""
         if self._product_type is None:
             from model.static.inv.type import Type
             self._product_type = Type(self.product_type_id)
         return self._product_type
+    
     def get_material_requirements(self):
         """Populates and returns the blueprint's material requirements"""
         if self._material_requirements is None:
@@ -104,4 +106,4 @@ class BlueprintType(Flyweight): #IGNORE:R0902
 
     def get_component_blueprints(self):
         """Gets a list of blueprints required for the components"""
-        pass
+        return self.get_material_requirements().get_component_blueprints()
