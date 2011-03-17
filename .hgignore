@@ -1,0 +1,8 @@
+syntax: regexp
+
+^Resources/
+.*\.pyc
+\.DS_Store
+.*\.pyo
+EVE Suite.mchg
+\.settings/
