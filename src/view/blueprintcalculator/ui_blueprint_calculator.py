@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_blueprint_calculator.ui'
 #
-# Created: Sat Mar 12 00:26:18 2011
+# Created: Sat Mar 19 14:47:54 2011
 #      by: pyside-uic 0.2.7 running on PySide 1.0.0~rc1
 #
 # WARNING! All changes made in this file will be lost!
@@ -42,7 +42,7 @@ class Ui_BlueprintCalculator(object):
         self.horizontalLayout_4.setMargin(0)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.character_combo = QtGui.QComboBox(self.groupBox_2)
-        self.character_combo.setEditable(True)
+        self.character_combo.setEditable(False)
         self.character_combo.setSizeAdjustPolicy(QtGui.QComboBox.AdjustToContents)
         self.character_combo.setFrame(True)
         self.character_combo.setObjectName("character_combo")

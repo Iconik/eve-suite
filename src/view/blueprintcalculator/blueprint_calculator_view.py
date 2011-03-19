@@ -28,12 +28,6 @@ class BlueprintDelegate(QtGui.QStyledItemDelegate):
             spinBox.interpretText()
             value = spinBox.value()
             model.setData(index, value, QtCore.Qt.SizeHintRole)
-            
-    #def updateEditorGeometry(self, editor, option, index):
-        #editor.setGeometry(option.rect)
-        
-    #def emitCommitData(self):
-        #self.commitData.emit(self.sender())
 
 class BlueprintCalculatorView(QtGui.QMainWindow):
     def __init__(self, parent=None):
@@ -62,7 +56,8 @@ class BlueprintCalculatorView(QtGui.QMainWindow):
         
         #Setting up blueprint_tree
         self.ui.blueprint_tree.setModel(self.bpc.blueprint_model)
-        self.ui.blueprint_tree.setSelectionMode(QtGui.QAbstractItemView.NoSelection)
+        self.ui.blueprint_tree.setSelectionMode(
+            QtGui.QAbstractItemView.NoSelection)
         self.ui.blueprint_tree.setItemDelegate(BlueprintDelegate(self))
         self.ui.blueprint_tree.setColumnWidth(1, 67)
         self.ui.blueprint_tree.setColumnWidth(2, 67)
