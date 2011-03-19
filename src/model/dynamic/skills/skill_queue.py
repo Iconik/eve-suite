@@ -1,8 +1,3 @@
-'''
-Created on Nov 6, 2009
-
-@author: frederikns
-'''
 import xml.etree.ElementTree as ElementTree
 from model.dynamic.api import api
 from model.dynamic.skills.skill_queue_item import SkillQueueItem

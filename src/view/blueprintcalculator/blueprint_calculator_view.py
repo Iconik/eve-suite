@@ -1,8 +1,3 @@
-'''
-Created on Mar 2, 2011
-
-@author: frederikns
-'''
 from PySide import QtGui, QtCore
 from view.blueprintcalculator.ui_blueprint_calculator import \
 Ui_BlueprintCalculator

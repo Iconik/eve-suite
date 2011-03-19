@@ -1,9 +1,3 @@
-'''
-Created on Nov 2, 2009
-
-@author: frederikns
-'''
-
 import urllib
 import os
 from datetime import datetime

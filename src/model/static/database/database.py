@@ -1,8 +1,3 @@
-'''
-Created on Dec 7, 2009
-
-@author: frederikns
-'''
 import sqlite3
 
 LOCATION = '../Resources/Database/inc110-sqlite3-v1.db'

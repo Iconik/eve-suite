@@ -1,8 +1,3 @@
-'''
-Created on Dec 1, 2009
-
-@author: frederikns
-'''
 import weakref
 
 from model.flyweight import Flyweight

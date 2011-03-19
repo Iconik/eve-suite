@@ -1,10 +1,3 @@
-'''
-Created on Nov 6, 2009
-
-@author: frederikns
-'''
-
-
 class Character(object):
     def __init__(self, account, name, character_id, #IGNORE:R0913
                  corporation_name, corporation_id):

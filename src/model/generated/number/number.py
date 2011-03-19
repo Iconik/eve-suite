@@ -1,8 +1,3 @@
-'''
-Created on Feb 8, 2010
-
-@author: frederikns
-'''
 import locale
 
 def format_number(number):

@@ -1,8 +1,3 @@
-'''
-Created on Nov 15, 2009
-
-@author: frederikns
-'''
 from model.flyweight import Flyweight
 from model.static.database import database
 from model.dynamic.inventory.item import Item

@@ -1,9 +1,3 @@
-'''
-Created on 9 Feb 2010
-
-@author: FrederikNS
-'''
-
 class Blueprint(object):
     '''
     classdocs
