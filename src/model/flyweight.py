@@ -1,8 +1,3 @@
-'''
-Created on Jan 12, 2011
-
-@author: frederikns
-'''
 from weakref import WeakValueDictionary
 
 class Flyweight(object):

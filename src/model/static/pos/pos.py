@@ -1,9 +1,3 @@
-'''
-Created on Nov 15, 2009
-
-@author: frederikns
-'''
-
 import datetime
 import math
 from model.static.inv.type import Type

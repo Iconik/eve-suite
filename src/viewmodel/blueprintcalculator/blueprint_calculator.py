@@ -1,8 +1,3 @@
-'''
-Created on May 31, 2010
-
-@author: frederikns
-'''
 from PySide import QtGui, QtCore
 from model.static.database import database
 
@@ -42,6 +37,9 @@ class BlueprintCalculator(object):
             "Waste", "Total", "Eliminate Waste", "Next Improvement"])
         self.blueprint_model.setHorizontalHeaderLabels(
             ["Manufacture / Blueprint", "ME", "PE"])
+        
+    def populate_materials(self):
+        pass
             
     def blueprint_change(self,blueprint_id):
         from model.dynamic.inventory.blueprint import Blueprint

@@ -1,8 +1,3 @@
-'''
-Created on Oct 13, 2010
-
-@author: frederikns
-'''
 import math
 from model.static.inv.type_materials import TypeMaterials
 from model.static.ram.type_requirements import TypeRequirements

@@ -1,8 +1,3 @@
-'''
-Created on Apr 27, 2010
-
-@author: frederikns
-'''
 from model.static.database import database
 from collections import deque
 

@@ -1,8 +1,3 @@
-'''
-Created on Oct 28, 2009
-
-@author: frederikns
-'''
 from model.flyweight import Flyweight
 from model.static.database import database
 

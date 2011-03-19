@@ -1,8 +1,3 @@
-'''
-Created on 9 Feb 2010
-
-@author: FrederikNS
-'''
 from collections import namedtuple
 
 from model.flyweight import Flyweight

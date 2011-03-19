@@ -1,8 +1,3 @@
-'''
-Created on Nov 6, 2009
-
-@author: frederikns
-'''
 from datetime import datetime
 from model.generated.roman.roman import to_roman
 
