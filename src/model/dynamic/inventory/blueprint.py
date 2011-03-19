@@ -18,7 +18,8 @@ class Blueprint(object):
         self.material_efficiency = material_efficiency
         self.production_efficiency = production_efficiency
         
-        self._blueprint = None #Should only be referenced directly by get_blueprint_type()
+        """Should only be referenced directly by get_blueprint_type()"""
+        self._blueprint = None
         
     def get_blueprint_type(self):
         """Populates and returns the _blueprint object"""

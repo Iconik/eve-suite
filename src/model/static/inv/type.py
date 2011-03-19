@@ -82,8 +82,10 @@ class Type(Flyweight):
             cursor = database.get_cursor(
                 "select * from invBlueprintTypes where productTypeID=%s;" %
                 self.type_id)
-            if len(cursor) > 0:
-                self._blueprint_type_id = cursor.fetchone()["blueprintTypeID"]
+            #cursor.fetchall()
+            row = cursor.fetchone()
+            if row is not None:
+                self._blueprint_type_id = row["blueprintTypeID"]
                 self._manufacturable = True
             else:
                 self._manufacturable = False
@@ -94,5 +96,6 @@ class Type(Flyweight):
         from model.static.inv.blueprint_type import BlueprintType
         if self._blueprint is None:
             if self.is_manufacturable():
-                self._blueprint = weakref(BlueprintType(self._blueprint_type_id))
+                blue = BlueprintType(self._blueprint_type_id)
+                self._blueprint = blue
         return self._blueprint
