@@ -49,7 +49,8 @@ class MaterialRequirements(object): #IGNORE:R0902
             for mat in self.type_materials.values():
                 if mat.type_id in recycled_mats:
                     if mat.quantity > recycled_mats[mat.type_id].quantity:
-                        self._base_materials.append(mat-recycled_mats[mat.type_id])            
+                        self._base_materials.append(mat-recycled_mats[
+                            mat.type_id])            
                 else:
                     self._base_materials.append(mat.copy())
                 
@@ -67,9 +68,9 @@ class MaterialRequirements(object): #IGNORE:R0902
             self._production_efficiency_skill = production_efficiency_skill
             self._waste_factor = waste_factor
             for item in self.get_material_base():
-                self._wastes[item.type_id] = waste(item.quantity, material_efficiency,
-                    production_efficiency_skill, waste_factor,
-                    material_multiplier)
+                self._wastes[item.type_id] = waste(item.quantity,
+                    material_efficiency, production_efficiency_skill,
+                    waste_factor, material_multiplier)
         return self._wastes
     
     def get_material_totals(self, material_efficiency=0,
@@ -89,8 +90,8 @@ class MaterialRequirements(object): #IGNORE:R0902
         if self._eliminate_levels is None:
             self._eliminate_levels = dict()
             for item in self.get_material_base():
-                self._eliminate_levels[item.type_id] = eliminate_waste(item.quantity,
-                    waste_factor)
+                self._eliminate_levels[item.type_id] = eliminate_waste(
+                    item.quantity, waste_factor)
         return self._eliminate_levels
     
     def get_material_next_improvements(self, material_efficiency=0,
@@ -110,10 +111,15 @@ class MaterialRequirements(object): #IGNORE:R0902
     
     def get_component_blueprints(self):
         if self._component_blueprints is None:
+            self._component_blueprints = list()
             for material in self.type_materials.values():
-                self._component_blueprints.append(material.get_blueprint_type())
-            for requirements in self.type_requirements[1]:
-                self._component_blueprints.append(requirements.item.get_blueprint_type())
+                blueprint = material.get_blueprint_type()
+                if blueprint is not None:
+                    self._component_blueprints.append(blueprint)
+            for requirement in self.type_requirements[1]:
+                blueprint = requirement.item.get_blueprint_type()
+                if blueprint is not None:
+                    self._component_blueprints.append(blueprint)
         return self._component_blueprints
 
 def waste(quantity, material_efficiency, production_efficiency_skill=5,
