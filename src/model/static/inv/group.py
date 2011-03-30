@@ -10,11 +10,11 @@ class Group(Flyweight):
         #prevents reinitializing
 
         self.group_id = group_id
-        
+
         cursor = database.get_cursor("select * from invGroups where \
         groupID=%s;" % (self.group_id))
         row = cursor.fetchone()
-        
+
         self.category_id = row["categoryID"]
         self.group_name = row["groupName"]
         self.description = row["description"]
@@ -26,11 +26,11 @@ class Group(Flyweight):
         self.anchorable = row["anchorable"]
         self.fittable_non_singleton = row["fittableNonSingleton"]
         self.published = row["published"]
-        
+
         cursor.close()
-        
+
         self._category = None
-    
+
     def get_category(self):
         """Populates and returns the _category"""
         if self._category is None:

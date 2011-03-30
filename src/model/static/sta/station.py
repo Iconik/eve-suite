@@ -8,13 +8,13 @@ class Station(Flyweight):
             return
         self._inited = None
         #prevents reinitializing
-        
+
         self.station_id = station_id
-        
+
         cursor = database.get_cursor("select * from staStations where \
         stationID='%s';" % (self.station_id))
         row = cursor.fetchone()
-        
+
         self.security = row["security"]
         self.docking_cost_per_volume = row["dockingCostPervolume"]
         self.max_ship_volume_dockable = row["maxShipVolumeDockable"]
@@ -32,35 +32,35 @@ class Station(Flyweight):
         self.reprocessing_efficiency = row["reprocessingEfficiency"]
         self.reprocessing_stations_take = row["reprocessingStationsTake"]
         self.reprocessing_hangar_flag = row["reprocessingHangarFlag"]
-        
+
         cursor.close()
-        
+
         self._solar_system = None
         self._region = None
         self._constellation = None
         self._station_type = None
-        
+
     def get_solar_system(self):
         """Populations and returns the solar system"""
         if self._solar_system is None:
             from model.static.map.solar_system import SolarSystem
             self._solar_system = SolarSystem(self.solar_system_id)
         return self._solar_system
-        
+
     def get_region(self):
         """Populations and returns the _region"""
         if self._region is None:
             from model.static.map.region import Region
             self._region = Region(self.region_id)
         return self._region
-    
+
     def get_constellation(self):
         """Populations and returns the _constellation"""
         if self._constellation is None:
             from model.static.map.constellation import Constellation
             self._constellation = Constellation(self.constellation_id)
         return self._constellation
-    
+
     def get_stations_type(self):
         """Populations and returns the station type"""
         if self._station_type is None:

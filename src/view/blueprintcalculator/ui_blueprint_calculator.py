@@ -75,4 +75,3 @@ class Ui_BlueprintCalculator(object):
         self.groupBox_2.setTitle(QtGui.QApplication.translate("BlueprintCalculator", "Character", None, QtGui.QApplication.UnicodeUTF8))
         self.character_combo.setItemText(0, QtGui.QApplication.translate("BlueprintCalculator", "All Level 5 Skills", None, QtGui.QApplication.UnicodeUTF8))
         self.character_combo.setItemText(1, QtGui.QApplication.translate("BlueprintCalculator", "No Skills", None, QtGui.QApplication.UnicodeUTF8))
-

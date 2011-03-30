@@ -5,7 +5,7 @@ from model.dynamic.skills.skill_queue_item import SkillQueueItem
 class SkillQueue(object):
     def __init__(self, user_id, api_key, character_id):
         api.fetch("char", "SkillQueue", user_id, api_key, character_id)
-        
+
         tree = ElementTree.parse("%s/SkillQueue.xml.aspx" % \
                                  api.build_path("char", user_id, character_id))
         root = tree.getroot()

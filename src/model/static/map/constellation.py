@@ -8,13 +8,13 @@ class Constellation(Flyweight):
             return
         self._inited = None
         #prevents reinitializing
-        
+
         self.constellation_id = constellation_id
-        
+
         cursor = database.get_cursor("select * from mapConstellations where \
         constellationID='%s';" % (self.constellation_id))
         row = cursor.fetchone()
-        
+
         self.region_id = row["regionID"]
         self.constellation_name = row["constellationName"]
         self.x_pos = row["x"]
@@ -28,17 +28,19 @@ class Constellation(Flyweight):
         self.z_max = row["zMax"]
         self.faction_id = row["factionID"]
         self.radius = row["radius"]
-        
+
+        cursor.close()
+
         self._region = None
         self._faction = None
-        
+
     def get_region(self):
         """Populates and returns the _region"""
         if self._region is None:
             from model.static.map.region import Region
             self._region = Region(self.region_id)
         return self._region
-    
+
     def get_faction(self):
         """Populates and returns the _faction"""
         if self._faction is None:

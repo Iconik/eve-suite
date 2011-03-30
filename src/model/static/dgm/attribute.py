@@ -10,11 +10,11 @@ class Attribute(Flyweight):
         #prevents reinitializing
 
         self.attribute_id = attribute_id
-        
+
         cursor = database.get_cursor("select * from dgmAttributeTypes where \
         attributeID=%s;" % (self.attribute_id))
         row = cursor.fetchone()
-        
+
         self.attribute_name = row["attributeName"]
         self.description = row["description"]
         self.graphic_id = row["graphicID"]
@@ -25,7 +25,9 @@ class Attribute(Flyweight):
         self.stackable = row["stackable"]
         self.high_is_good = row["highIsGood"]
         self.category_id = row["categoryID"]
-        
+
+        cursor.close()
+
         self._category = None
 
     def get_category(self):

@@ -11,7 +11,7 @@ class MaterialRequirements(object): #IGNORE:R0902
         self.product_type_id = product_type_id
         self.type_materials = TypeMaterials(self.product_type_id)
         self.type_requirements = TypeRequirements(self._blueprint_type_id)
-        
+
         """The blueprints base materials, list, ("""
         self._base_materials = None
         self._material_efficiency = None
@@ -20,27 +20,27 @@ class MaterialRequirements(object): #IGNORE:R0902
         self._wastes = None
         self._eliminate_levels = None
         self._component_blueprints = None
-        
+
     def get_reprocessing_materials(self):
         """Gets and returns the reprocessing materials for the type"""
         pass
-    
+
     def get_material_base(self):
         """Returns the base materials, excluding recycled materials"""
         if self._base_materials is None:
             self._base_materials = list()
-            
+
             recycled_mats = dict()
             for item in self.type_requirements[1]:
                 if item.recycle == True:
                     component_mats = TypeMaterials(item.item.type_id)
-                    
+
                     for mat in component_mats.values():
                         if mat.type_id not in recycled_mats:
                             recycled_mats[mat.type_id] = mat
                         else:
                             recycled_mats[mat.type_id].quantity += mat.quantity
-                    
+
             for mat in self.type_materials.values():
                 if mat.type_id in recycled_mats:
                     if mat.quantity > recycled_mats[mat.type_id].quantity:
@@ -48,9 +48,9 @@ class MaterialRequirements(object): #IGNORE:R0902
                             mat.type_id])            
                 else:
                     self._base_materials.append(mat.copy())
-                
+
         return self._base_materials
-        
+
     def get_material_waste(self, material_efficiency=0,
         production_efficiency_skill=5, waste_factor=10.0,
         material_multiplier=1.0):
@@ -67,7 +67,7 @@ class MaterialRequirements(object): #IGNORE:R0902
                     material_efficiency, production_efficiency_skill,
                     waste_factor, material_multiplier)
         return self._wastes
-    
+
     def get_material_totals(self, material_efficiency=0,
         production_efficiency_skill=5, waste_factor=10.0,
         material_multiplier=1.0):
@@ -78,7 +78,7 @@ class MaterialRequirements(object): #IGNORE:R0902
         for item in self.get_material_base():
             totals[item.type_id] = item.quantity + wastes[item.type_id]
         return totals
-    
+
     def get_material_eliminate_waste(self, waste_factor=10.0):
         """Returns the levels where no waste will be present for the materials
         """
@@ -88,7 +88,7 @@ class MaterialRequirements(object): #IGNORE:R0902
                 self._eliminate_levels[item.type_id] = eliminate_waste(
                     item.quantity, waste_factor)
         return self._eliminate_levels
-    
+
     def get_material_next_improvements(self, material_efficiency=0,
         production_efficiency_skill=5, waste_factor=10.0,
         material_multiplier=1.0):
@@ -103,7 +103,7 @@ class MaterialRequirements(object): #IGNORE:R0902
                     production_efficiency_skill, waste_factor,
                     material_multiplier))
         return self._eliminate_levels
-    
+
     def get_component_blueprints(self):
         if self._component_blueprints is None:
             self._component_blueprints = list()
