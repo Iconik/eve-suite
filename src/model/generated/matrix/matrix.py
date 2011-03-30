@@ -30,7 +30,7 @@ def gauss_jordan(m, eps = 1.0/(10**10)):
         for x in range(h, w):       # Normalize row y
             m[y][x] /= c
     return True
-  
+
 '''
 The rest is written by: Eric Atienza
 license: public domain

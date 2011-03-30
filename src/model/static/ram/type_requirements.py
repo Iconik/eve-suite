@@ -13,7 +13,7 @@ class TypeRequirements(Flyweight): #IGNORE:R0903
         #prevents reinitializing
 
         self.type_id = type_id
-        
+
         """Remember: the key is the activity type
         0 = None
         1 = Manufacturing
@@ -25,12 +25,12 @@ class TypeRequirements(Flyweight): #IGNORE:R0903
         7 = Reverse Engineering
         8 = Invention"""
         self._requirements = dict()
-        
+
         cursor = database.get_cursor("select * \
         from ramTypeRequirements where typeID=%s;" % (self.type_id))
-        
+
         requirement = namedtuple("requirement", "item, damage, recycle")
-        
+
         for row in cursor:
             if row["activityID"] not in self._requirements:
                 self._requirements[row["activityID"]] = list()
@@ -38,7 +38,9 @@ class TypeRequirements(Flyweight): #IGNORE:R0903
                 item=Item(row["requiredTypeID"], quantity=row["quantity"]),
                 damage=row["damagePerJob"],
                 recycle=True if row["recycle"] == 1 else False))
-            
+
+        cursor.close()
+
     def __getitem__(self, k):
         """Allows TypeRequirements[k]"""
         return self._requirements[k]

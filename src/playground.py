@@ -25,7 +25,6 @@
 
 from PySide import QtCore, QtGui
 
-
 class IconSizeSpinBox(QtGui.QSpinBox):
     @staticmethod
     def valueFromText(text):
@@ -39,7 +38,6 @@ class IconSizeSpinBox(QtGui.QSpinBox):
     @staticmethod
     def textFromValue(value):
         return "%d x %d" % (value, value)
-
 
 class ImageDelegate(QtGui.QItemDelegate):
     def createEditor(self, parent, option, index):
@@ -71,7 +69,6 @@ class ImageDelegate(QtGui.QItemDelegate):
 
     def emitCommitData(self):
         self.commitData.emit(self.sender())
-
 
 class IconPreviewArea(QtGui.QWidget):
     def __init__(self, parent=None):
@@ -147,7 +144,6 @@ class IconPreviewArea(QtGui.QWidget):
                 pixmap = self.icon.pixmap(self.size, mode, state)
                 self.pixmapLabels[i][j].setPixmap(pixmap)
                 self.pixmapLabels[i][j].setEnabled(not pixmap.isNull())
-
 
 class MainWindow(QtGui.QMainWindow):
     def __init__(self, parent=None):
@@ -430,7 +426,6 @@ class MainWindow(QtGui.QMainWindow):
 
             if candidate.metaObject().className() == QtGui.QApplication.style().metaObject().className():
                 action.trigger()
-
 
 if __name__ == '__main__':
 

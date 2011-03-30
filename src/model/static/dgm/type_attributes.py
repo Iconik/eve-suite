@@ -9,14 +9,14 @@ class TypeAttributes(Flyweight):
             return
         self._inited = None
         #prevents reinitializing
-        
+
         self.type_id = type_id
-        
+
         cursor = database.get_cursor("select * from dgmTypeAttributes where \
         typeID=%s;" % (self.type_id))
-        
+
         self.attributes = list()
-        
+
         for row in cursor:
             if row["valueInt"] is not None:
                 self.attributes.append((Attribute(row["attributeID"]),
@@ -24,5 +24,5 @@ class TypeAttributes(Flyweight):
             elif row["valueFloat"] is not None:
                 self.attributes.append((Attribute(row["attributeID"]),
                                      row["valueFloat"]))
-        
+
         cursor.close()

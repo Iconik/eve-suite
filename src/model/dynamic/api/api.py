@@ -18,7 +18,7 @@ def build_link(folder, file_name, user_id=None, api_key=None,
         return "http://api.eve-online.com/%s/%s.xml.aspx?userID=%s" % \
         (folder, file_name, user_id)
     return "http://api.eve-online.com/%s/%s.xml.aspx" % (folder, file_name)
-    
+
 def build_path(folder, user_id=None, character_id=None, file_name=None):
     """Builds a relative file path for an api XML cache file"""
     if file_name is not None:
@@ -47,9 +47,9 @@ def check_cached_until(path):
                                                  "%Y-%m-%d %H:%M:%S")):
             return True
     return True
-    
+
 ONLINE = True
-    
+
 def fetch(folder, file_name, user_id=None, api_key=None, character_id=None):
     """
     Checks if the specified api XML file is outdated, and if it is, fetches a
