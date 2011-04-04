@@ -8,13 +8,13 @@ class SolarSystem(Flyweight):
             return
         self._inited = None
         #prevents reinitializing
-        
+
         self.solar_system_id = solar_system_id
-        
+
         cursor = database.get_cursor("select * from mapSolarSystems where \
         solarSystemID=%s;" % (self.solar_system_id))
         row = cursor.fetchone()
-        
+
         self.region_id = row["regionID"]
         self.constellation_id = row["constellationID"]
         self.solar_system_name = row["solarSystemName"]
@@ -40,33 +40,33 @@ class SolarSystem(Flyweight):
         self.radius = row["radius"]
         self.sun_type_id = row["sunTypeID"]
         self.security_class = row["securityClass"]
-        
+
         cursor.close()
-        
+
         self._region = None
         self._constellation = None
         self._sun_type = None
-        
+
     def get_region(self):
         """Populates and returns the _region"""
         if self._region is None:
             from model.static.map.region import Region
             self._region = Region(self.region_id)
         return self._region
-    
+
     def get_constellation(self):
         """Populates and returns the _constellation"""
         if self._constellation is None:
             from model.static.map.constellation import Constellation
             self._constellation = Constellation(self.constellation_id)
         return self._constellation
-    
+
     def get_sun_type(self):
         """Populates and returns the sun type"""
         if self._sun_type is None:
             from model.static.inv.type import Type
             self._sun_type = Type(self.sun_type_id)
         return self._sun_type
-    
+
     def __str__(self):
         return self.solar_system_name

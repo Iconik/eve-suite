@@ -8,12 +8,14 @@ class CertificateClass(Flyweight):
             return
         self._inited = None
         #prevents reinitializing
-        
+
         self.class_id = class_id
-        
+
         cursor = database.get_cursor("select * from crtClasses where \
         classID=%s;" % (self.class_id))
         row = cursor.fetchone()
-        
+
         self.description = row["description"]
         self.class_name = row["className"]
+
+        cursor.close()

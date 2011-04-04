@@ -5,16 +5,16 @@ class TravelAdvisor(object):
     def __init__(self):
         cursor = database.get_cursor("select * from mapSolarSystemJumps;")
         self.connections = dict()
-        
+
         for row in cursor:
             if row["fromSolarSystemID"] not in self.connections:
                 self.connections[row["fromSolarSystemID"]] = set()
             self.connections[row["fromSolarSystemID"]].add(row["toSolarSystemID"])
-        
+
     def breadth_first(self, fromid, toid):
         closed_set = dict()
         open_set = deque([fromid])
-        
+
         while len(open_set) > 0:
             current = open_set.popleft()
             #print current

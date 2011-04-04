@@ -17,9 +17,9 @@ class SkillQueueItem(object):
             self.end_time = datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
         else:
             self.end_time = None
-        
+
         self._type = None
-            
+
     def get_type(self):
         """Populates and returns the _type"""
         if self._type is None:
