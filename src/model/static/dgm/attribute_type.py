@@ -1,7 +1,7 @@
 from model.flyweight import Flyweight
 from model.static.database import database
 
-class Attribute(Flyweight):
+class AttributeType(Flyweight):
     def __init__(self, attribute_id):
         #prevents reinitializing
         if "_inited" in self.__dict__:

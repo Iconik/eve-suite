@@ -3,7 +3,7 @@ from model.static.database import database
 import weakref
 
 class NPCCorporation(Flyweight):
-    def __init__(self, corporation_id):
+    def __init__(self,corporation_id):
         #prevents reinitializing
         if "_inited" in self.__dict__:
             return
@@ -13,22 +13,23 @@ class NPCCorporation(Flyweight):
         self.corporation_id = corporation_id
 
         cursor = database.get_cursor("select * from crpNPCCorporations where \
-        corporationID=%s" % (self.corporation_id))
+        corporationID=%s;" % (self.corporation_id))
         row = cursor.fetchone()
 
         self.size = row["size"]
         self.extent = row["extent"]
         self.solar_system_id = row["solarSystemID"]
-        self.investor_ids = [row["investorID1"], row["investorID2"],
-                             row["investorID3"], row["investorID4"]]
-        self.investor_shares = [row["investorShares1"], row["investorShares2"],
-                                row["investorShares3"], row["investorShares4"]]
+        self.investor_id1 = row["investorID1"]
+        self.investor_ids = (row["investorID1"], row["investorID2"],
+            row["investorID3"], row["investorID4"])
+        self.investor_shares = (row["investorShares1"], row["investorShares2"],
+            row["investorShares3"], row["investorShares4"])
         self.friend_id = row["friendID"]
         self.enemy_id = row["enemyID"]
         self.public_shares = row["publicShares"]
         self.initial_price = row["initialPrice"]
         self.min_security = row["minSecurity"]
-        self.scattered = row["scattered"]
+        self.scattered = True if row["scattered"] == 1 else False
         self.fringe = row["fringe"]
         self.corridor = row["corridor"]
         self.hub = row["hub"]
@@ -38,6 +39,7 @@ class NPCCorporation(Flyweight):
         self.station_count = row["stationCount"]
         self.station_system_count = row["stationSystemCount"]
         self.description = row["description"]
+        self.icon_id = row["iconID"]
 
         cursor.close()
 
@@ -45,6 +47,7 @@ class NPCCorporation(Flyweight):
         self._investors = None
         self._friend = None
         self._enemy = None
+        self._faction = None
 
     def get_solar_system(self):
         """Populates and returns the solar system"""
@@ -74,3 +77,9 @@ class NPCCorporation(Flyweight):
         if self._enemy is None:
             self._enemy = NPCCorporation(self.enemy_id)
         return self._enemy
+
+    def get_faction(self):
+        if self._faction is None:
+            from model.static.chr.faction import Faction
+            self._faction = Faction(self.faction_id)
+        return self._faction

@@ -1,6 +1,5 @@
 from model.flyweight import Flyweight
 from model.static.database import database
-import weakref
 
 class Type(Flyweight):
     def __init__(self, type_id):
