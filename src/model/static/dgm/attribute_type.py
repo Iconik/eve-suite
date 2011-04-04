@@ -1,7 +1,7 @@
 from model.flyweight import Flyweight
 from model.static.database import database
 
-class Attribute(Flyweight):
+class AttributeType(Flyweight):
     def __init__(self, attribute_id):
         #prevents reinitializing
         if "_inited" in self.__dict__:
@@ -10,11 +10,11 @@ class Attribute(Flyweight):
         #prevents reinitializing
 
         self.attribute_id = attribute_id
-        
+
         cursor = database.get_cursor("select * from dgmAttributeTypes where \
         attributeID=%s;" % (self.attribute_id))
         row = cursor.fetchone()
-        
+
         self.attribute_name = row["attributeName"]
         self.description = row["description"]
         self.graphic_id = row["graphicID"]
@@ -25,7 +25,9 @@ class Attribute(Flyweight):
         self.stackable = row["stackable"]
         self.high_is_good = row["highIsGood"]
         self.category_id = row["categoryID"]
-        
+
+        cursor.close()
+
         self._category = None
 
     def get_category(self):

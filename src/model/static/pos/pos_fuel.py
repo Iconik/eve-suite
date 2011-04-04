@@ -9,10 +9,10 @@ class POSFuel(Flyweight):
             return
         self._inited = None
         #prevents reinitializing
-        
+
         cursor = database.get_cursor("select * from invControlTowerResources \
         where controlTowerTypeID='%s';" % (pos_type_id))
-        
+
         self.online = list()
         self.power = list()
         self.cpu = list()
@@ -38,5 +38,5 @@ class POSFuel(Flyweight):
                                             quantity=row["quantity"]),
                                             row["minSecurityLevel"],
                                             row["factionID"]))
-                
+
         cursor.close()

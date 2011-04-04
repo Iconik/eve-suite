@@ -8,16 +8,16 @@ class Category(Flyweight):
             return
         self._inited = None
         #prevents reinitializing
-        
+
         self.category_id = category_id
-        
+
         cursor = database.get_cursor("select * from invCategories where \
         categoryID=%s;" % (self.category_id))
         row = cursor.fetchone()
-        
+
         self.category_name = row["categoryName"]
         self.description = row["description"]
         self.graphic_id = row["graphicID"]
         self.published = row["published"]
-        
+
         cursor.close()

@@ -30,10 +30,10 @@ class BlueprintCalculatorView(QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self, parent)
         self.ui = Ui_BlueprintCalculator()
         self.ui.setupUi(self)
-        
+
         #Reference to the viewmodel
         self.bpc = BlueprintCalculator()
-        
+
         #Setting up the combobox for selecting active blueprints, along with
         #suggestions
         self.ui.blueprint_combo.addItems(BlueprintCalculator.blueprint_list)
@@ -42,13 +42,13 @@ class BlueprintCalculatorView(QtGui.QMainWindow):
             self.ui.blueprint_combo)
         bpcompleter.setCaseSensitivity(QtCore.Qt.CaseInsensitive)
         self.ui.blueprint_combo.setCompleter(bpcompleter)
-        
+
         #Setting up material_tree
         self.ui.manufacturing_tree.setModel(self.bpc.material_model)
         self.ui.manufacturing_tree.setUniformRowHeights(True)
         for x in range(self.bpc.material_model.columnCount()):
             self.ui.manufacturing_tree.resizeColumnToContents(x)
-        
+
         #Setting up blueprint_tree
         self.ui.blueprint_tree.setModel(self.bpc.blueprint_model)
         self.ui.blueprint_tree.setSelectionMode(
@@ -58,11 +58,11 @@ class BlueprintCalculatorView(QtGui.QMainWindow):
         self.ui.blueprint_tree.setColumnWidth(2, 67)
         self.ui.blueprint_tree.setUniformRowHeights(True)
         self.ui.blueprint_tree.header()
-        
+
         #Setting up actions
         self.ui.blueprint_combo.currentIndexChanged.connect(
             self.update_blueprints)
-        
+
     def update_blueprints(self):
         self.bpc.blueprint_change(BlueprintCalculator.blueprint_dict[
             self.ui.blueprint_combo.itemText(
