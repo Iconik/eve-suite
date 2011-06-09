@@ -1,5 +1,6 @@
 from PySide import QtGui, QtCore
 from model.static.database import database
+from collections import namedtuple
 
 class BlueprintCalculator(object):
     blueprint_dict = dict()
@@ -10,6 +11,10 @@ class BlueprintCalculator(object):
 
         self.material_model = QtGui.QStandardItemModel()
         self.blueprint_model = QtGui.QStandardItemModel()
+        
+        self.blueprint_tuple = namedtuple("blueprint_tuple", "type_id, product_type_id, blueprint, ")
+        self.relation_tuple = namedtuple("relation","type_id, blueprint, \
+        material_requirements, blueprintitems, ")
 
         self._clear_models()
 

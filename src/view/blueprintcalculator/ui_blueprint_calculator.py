@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_blueprint_calculator.ui'
 #
-# Created: Sat Mar 19 14:47:54 2011
-#      by: pyside-uic 0.2.7 running on PySide 1.0.0~rc1
+# Created: Tue Apr 12 20:59:39 2011
+#      by: pyside-uic 0.2.7 running on PySide 1.0.0
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -70,8 +70,9 @@ class Ui_BlueprintCalculator(object):
         QtCore.QMetaObject.connectSlotsByName(BlueprintCalculator)
 
     def retranslateUi(self, BlueprintCalculator):
-        BlueprintCalculator.setWindowTitle(QtGui.QApplication.translate("BlueprintCalculator", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
+        BlueprintCalculator.setWindowTitle(QtGui.QApplication.translate("BlueprintCalculator", "Blueprint Calculator", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setTitle(QtGui.QApplication.translate("BlueprintCalculator", "Blueprint", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_2.setTitle(QtGui.QApplication.translate("BlueprintCalculator", "Character", None, QtGui.QApplication.UnicodeUTF8))
         self.character_combo.setItemText(0, QtGui.QApplication.translate("BlueprintCalculator", "All Level 5 Skills", None, QtGui.QApplication.UnicodeUTF8))
         self.character_combo.setItemText(1, QtGui.QApplication.translate("BlueprintCalculator", "No Skills", None, QtGui.QApplication.UnicodeUTF8))
+

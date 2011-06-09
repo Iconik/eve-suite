@@ -1,6 +1,6 @@
 import sqlite3
 
-LOCATION = '../Resources/Database/inc110-sqlite3-v1.db'
+LOCATION = '../Resources/Database/inc15-sqlite3-v1.db'
 
 CONNECTION = sqlite3.connect(LOCATION)
 CONNECTION.row_factory = sqlite3.Row
