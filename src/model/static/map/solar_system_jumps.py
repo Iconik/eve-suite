@@ -15,12 +15,12 @@ class SolarSystemJump(Flyweight):
         cursor = database.get_cursor("select * from mapSolarSystemJumps where \
         fromSolarSystemID=%s;" % (self.from_solar_system_id))
 
-        self.YYY = list()
+        self.jumps = list()
 
-        XXX = namedtuple("XXX", "from_region_id from_constellation_id to_solar_system_id to_constellation_id to_region_id ")
+        jump_tuple = namedtuple("jump_tuple", "from_region_id from_constellation_id to_solar_system_id to_constellation_id to_region_id ")
 
         for row in cursor:
-            self.YYY.append(XXX(
+            self.jumps.append(jump_tuple(
                 from_region_id=row["fromRegionID"],
                 from_constellation_id=row["fromConstellationID"],
                 to_solar_system_id=row["toSolarSystemID"],
