@@ -1,5 +1,3 @@
-import weakref
-
 from model.flyweight import Flyweight
 from model.static.database import database
 

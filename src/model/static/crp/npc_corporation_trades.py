@@ -1,4 +1,3 @@
-from collections import namedtuple
 from model.flyweight import Flyweight
 from model.static.database import database
 

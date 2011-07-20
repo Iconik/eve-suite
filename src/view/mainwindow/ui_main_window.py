@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_main_window.ui'
 #
-# Created: Thu Mar 17 23:49:49 2011
-#      by: pyside-uic 0.2.7 running on PySide 1.0.0~rc1
+# Created: Wed Jul 20 14:13:12 2011
+#      by: pyside-uic 0.2.10 running on PySide 1.0.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -20,7 +20,7 @@ class Ui_MainWindow(object):
         self.widget_3 = QtGui.QWidget(self.centralwidget)
         self.widget_3.setObjectName("widget_3")
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.widget_3)
-        self.verticalLayout_3.setMargin(0)
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.pushButton_3 = QtGui.QPushButton(self.widget_3)
         self.pushButton_3.setText("")
@@ -39,7 +39,7 @@ class Ui_MainWindow(object):
         self.widget_4 = QtGui.QWidget(self.centralwidget)
         self.widget_4.setObjectName("widget_4")
         self.verticalLayout_4 = QtGui.QVBoxLayout(self.widget_4)
-        self.verticalLayout_4.setMargin(0)
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.pushButton_4 = QtGui.QPushButton(self.widget_4)
         self.pushButton_4.setText("")
@@ -52,7 +52,7 @@ class Ui_MainWindow(object):
         self.widget = QtGui.QWidget(self.centralwidget)
         self.widget.setObjectName("widget")
         self.verticalLayout = QtGui.QVBoxLayout(self.widget)
-        self.verticalLayout.setMargin(0)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.pushButton = QtGui.QPushButton(self.widget)
         self.pushButton.setText("")
@@ -68,7 +68,7 @@ class Ui_MainWindow(object):
         self.widget_2 = QtGui.QWidget(self.centralwidget)
         self.widget_2.setObjectName("widget_2")
         self.verticalLayout_2 = QtGui.QVBoxLayout(self.widget_2)
-        self.verticalLayout_2.setMargin(0)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.pushButton_2 = QtGui.QPushButton(self.widget_2)
         self.pushButton_2.setText("")
@@ -82,7 +82,7 @@ class Ui_MainWindow(object):
         self.widget_5 = QtGui.QWidget(self.centralwidget)
         self.widget_5.setObjectName("widget_5")
         self.verticalLayout_5 = QtGui.QVBoxLayout(self.widget_5)
-        self.verticalLayout_5.setMargin(0)
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.manufacturing_calculator_button = QtGui.QPushButton(self.widget_5)
         self.manufacturing_calculator_button.setText("")
@@ -95,7 +95,7 @@ class Ui_MainWindow(object):
         self.widget_6 = QtGui.QWidget(self.centralwidget)
         self.widget_6.setObjectName("widget_6")
         self.verticalLayout_9 = QtGui.QVBoxLayout(self.widget_6)
-        self.verticalLayout_9.setMargin(0)
+        self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_9.setObjectName("verticalLayout_9")
         self.pushButton_9 = QtGui.QPushButton(self.widget_6)
         self.pushButton_9.setText("")
@@ -108,7 +108,7 @@ class Ui_MainWindow(object):
         self.widget_8 = QtGui.QWidget(self.centralwidget)
         self.widget_8.setObjectName("widget_8")
         self.verticalLayout_6 = QtGui.QVBoxLayout(self.widget_8)
-        self.verticalLayout_6.setMargin(0)
+        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         self.pushButton_6 = QtGui.QPushButton(self.widget_8)
         self.pushButton_6.setText("")
@@ -121,7 +121,7 @@ class Ui_MainWindow(object):
         self.widget_9 = QtGui.QWidget(self.centralwidget)
         self.widget_9.setObjectName("widget_9")
         self.verticalLayout_7 = QtGui.QVBoxLayout(self.widget_9)
-        self.verticalLayout_7.setMargin(0)
+        self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
         self.pushButton_7 = QtGui.QPushButton(self.widget_9)
         self.pushButton_7.setText("")
@@ -134,7 +134,7 @@ class Ui_MainWindow(object):
         self.widget_10 = QtGui.QWidget(self.centralwidget)
         self.widget_10.setObjectName("widget_10")
         self.verticalLayout_8 = QtGui.QVBoxLayout(self.widget_10)
-        self.verticalLayout_8.setMargin(0)
+        self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_8.setObjectName("verticalLayout_8")
         self.research_calculator_button = QtGui.QPushButton(self.widget_10)
         self.research_calculator_button.setText("")
@@ -147,7 +147,7 @@ class Ui_MainWindow(object):
         self.widget_11 = QtGui.QWidget(self.centralwidget)
         self.widget_11.setObjectName("widget_11")
         self.verticalLayout_10 = QtGui.QVBoxLayout(self.widget_11)
-        self.verticalLayout_10.setMargin(0)
+        self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_10.setObjectName("verticalLayout_10")
         self.pushButton_10 = QtGui.QPushButton(self.widget_11)
         self.pushButton_10.setText("")
@@ -160,7 +160,7 @@ class Ui_MainWindow(object):
         self.widget_12 = QtGui.QWidget(self.centralwidget)
         self.widget_12.setObjectName("widget_12")
         self.verticalLayout_11 = QtGui.QVBoxLayout(self.widget_12)
-        self.verticalLayout_11.setMargin(0)
+        self.verticalLayout_11.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_11.setObjectName("verticalLayout_11")
         self.pushButton_11 = QtGui.QPushButton(self.widget_12)
         self.pushButton_11.setText("")
@@ -173,7 +173,7 @@ class Ui_MainWindow(object):
         self.widget_13 = QtGui.QWidget(self.centralwidget)
         self.widget_13.setObjectName("widget_13")
         self.verticalLayout_12 = QtGui.QVBoxLayout(self.widget_13)
-        self.verticalLayout_12.setMargin(0)
+        self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_12.setObjectName("verticalLayout_12")
         self.pushButton_12 = QtGui.QPushButton(self.widget_13)
         self.pushButton_12.setText("")

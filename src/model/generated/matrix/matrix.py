@@ -61,4 +61,4 @@ def zeros( s , zero=0):
     :param size: a tuple containing dimensions of the matrix
     :param zero: the value to use to fill the matrix (by default it's zero )
     """
-    return [zeros(s[1:] ) for i in range(s[0] ) ] if not len(s) else zero
+    return [zeros(s[1:] ) for _ in range(s[0] ) ] if not len(s) else zero
