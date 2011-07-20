@@ -1,6 +1,5 @@
 import sys
-from PySide import QtCore, QtGui
-from view.blueprintcalculator.blueprint_calculator_view import BlueprintCalculatorView
+from PySide import QtGui
 from view.mainwindow.main_window import MainWindow
 
 if __name__ == "__main__":
