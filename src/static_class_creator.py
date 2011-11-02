@@ -1,11 +1,10 @@
 import re
 
 if __name__ == '__main__':
-    input = """CREATE TABLE "ramInstallationTypeContents" (
-  "installationTypeID" int(11) NOT NULL,
-  "assemblyLineTypeID" tinyint(3) NOT NULL,
-  "quantity" tinyint(4) default NULL,
-  PRIMARY KEY  ("installationTypeID","assemblyLineTypeID")
+    input = """CREATE TABLE "crpNPCCorporationResearchFields" (
+  "skillID" int(11) NOT NULL,
+  "corporationID" int(11) NOT NULL,
+  PRIMARY KEY  ("skillID","corporationID")
 )"""
 
     table_name_extractor = re.compile(r'\s*CREATE TABLE "(\w*)" \(') #extracts the table name

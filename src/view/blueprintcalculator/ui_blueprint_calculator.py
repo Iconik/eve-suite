@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_blueprint_calculator.ui'
 #
-# Created: Sat Mar 19 14:47:54 2011
-#      by: pyside-uic 0.2.7 running on PySide 1.0.0~rc1
+# Created: Wed Jul 20 14:14:18 2011
+#      by: pyside-uic 0.2.10 running on PySide 1.0.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -16,18 +16,18 @@ class Ui_BlueprintCalculator(object):
         self.centralwidget = QtGui.QWidget(BlueprintCalculator)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtGui.QVBoxLayout(self.centralwidget)
-        self.verticalLayout.setMargin(0)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.widget = QtGui.QWidget(self.centralwidget)
         self.widget.setObjectName("widget")
         self.horizontalLayout = QtGui.QHBoxLayout(self.widget)
-        self.horizontalLayout.setMargin(0)
-        self.horizontalLayout.setMargin(0)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.groupBox = QtGui.QGroupBox(self.widget)
         self.groupBox.setObjectName("groupBox")
         self.horizontalLayout_2 = QtGui.QHBoxLayout(self.groupBox)
-        self.horizontalLayout_2.setMargin(0)
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.blueprint_combo = QtGui.QComboBox(self.groupBox)
         self.blueprint_combo.setEditable(True)
@@ -39,7 +39,7 @@ class Ui_BlueprintCalculator(object):
         self.groupBox_2 = QtGui.QGroupBox(self.widget)
         self.groupBox_2.setObjectName("groupBox_2")
         self.horizontalLayout_4 = QtGui.QHBoxLayout(self.groupBox_2)
-        self.horizontalLayout_4.setMargin(0)
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.character_combo = QtGui.QComboBox(self.groupBox_2)
         self.character_combo.setEditable(False)
@@ -54,8 +54,8 @@ class Ui_BlueprintCalculator(object):
         self.widget_2 = QtGui.QWidget(self.centralwidget)
         self.widget_2.setObjectName("widget_2")
         self.horizontalLayout_3 = QtGui.QHBoxLayout(self.widget_2)
-        self.horizontalLayout_3.setMargin(0)
-        self.horizontalLayout_3.setMargin(0)
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.manufacturing_tree = QtGui.QTreeView(self.widget_2)
         self.manufacturing_tree.setObjectName("manufacturing_tree")
@@ -70,8 +70,9 @@ class Ui_BlueprintCalculator(object):
         QtCore.QMetaObject.connectSlotsByName(BlueprintCalculator)
 
     def retranslateUi(self, BlueprintCalculator):
-        BlueprintCalculator.setWindowTitle(QtGui.QApplication.translate("BlueprintCalculator", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
+        BlueprintCalculator.setWindowTitle(QtGui.QApplication.translate("BlueprintCalculator", "Blueprint Calculator", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setTitle(QtGui.QApplication.translate("BlueprintCalculator", "Blueprint", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_2.setTitle(QtGui.QApplication.translate("BlueprintCalculator", "Character", None, QtGui.QApplication.UnicodeUTF8))
         self.character_combo.setItemText(0, QtGui.QApplication.translate("BlueprintCalculator", "All Level 5 Skills", None, QtGui.QApplication.UnicodeUTF8))
         self.character_combo.setItemText(1, QtGui.QApplication.translate("BlueprintCalculator", "No Skills", None, QtGui.QApplication.UnicodeUTF8))
+
