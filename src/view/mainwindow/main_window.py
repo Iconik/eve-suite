@@ -1,4 +1,4 @@
-from PySide import QtGui, QtCore
+from PySide import QtGui
 from view.blueprintcalculator.blueprint_calculator_view import BlueprintCalculatorView
 from view.mainwindow.ui_main_window import Ui_MainWindow
 
