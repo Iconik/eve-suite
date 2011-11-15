@@ -12,8 +12,8 @@ class AssemblyLineTypeDetailPerCategory(Flyweight):
 
         self.assembly_line_type_id = assembly_line_type_id
 
-        cursor = database.get_cursor("select * from ramAssemblyLineTypeDetailPerCategory where \
-        assemblyLineTypeID=%s;" % (self.assembly_line_type_id))
+        cursor = database.get_cursor(
+            "select * from ramAssemblyLineTypeDetailPerCategory where assemblyLineTypeID={};".format(self.assembly_line_type_id))
 
         self.categories = list()
 

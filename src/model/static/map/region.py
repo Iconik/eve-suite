@@ -11,8 +11,9 @@ class Region(Flyweight):
 
         self.region_id = region_id
 
-        cursor = database.get_cursor("select * from mapLocationScenes where \
-        locationID=%s;" % (self.location_id))
+        cursor = database.get_cursor(
+            "select * from mapLocationScenes where locationID={};".format(
+                self.location_id))
         row = cursor.fetchone()
 
         self.region_name = row["regionName"]

@@ -12,8 +12,8 @@ class NPCCorporationDivision(Flyweight):
 
         self.corporation_id = corporation_id
 
-        cursor = database.get_cursor("select * from crpNPCCorporationDivisions where \
-        corporationID=%s;" % (self.corporation_id))
+        cursor = database.get_cursor(
+            "select * from crpNPCCorporationDivisions where corporationID={};".format(self.corporation_id))
 
         self.divisions = list()
 

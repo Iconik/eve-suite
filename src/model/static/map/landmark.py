@@ -11,8 +11,9 @@ class Landmark(Flyweight):
 
         self.landmark_id = landmark_id
 
-        cursor = database.get_cursor("select * from mapLandmark where \
-        landmarkID=%s;" % (self.landmark_id))
+        cursor = database.get_cursor(
+            "select * from mapLandmark where landmarkID={};".format(
+                self.landmark_id))
         row = cursor.fetchone()
 
         self.landmark_name = row["landmarkName"]

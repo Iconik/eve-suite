@@ -12,8 +12,8 @@ class SolarSystemJump(Flyweight):
 
         self.from_solar_system_id = from_solar_system_id
 
-        cursor = database.get_cursor("select * from mapSolarSystemJumps where \
-        fromSolarSystemID=%s;" % (self.from_solar_system_id))
+        cursor = database.get_cursor(
+            "select * from mapSolarSystemJumps where fromSolarSystemID={};".format(self.from_solar_system_id))
 
         self.YYY = list()
 

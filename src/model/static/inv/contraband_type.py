@@ -12,8 +12,9 @@ class ContrabandType(Flyweight):
 
         self.faction_id = faction_id
 
-        cursor = database.get_cursor("select * from invContrabandTypes where \
-        factionID=%s;" % (self.faction_id))
+        cursor = database.get_cursor(
+            "select * from invContrabandTypes where factionID={};".format(
+                self.faction_id))
         
         self.contraband = list()
         

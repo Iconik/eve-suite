@@ -11,8 +11,9 @@ class StationType(Flyweight):
 
         self.station_type_id = station_type_id
 
-        cursor = database.get_cursor("select * from staStationTypes where \
-        stationTypeID=%s;" % (self.station_type_id))
+        cursor = database.get_cursor(
+            "select * from staStationTypes where stationTypeID={};".format(
+                self.station_type_id))
         row = cursor.fetchone()
 
         self.dock_entry_x = row["dockEntryX"]

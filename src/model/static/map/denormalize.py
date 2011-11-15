@@ -11,8 +11,9 @@ class Denormalize(Flyweight):
 
         self.item_id = item_id
 
-        cursor = database.get_cursor("select * from mapDenormalize where \
-        itemID=%s;" % (self.item_id))
+        cursor = database.get_cursor(
+            "select * from mapDenormalize where itemID={};".format(
+                self.item_id))
         row = cursor.fetchone()
 
         self.type_id = row["typeID"]

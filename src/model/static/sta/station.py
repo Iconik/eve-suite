@@ -11,8 +11,9 @@ class Station(Flyweight):
 
         self.station_id = station_id
 
-        cursor = database.get_cursor("select * from staStations where \
-        stationID='%s';" % (self.station_id))
+        cursor = database.get_cursor(
+            "select * from staStations where stationID={};".format(
+                self.station_id))
         row = cursor.fetchone()
 
         self.security = row["security"]

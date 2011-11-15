@@ -11,8 +11,8 @@ class Unit(Flyweight):
 
         self.unit_id = unit_id
 
-        cursor = database.get_cursor("select * from eveUnits where \
-        unitID=%s;" % (self.unit_id))
+        cursor = database.get_cursor(
+            "select * from eveUnits where unitID={};".format(self.unit_id))
         row = cursor.fetchone()
 
         self.unit_name = row["unitName"]

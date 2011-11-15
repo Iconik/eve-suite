@@ -12,8 +12,8 @@ class AssemblyLineTypeDetailPerGroup(Flyweight):
 
         self.assembly_line_type_id = assembly_line_type_id
 
-        cursor = database.get_cursor("select * from ramAssemblyLineTypeDetailPerGroup where \
-        assemblyLineTypeID=%s;" % (self.assembly_line_type_id))
+        cursor = database.get_cursor(
+            "select * from ramAssemblyLineTypeDetailPerGroup where assemblyLineTypeID={};".format(self.assembly_line_type_id))
 
         self.groups = list()
 

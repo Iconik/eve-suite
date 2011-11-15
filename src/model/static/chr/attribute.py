@@ -11,8 +11,9 @@ class Attribute(Flyweight):
 
         self.attribute_id = attribute_id
 
-        cursor = database.get_cursor("select * from chrAttributes where \
-        attributeID=%s;" % (self.attribute_id))
+        cursor = database.get_cursor(
+            "select * from chrAttributes where attributeID={};".format(
+                self.attribute_id))
         row = cursor.fetchone()
 
         self.attribute_name = row["attributeName"]

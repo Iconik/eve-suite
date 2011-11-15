@@ -11,8 +11,9 @@ class Service(Flyweight):
 
         self.service_id = service_id
 
-        cursor = database.get_cursor("select * from staServices where \
-        serviceID=%s;" % (self.service_id))
+        cursor = database.get_cursor(
+            "select * from staServices where serviceID={};".format(
+                self.service_id))
         row = cursor.fetchone()
 
         self.service_name = row["serviceName"]

@@ -12,7 +12,7 @@ class Type(Flyweight):
         self.type_id = type_id
 
         cursor = database.get_cursor(
-            "select * from invTypes where typeID=%s;" % self.type_id)
+            "select * from invTypes where typeID={};".format(self.type_id))
         row = cursor.fetchone()
 
         self.type_name = row["typeName"]
@@ -74,8 +74,7 @@ class Type(Flyweight):
 
         if self._manufacturable is None:
             cursor = database.get_cursor(
-                "select * from invBlueprintTypes where productTypeID=%s;" %
-                self.type_id)
+                "select * from invBlueprintTypes where productTypeID={};".format(self.type_id))
             #cursor.fetchall()
             row = cursor.fetchone()
             if row is not None:

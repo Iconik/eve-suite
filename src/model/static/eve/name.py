@@ -11,8 +11,8 @@ class Name(Flyweight):
 
         self.item_id = item_id
 
-        cursor = database.get_cursor("select * from eveNames where \
-        itemID=%s;" % (self.item_id))
+        cursor = database.get_cursor(
+            "select * from eveNames where itemID={};".format(self.item_id))
         row = cursor.fetchone()
 
         self.item_name = row["itemName"]

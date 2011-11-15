@@ -11,8 +11,8 @@ class Config(Flyweight):
 
         self.agent_id = agent_id
 
-        cursor = database.get_cursor("select * from agtConfig where \
-        agentID=%s;" % (self.agent_id))
+        cursor = database.get_cursor(
+            "select * from agtConfig where agentID={};".format(self.agent_id))
         
         self.location_service = False
         for row in cursor:

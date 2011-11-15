@@ -11,8 +11,9 @@ class TranslationColumn(Flyweight):
 
         self.tc_group_id = tc_group_id
 
-        cursor = database.get_cursor("select * from trnTranslationColumns where \
-        tcGroupID=%s;" % (self.tc_group_id))
+        cursor = database.get_cursor(
+            "select * from trnTranslationColumns where tcGroupID={};".format(
+                self.tc_group_id))
         row = cursor.fetchone()
 
         self.tc_id = row["tcID"]

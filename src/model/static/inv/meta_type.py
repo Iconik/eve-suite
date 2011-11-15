@@ -11,8 +11,8 @@ class MetaType(Flyweight):
 
         self.type_id = type_id
 
-        cursor = database.get_cursor("select * from invMetaTypes where \
-        typeID=%s;" % (self.type_id))
+        cursor = database.get_cursor(
+            "select * from invMetaTypes where typeID={};".format(self.type_id))
         row = cursor.fetchone()
 
         self.parent_type_id = row["parentTypeID"]

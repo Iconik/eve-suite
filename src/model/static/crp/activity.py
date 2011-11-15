@@ -11,8 +11,9 @@ class Activity(Flyweight):
 
         self.activity_id = activity_id
 
-        cursor = database.get_cursor("select * from crpActivities where \
-        activityID=%s;" % (self.activity_id))
+        cursor = database.get_cursor(
+            "select * from crpActivities where activityID={};".format(
+                self.activity_id))
         row = cursor.fetchone()
 
         self.activity_name = row["activityName"]

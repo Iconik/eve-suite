@@ -11,8 +11,9 @@ class Graphic(Flyweight):
 
         self.graphic_id = graphic_id
 
-        cursor = database.get_cursor("select * from eveGraphics where \
-        graphicID=%s;" % (self.graphic_id))
+        cursor = database.get_cursor(
+            "select * from eveGraphics where graphicID={};".format(
+                self.graphic_id))
         row = cursor.fetchone()
 
         self.graphic_file = row["graphicFile"]

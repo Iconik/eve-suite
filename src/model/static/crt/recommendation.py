@@ -11,8 +11,8 @@ class Recommendation(Flyweight):
 
         self.recommendation_id = recommendation_id
 
-        cursor = database.get_cursor("select * from crtRecommendations where \
-        recommendationID=%s;" % (self.recommendation_id))
+        cursor = database.get_cursor(
+            "select * from crtRecommendations where recommendationID={};".format(self.recommendation_id))
         row = cursor.fetchone()
 
         self.ship_type_id = row["shipTypeID"]

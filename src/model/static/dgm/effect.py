@@ -11,8 +11,9 @@ class Effect(Flyweight):
 
         self.effect_id = effect_id
 
-        cursor = database.get_cursor("select * from dgmEffects where \
-        effectID=%s;" % (self.effect_id))
+        cursor = database.get_cursor(
+            "select * from dgmEffects where effectID={};".format(
+                self.effect_id))
         row = cursor.fetchone()
 
         self.effect_name = row["effectName"]

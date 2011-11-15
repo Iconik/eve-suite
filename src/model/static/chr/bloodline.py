@@ -11,8 +11,9 @@ class Bloodline(Flyweight):
 
         self.bloodline_id = bloodline_id
 
-        cursor = database.get_cursor("select * from chrBloodlines where \
-        bloodlineID=%s;" % (self.bloodline_id))
+        cursor = database.get_cursor(
+            "select * from chrBloodlines where bloodlineID={};".format(
+                self.bloodline_id))
         row = cursor.fetchone()
 
         self.bloodline_name = row["bloodlineName"]

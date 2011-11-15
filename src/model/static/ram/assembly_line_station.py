@@ -12,8 +12,9 @@ class AssemblyLineStation(Flyweight):
 
         self.station_id = station_id
 
-        cursor = database.get_cursor("select * from ramAssemblyLineStations where \
-        stationID=%s;" % (self.station_id))
+        cursor = database.get_cursor(
+            "select * from ramAssemblyLineStations where stationID={};".format(
+                self.station_id))
 
         self.assembly_lines = list()
 

@@ -11,8 +11,9 @@ class AttributeCategory(Flyweight):
 
         self.category_id = category_id
 
-        cursor = database.get_cursor("select * from dgmAttributeCategories where \
-        categoryID=%s;" % (self.category_id))
+        cursor = database.get_cursor(
+            "select * from dgmAttributeCategories where categoryID={};".format(
+                self.category_id))
         row = cursor.fetchone()
 
         self.category_name = row["categoryName"]

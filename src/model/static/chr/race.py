@@ -11,8 +11,7 @@ class Race(Flyweight):
 
         self.race_id = race_id
 
-        cursor = database.get_cursor("select * from chrRaces where \
-        raceID='%s';" % (self.race_id))
+        cursor = database.get_cursor("select * from chrRaces where raceID={};".format(self.race_id))
         row = cursor.fetchone()
 
         self.race_name = row["raceName"]
