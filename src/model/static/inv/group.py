@@ -11,8 +11,8 @@ class Group(Flyweight):
 
         self.group_id = group_id
 
-        cursor = database.get_cursor("select * from invGroups where \
-        groupID=%s;" % (self.group_id))
+        cursor = database.get_cursor(
+            "select * from invGroups where groupID={};".format(self.group_id))
         row = cursor.fetchone()
 
         self.category_id = row["categoryID"]

@@ -13,8 +13,8 @@ class ConstellationJumps(Flyweight):
 
         self.from_constellation_id = from_constellation_id
 
-        cursor = database.get_cursor("select * from mapConstellationJumps where \
-        fromConstellationID=%s;" % (self.from_constellation_id))
+        cursor = database.get_cursor(
+            "select * from mapConstellationJumps where fromConstellationID={};".format(self.from_constellation_id))
 
         self.jumps = list()
 

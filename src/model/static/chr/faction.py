@@ -11,8 +11,9 @@ class Faction(Flyweight):
 
         self.faction_id = faction_id
 
-        cursor = database.get_cursor("select * from chrFactions where \
-        factionID=%s;" % (self.faction_id))
+        cursor = database.get_cursor(
+            "select * from chrFactions where factionID={};".format(
+                self.faction_id))
         row = cursor.fetchone()
 
         self.faction_name = row["factionName"]

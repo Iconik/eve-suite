@@ -11,8 +11,9 @@ class AssemblyLine(Flyweight):
 
         self.assembly_line_id = assembly_line_id
 
-        cursor = database.get_cursor("select * from ramAssemblyLines where \
-        assemblyLineID=%s;" % (self.assembly_line_id))
+        cursor = database.get_cursor(
+            "select * from ramAssemblyLines where assemblyLineID={};".format(
+                self.assembly_line_id))
         row = cursor.fetchone()
 
         self.assembly_line_type_id = row["assemblyLineTypeID"]

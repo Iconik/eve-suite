@@ -16,8 +16,8 @@ class Schematic(Flyweight):
 
         self.schematic_id = schematic_id
 
-        cursor = database.get_cursor("select * from planetSchematics where \
-        schematicID=%s;" % (self.schematic_id))
+        cursor = database.get_cursor(
+            "select * from planetSchematics where schematicID={};".format(self.schematic_id))
         row = cursor.fetchone()
 
         self.schematic_name = row["schematicName"]

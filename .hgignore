@@ -6,3 +6,4 @@ syntax: regexp
 .*\.pyo
 EVE Suite.mchg
 \.settings/
+src/playground.py

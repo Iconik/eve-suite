@@ -14,8 +14,9 @@ class BlueprintType(Flyweight): #IGNORE:R0902
 
         self._blueprint_type_id = blueprint_type_id
 
-        cursor = database.get_cursor("select * from invBlueprintTypes \
-        where blueprintTypeID=%s;" % (self._blueprint_type_id))
+        cursor = database.get_cursor(
+            "select * from invBlueprintTypes where blueprintTypeID={};".format(
+                self._blueprint_type_id))
 
         row = cursor.fetchone()
 

@@ -10,8 +10,9 @@ class MarketGroup(Flyweight):
         #prevents reinitializing
 
         self.market_group_id = market_group_id
-        cursor = database.get_cursor("select * from invMarketGroups where \
-        marketGroupID=%s;" % (self.market_group_id))
+        cursor = database.get_cursor(
+            "select * from invMarketGroups where marketGroupID={};".format(
+                self.market_group_id))
         row = cursor.fetchone()
 
         self.parent_group_id = row["parentGroupID"]

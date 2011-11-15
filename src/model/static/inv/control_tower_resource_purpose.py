@@ -11,8 +11,8 @@ class ControlTowerResourcePurpose(Flyweight):
 
         self.purpose = purpose
 
-        cursor = database.get_cursor("select * from invControlTowerResourcePurposes where \
-        purpose=%s;" % (self.purpose))
+        cursor = database.get_cursor(
+            "select * from invControlTowerResourcePurposes where purpose={};".format(self.purpose))
         row = cursor.fetchone()
 
         self.purpose_text = row["purposeText"]

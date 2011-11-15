@@ -11,8 +11,8 @@ class Flag(Flyweight):
 
         self.flag_id = flag_id
 
-        cursor = database.get_cursor("select * from invFlags where \
-        flagID=%s;" % (self.flag_id))
+        cursor = database.get_cursor(
+            "select * from invFlags where flagID={};".format(self.flag_id))
         row = cursor.fetchone()
 
         self.flag_name = row["flagName"]

@@ -26,8 +26,9 @@ class TypeRequirements(Flyweight): #IGNORE:R0903
         8 = Invention"""
         self._requirements = dict()
 
-        cursor = database.get_cursor("select * \
-        from ramTypeRequirements where typeID=%s;" % (self.type_id))
+        cursor = database.get_cursor(
+            "select * from ramTypeRequirements where typeID={};".format(
+                self.type_id))
 
         requirement = namedtuple("requirement", "item, damage, recycle")
 

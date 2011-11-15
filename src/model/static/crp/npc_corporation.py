@@ -12,8 +12,9 @@ class NPCCorporation(Flyweight):
 
         self.corporation_id = corporation_id
 
-        cursor = database.get_cursor("select * from crpNPCCorporations where \
-        corporationID=%s;" % (self.corporation_id))
+        cursor = database.get_cursor(
+            "select * from crpNPCCorporations where corporationID={};".format(
+                self.corporation_id))
         row = cursor.fetchone()
 
         self.size = row["size"]

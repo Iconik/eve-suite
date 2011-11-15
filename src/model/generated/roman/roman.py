@@ -90,8 +90,7 @@ def from_roman(roman_numeral):
     if roman_numeral == "N":
         return 0
     if not ROMAN_NUMERAL_PATTERN.search(roman_numeral):
-        raise InvalidRomanNumeralError, 'Invalid Roman numeral: %s' % \
-        roman_numeral
+        raise InvalidRomanNumeralError, 'Invalid Roman numeral: {}'.format(roman_numeral)
 
     result = 0
     index = 0

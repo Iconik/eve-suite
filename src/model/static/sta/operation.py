@@ -11,8 +11,9 @@ class Operation(Flyweight):
 
         self.activity_id = activity_id
 
-        cursor = database.get_cursor("select * from staOperations where \
-        activityID=%s;" % (self.activity_id))
+        cursor = database.get_cursor(
+            "select * from staOperations where activityID={};".format(
+                self.activity_id))
         row = cursor.fetchone()
 
         self.operation_id = row["operationID"]

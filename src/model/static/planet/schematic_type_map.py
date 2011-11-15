@@ -18,8 +18,8 @@ class SchematicTypeMap(Flyweight):
 
         self.schematic_id = schematic_id
 
-        cursor = database.get_cursor("select * from planetSchematicTypeMap \
-        where schematicID='%s';" % (self.schematic_id))
+        cursor = database.get_cursor(
+            "select * from planetSchematicTypeMap where schematicID={};".format(self.schematic_id))
 
         types = list()
 

@@ -12,8 +12,9 @@ class TypeEffects(Flyweight):
 
         self.type_id = type_id
 
-        cursor = database.get_cursor("select * from dgmTypeEffects where \
-        typeID=%s;" % (self.type_id))
+        cursor = database.get_cursor(
+            "select * from dgmTypeEffects where typeID={};".format(
+                self.type_id))
         
         self.effects = list()
         

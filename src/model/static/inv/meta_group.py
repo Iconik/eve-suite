@@ -11,8 +11,9 @@ class MetaGroup(Flyweight):
 
         self.meta_group_id = meta_group_id
 
-        cursor = database.get_cursor("select * from invMetaGroups where \
-        metaGroupID=%s;" % (self.meta_group_id))
+        cursor = database.get_cursor(
+            "select * from invMetaGroups where metaGroupID={};".format(
+                self.meta_group_id))
         row = cursor.fetchone()
 
         self.meta_group_name = row["metaGroupName"]

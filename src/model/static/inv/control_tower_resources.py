@@ -12,8 +12,8 @@ class ControlTowerResource(Flyweight):
 
         self.control_tower_type_id = control_tower_type_id
 
-        cursor = database.get_cursor("select * from invControlTowerResources where \
-        controlTowerTypeID=%s;" % (self.control_tower_type_id))
+        cursor = database.get_cursor(
+            "select * from invControlTowerResources where controlTowerTypeID={};".format(self.control_tower_type_id))
 
         self.resources = list()
 

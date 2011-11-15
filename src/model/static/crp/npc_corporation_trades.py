@@ -12,8 +12,8 @@ class NPCCorporationTrade(Flyweight):
 
         self.corporation_id = corporation_id
 
-        cursor = database.get_cursor("select * from crpNPCCorporationTrades where \
-        corporationID=%s;" % (self.corporation_id))
+        cursor = database.get_cursor(
+            "select * from crpNPCCorporationTrades where corporationID={};".format(self.corporation_id))
 
         self.trades = list()
 

@@ -11,8 +11,9 @@ class Relationship(Flyweight):
 
         self.relationship_id = relationship_id
 
-        cursor = database.get_cursor("select * from crtRelationships where \
-        relationshipID=%s;" % (self.relationship_id))
+        cursor = database.get_cursor(
+            "select * from crtRelationships where relationshipID={};".format(
+                self.relationship_id))
         row = cursor.fetchone()
 
         self.parent_id = row["parentID"]

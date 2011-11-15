@@ -11,8 +11,9 @@ class Constellation(Flyweight):
 
         self.constellation_id = constellation_id
 
-        cursor = database.get_cursor("select * from mapConstellations where \
-        constellationID='%s';" % (self.constellation_id))
+        cursor = database.get_cursor(
+            "select * from mapConstellations where constellationID={};".format(
+                self.constellation_id))
         row = cursor.fetchone()
 
         self.region_id = row["regionID"]

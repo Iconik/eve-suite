@@ -11,8 +11,9 @@ class Ancestry(Flyweight):
 
         self.ancestry_id = ancestry_id
 
-        cursor = database.get_cursor("select * from chrAncestries where \
-        ancestryID=%s;" % (self.ancestry_id))
+        cursor = database.get_cursor(
+            "select * from chrAncestries where ancestryID={};".format(
+                self.ancestry_id))
         row = cursor.fetchone()
 
         self.ancestry_name = row["ancestryName"]

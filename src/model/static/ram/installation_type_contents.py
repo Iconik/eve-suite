@@ -12,8 +12,8 @@ class InstallationTypeContent(Flyweight):
 
         self.installation_type_id = installation_type_id
 
-        cursor = database.get_cursor("select * from ramInstallationTypeContents where \
-        installationTypeID=%s;" % (self.installation_type_id))
+        cursor = database.get_cursor(
+            "select * from ramInstallationTypeContents where installationTypeID={};".format(self.installation_type_id))
 
         self.assembly_lines = list()
 

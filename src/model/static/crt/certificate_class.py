@@ -11,8 +11,8 @@ class CertificateClass(Flyweight):
 
         self.class_id = class_id
 
-        cursor = database.get_cursor("select * from crtClasses where \
-        classID=%s;" % (self.class_id))
+        cursor = database.get_cursor(
+            "select * from crtClasses where classID={};".format(self.class_id))
         row = cursor.fetchone()
 
         self.description = row["description"]

@@ -11,7 +11,8 @@ class TypeReaction(Flyweight):
 
         self.reaction_type_id = reaction_type_id
 
-        cursor = database.get_cursor("select * from invTypeReactions where \
-        reactionTypeID=%s;" % (self.reaction_type_id))
+        cursor = database.get_cursor(
+            "select * from invTypeReactions where reactionTypeID={};".format(
+                self.reaction_type_id))
 
         cursor.close()

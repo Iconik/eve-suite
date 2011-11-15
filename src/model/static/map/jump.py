@@ -11,8 +11,9 @@ class Jump(Flyweight):
 
         self.stargate_id = stargate_id
 
-        cursor = database.get_cursor("select * from mapJumps where \
-        stargateID=%s;" % (self.stargate_id))
+        cursor = database.get_cursor(
+            "select * from mapJumps where stargateID={};".format(
+                self.stargate_id))
         row = cursor.fetchone()
 
         self.celestial_id = row["celestialID"]

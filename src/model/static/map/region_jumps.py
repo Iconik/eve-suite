@@ -11,8 +11,9 @@ class RegionJumps(Flyweight):
 
         self.from_region_id = from_region_id
 
-        cursor = database.get_cursor("select * from mapRegionJumps where \
-        fromRegionID=%s;" % (self.from_region_id))
+        cursor = database.get_cursor(
+            "select * from mapRegionJumps where fromRegionID={};".format(
+                self.from_region_id))
 
         self.YYY = list()
 

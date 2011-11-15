@@ -15,9 +15,8 @@ class Account(Flyweight):
         self.api_key = api_key.strip()
 
         api.fetch("account", "Characters", self.user_id, self.api_key)
-
-        tree = ET.parse("%s/Characters.xml.aspx" % 
-                        (api.build_path("account", self.user_id)))
+        
+        tree = ET.parse("{}/Characters.xml.aspx".format(api.build_path("account", self.user_id)))
         root = tree.getroot()
         rowset = root.find("result").find("rowset")
 

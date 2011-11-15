@@ -11,8 +11,8 @@ class Category(Flyweight):
 
         self.category_id = category_id
 
-        cursor = database.get_cursor("select * from invCategories where \
-        categoryID=%s;" % (self.category_id))
+        cursor = database.get_cursor(
+            "select * from invCategories where categoryID={};".format(self.category_id))
         row = cursor.fetchone()
 
         self.category_name = row["categoryName"]

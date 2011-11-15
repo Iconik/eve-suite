@@ -11,8 +11,8 @@ class NPCCorporationResearchField(Flyweight):
 
         self.corporation_id = corporation_id
 
-        cursor = database.get_cursor("select * from crpNPCCorporationResearchFields where \
-        corporationID=%s;" % (self.corporation_id))
+        cursor = database.get_cursor(
+            "select * from crpNPCCorporationResearchFields where corporationID={};".format(self.corporation_id))
 
         self.skills = list()
 

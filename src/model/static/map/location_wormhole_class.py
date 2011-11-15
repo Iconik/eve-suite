@@ -11,8 +11,8 @@ class LocationWormholeClass(Flyweight):
 
         self.location_id = location_id
 
-        cursor = database.get_cursor("select * from mapLocationWormholeClasses where \
-        locationID=%s;" % (self.location_id))
+        cursor = database.get_cursor(
+            "select * from mapLocationWormholeClasses where locationID={};".format(self.location_id))
         row = cursor.fetchone()
 
         self.wormhole_class_id = row["wormholeClassID"]

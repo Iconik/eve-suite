@@ -11,8 +11,9 @@ class Activity(Flyweight):
 
         self.activity_id = activity_id
 
-        cursor = database.get_cursor("select * from ramActivities where \
-        activityID=%s;" % (self.market_group_id))
+        cursor = database.get_cursor(
+            "select * from ramActivities where activityID={};".format(
+                self.market_group_id))
         row = cursor.fetchone()
 
         self.activity_name = row["activityID"]

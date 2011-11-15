@@ -16,8 +16,9 @@ class SchematicPinMap(Flyweight):
 
         self.schematic_id = schematic_id
 
-        cursor = database.get_cursor("select * from planetSchematicPinMap where \
-        schematicID=%s" % (self.schematic_id))
+        cursor = database.get_cursor(
+            "select * from planetSchematicPinMap where schematicID={}".format(
+                self.schematic_id))
 
         self.pin_type_ids = list()
 

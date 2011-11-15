@@ -11,8 +11,9 @@ class Universe(Flyweight):
 
         self.universe_id = universe_id
 
-        cursor = database.get_cursor("select * from mapUniverse where \
-        universeID=%s;" % (self.universe_id))
+        cursor = database.get_cursor(
+            "select * from mapUniverse where universeID={};".format(
+                self.universe_id))
         row = cursor.fetchone()
 
         self.universe_name = row["universeName"]

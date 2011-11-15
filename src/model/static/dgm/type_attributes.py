@@ -12,8 +12,9 @@ class TypeAttributes(Flyweight):
 
         self.type_id = type_id
 
-        cursor = database.get_cursor("select * from dgmTypeAttributes where \
-        typeID=%s;" % (self.type_id))
+        cursor = database.get_cursor(
+            "select * from dgmTypeAttributes where typeID={};".format(
+                self.type_id))
 
         self.attributes = list()
 

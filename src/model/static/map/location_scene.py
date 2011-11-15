@@ -11,8 +11,9 @@ class LocationScene(Flyweight):
 
         self.location_id = location_id
 
-        cursor = database.get_cursor("select * from mapLocationScenes where \
-        locationID=%s;" % (self.location_id))
+        cursor = database.get_cursor(
+            "select * from mapLocationScenes where locationID={};".format(
+                self.location_id))
         row = cursor.fetchone()
 
         self.scene_id = row["sceneID"]

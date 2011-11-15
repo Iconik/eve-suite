@@ -11,8 +11,8 @@ class Icon(Flyweight):
 
         self.icon_id = icon_id
 
-        cursor = database.get_cursor("select * from eveIcons where \
-        iconID=%s;" % (self.icon_id))
+        cursor = database.get_cursor(
+            "select * from eveIcons where iconID={};".format(self.icon_id))
         row = cursor.fetchone()
 
         self.icon_file = row["iconFile"]

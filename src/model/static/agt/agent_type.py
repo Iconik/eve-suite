@@ -11,8 +11,9 @@ class AgentType(Flyweight):
 
         self.agent_type_id = agent_type_id
 
-        cursor = database.get_cursor("select * from agtAgentTypes where \
-        agentTypeID=%s;" % (self.agent_type_id))
+        cursor = database.get_cursor(
+            "select * from agtAgentTypes where agentTypeID={};".format(
+                self.agent_type_id))
         row = cursor.fetchone()
 
         self.agent_type = row["agentType"]

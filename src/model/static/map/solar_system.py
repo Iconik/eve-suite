@@ -11,8 +11,9 @@ class SolarSystem(Flyweight):
 
         self.solar_system_id = solar_system_id
 
-        cursor = database.get_cursor("select * from mapSolarSystems where \
-        solarSystemID=%s;" % (self.solar_system_id))
+        cursor = database.get_cursor(
+            "select * from mapSolarSystems where solarSystemID={};".format(
+                self.solar_system_id))
         row = cursor.fetchone()
 
         self.region_id = row["regionID"]

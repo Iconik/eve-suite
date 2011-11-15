@@ -20,8 +20,9 @@ class TypeMaterials(Flyweight): #IGNORE:R0903
 
         self.type_id = type_id
         self._materials = dict()
-        cursor = database.get_cursor("select typeID, materialTypeID, quantity "
-        "from invTypeMaterials where typeID=%s;" % (self.type_id))
+        cursor = database.get_cursor(
+            "select * from invTypeMaterials where typeID={};".format(
+                self.type_id))
 
         for row in cursor:
             self._materials[row["materialTypeID"]] = Item(row["materialTypeID"],

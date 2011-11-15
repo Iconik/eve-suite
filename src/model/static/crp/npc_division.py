@@ -11,8 +11,9 @@ class NPCDivision(Flyweight):
 
         self.division_id = division_id
 
-        cursor = database.get_cursor("select * from crpNPCDivisions where \
-        divisionID=%s;" % (self.division_id))
+        cursor = database.get_cursor(
+            "select * from crpNPCDivisions where divisionID={};".format(
+                self.division_id))
         row = cursor.fetchone()
 
         self.division_name = row["divisionName"]

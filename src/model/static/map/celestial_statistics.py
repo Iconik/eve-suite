@@ -10,8 +10,9 @@ class CelestialStatistics(Flyweight):
 
         self.celestial_id = celestial_id
 
-        cursor = database.get_cursor("select * from mapCelestialStatics where \
-        celestialID=%s" % (self.celestial_id))
+        cursor = database.get_cursor(
+            "select * from mapCelestialStatics where celestialID={}".format(
+                self.celestial_id))
         row = cursor.fetchone()
 
         self.temperature = row["tempterature"]
